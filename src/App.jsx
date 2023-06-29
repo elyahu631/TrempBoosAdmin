@@ -5,7 +5,7 @@ import LoginProvider from './Contexts/LoginContext';
 function App() {
 
   useEffect(() => {
-    document.body.style.backgroundColor = '#226e7f80 ';
+    document.body.style.backgroundColor = '#226e7f89 ';
   }, []);
 
   return (
