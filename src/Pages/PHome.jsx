@@ -1,46 +1,29 @@
-//Comps/PHome.jsx
+// Pages/PHome.jsx
 
+import { Box, Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
-export default function PHome() {
+const PHome = () => {
+  const navigate = useNavigate();
+
+  const handleNavigation = (path) => {
+    navigate(path);
+  }
 
   return (
-    <div>
-      <hr />
-      <div style={{ width: "400px" }}>
-        <button
-          onClick={() => {
-            console.log("====================================");
-            console.log("lolo");
-            console.log("====================================");
-          }}
-        >
-          נוסעים יש כאן טרמפים
-        </button>
-        <br />
-        <hr />
-        <br />
-        <button
-          onClick={() => {
-            console.log("====================================");
-            console.log("lolo");
-            console.log("====================================");
-          }}
-        >
-          נהגים יש כאן טרמפיסטים
-        </button>
-        <br />
-        <hr />
-        <br />
-        <button
-          onClick={() => {
-            console.log("====================================");
-            console.log("lolo");
-            console.log("====================================");
-          }}
-        >
-          הוסף נסיעה או בקש טרמפ
-        </button>
-      </div>
-    </div>
+    <Box display="flex" p={2} height="100vh" alignItems="center" justifyContent="space-around">
+      <Box display="flex" flexDirection="column" gap={2}>
+        <Button variant="outlined" onClick={() => handleNavigation('/users')}>Users</Button>
+        <Button variant="outlined" onClick={() => handleNavigation('/groups')}>Groups</Button>
+        <Button variant="outlined" onClick={() => handleNavigation('/tremps')}>Tremps</Button>
+        <Button variant="outlined" onClick={() => handleNavigation('/gifts')}>Gifts</Button>
+      </Box>
+      <Box display="flex" flexDirection="column" gap={2}>
+        <Button variant="outlined" onClick={() => handleNavigation('/manage-system-admin')}>Managing System Admin</Button>
+        <Button variant="outlined" onClick={() => handleNavigation('/reports-and-statistics')}>Reports And Statistics</Button>
+      </Box>
+    </Box>
   );
-}
+};
+
+export default PHome;
