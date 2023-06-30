@@ -70,7 +70,7 @@ const CheckboxInputField = ({ label, name, formik }) => {
 };
 
 const FileInputField = ({ label, name, formik }) => {
-  const { setFieldValue, errors, touched, values } = formik;
+  const { setFieldValue,values } = formik;
 
   const handleFileChange = (event) => {
     const file = event.currentTarget.files[0];
