@@ -11,6 +11,8 @@ import PTremps from "../Pages/TrempBossManagement/PTremps";
 import PGifts from "../Pages/TrempBossManagement/PGifts";
 import PManageSystemAdmin from "../Pages/PManagingSystemAdministrators";
 import PReportsAndStatistics from "../Pages/TrempBossManagement/PReportsAndStatistics";
+import PAddAdmin from "../Pages/PAddAdmin";
+import PUpdateAdmin from "../Pages/PUpdateAdmin ";
 
 const Main = () => {
   return (
@@ -25,6 +27,8 @@ const Main = () => {
           <Route path="/tremps" element={<PTremps />} />
           <Route path="/gifts" element={<PGifts />} />
           <Route path="/manage-system-admin" element={<PManageSystemAdmin />} />
+          <Route path="/add-admin" element={<PAddAdmin />} />
+          <Route path="/update-admin" element={<PUpdateAdmin/>} />
           <Route path="/reports-and-statistics" element={<PReportsAndStatistics />} />
         </Routes>
       </Router>
