@@ -27,17 +27,23 @@ const initialValues = {
 
 const PLogin = () => {
   const navigate = useNavigate();
-  const { user, login } = useContext(LoginContext);
+  const {login } = useContext(LoginContext);
 
   const handleFormSubmit = async (values, { setSubmitting }) => {
     console.log(values);
     setSubmitting(false);
-    login(values.username, values.password); 
-    console.log(user);
-    if(user){
-      navigate('/home');
-    } else {
-      // handle failed login attempt, for instance showing a notification
+  
+    try {
+      const isLoginSuccessful = await login(values.username, values.password); 
+      if (isLoginSuccessful) {
+        navigate('/home');
+      } else {
+        // handle failed login attempt, for instance showing a notification
+        console.error('Login attempt failed');
+      }
+    } catch (error) {
+      // handle errors during the login attempt, for instance showing a notification
+      console.error('An error occurred during login', error);
     }
   };
   
