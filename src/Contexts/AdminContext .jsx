@@ -52,9 +52,7 @@ export const AdminProvider = ({ children }) => {
 
   const deleteUsers = async (userIds) => {
     const responses = userIds.map(async (id) => {
-      console.log('====================================');
       console.log(id);
-      console.log('====================================');
       const response = await fetch(
         `https://trempboss-nodeserver.up.railway.app/api/adminUsers/markDeleted/${id}`,
         {
@@ -79,8 +77,39 @@ export const AdminProvider = ({ children }) => {
     setAdmins(mappedAdmins);
   };
 
+
+
+  const addUser = async (user) => {
+    const response = await fetch(
+      `https://trempboss-nodeserver.up.railway.app/api/adminUsers/add`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(user),
+      }
+    );
+
+    if (!response.ok) {
+      const message = `An error has occurred: ${response.status}`;
+      console.log('====================================');
+      console.log(message);
+      console.log('====================================');
+    }
+
+    // re-fetch admin users after addition
+    const fetchedAdmins = await fetchAdminData();
+    const mappedAdmins = fetchedAdmins.map((item) => ({
+      ...item,
+      id: item._id,
+    }));
+    setAdmins(mappedAdmins);
+  };
+
   return (
-    <AdminContext.Provider value={{ adminUsers, setAdmins, deleteUsers }}>
+    <AdminContext.Provider value={{ adminUsers, setAdmins, deleteUsers, addUser }}>
       {children}
     </AdminContext.Provider>
   );

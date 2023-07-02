@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import {
@@ -13,28 +13,29 @@ import {
   Avatar,
 } from "@mui/material";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
+import { AdminContext } from "../Contexts/AdminContext ";
 
 const initialValues = {
   username: "",
-  firstName: "",
-  lastName: "",
+  first_name: "",
+  last_name: "",
   password: "",
   role: "",
-  phoneNumber: "",
-  accountActivated: false,
+  phone_number: "",
+  account_activated: false,
   email: "",
-  profilePicture: null,
+  photo_URL: "https://dummyurl.com/dummyimage.jpg",
 };
 
 const validationSchema = Yup.object().shape({
   username: Yup.string().required("Username is required"),
-  firstName: Yup.string().required("First name is required"),
-  lastName: Yup.string().required("Last name is required"),
+  first_name: Yup.string().required("First name is required"),
+  last_name: Yup.string().required("Last name is required"),
   password: Yup.string().required("Password is required"),
   role: Yup.string().required("Role is required"),
-  phoneNumber: Yup.string().required("Phone number is required"),
+  phone_number: Yup.string().required("Phone number is required"),
   email: Yup.string().email("Email is invalid").required("Email is required"),
-  profilePicture: Yup.mixed().required("Profile picture is required"),
+  photo_URL: Yup.mixed().required("Profile picture is required"),
 });
 
 const TextInputField = ({ label, name, formik }) => {
@@ -96,7 +97,11 @@ const FileInputField = ({ label, name, formik }) => {
         <div>{formik.errors[name]}</div>
       )}
       <Avatar
-        src={values[name] ? URL.createObjectURL(values[name]) : ""}
+        src={
+          values[name] instanceof File || values[name] instanceof Blob
+            ? URL.createObjectURL(values[name])
+            : values[name]
+        }
         style={{ width: 70, height: 70, marginLeft: "10px" }}
       >
         {!values[name] && <PhotoCamera />}
@@ -106,11 +111,20 @@ const FileInputField = ({ label, name, formik }) => {
 };
 
 const PAddAdmin = () => {
+  const context = useContext(AdminContext);
+
   const formik = useFormik({
-    initialValues,
-    validationSchema,
+    initialValues, // use initialValues here
+    validationSchema, // use validationSchema here
     onSubmit: (values) => {
-      console.log(values);
+      // Use a regular object instead of FormData
+      const data = {
+        ...values,
+        accountActivated: values.accountActivated ? true : false, // Convert checkbox boolean to integer
+      };
+
+      console.log(data);
+      context.addUser(data);
     },
   });
 
@@ -135,7 +149,7 @@ const PAddAdmin = () => {
               >
                 <FileInputField
                   label="Profile Picture"
-                  name="profilePicture"
+                  name="photo_URL"
                   formik={formik}
                 />
               </Grid>
@@ -150,14 +164,14 @@ const PAddAdmin = () => {
                 <Grid item xs={12} sm={6}>
                   <TextInputField
                     label="First Name"
-                    name="firstName"
+                    name="first_name"
                     formik={formik}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <TextInputField
                     label="Last Name"
-                    name="lastName"
+                    name="last_name"
                     formik={formik}
                   />
                 </Grid>
@@ -175,7 +189,7 @@ const PAddAdmin = () => {
                 <Grid item xs={12}>
                   <TextInputField
                     label="Phone Number"
-                    name="phoneNumber"
+                    name="phone_number"
                     formik={formik}
                   />
                 </Grid>
@@ -185,7 +199,7 @@ const PAddAdmin = () => {
                 <Grid item xs={12}>
                   <CheckboxInputField
                     label="Account Activated"
-                    name="accountActivated"
+                    name="account_activated"
                     formik={formik}
                   />
                 </Grid>
