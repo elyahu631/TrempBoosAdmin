@@ -70,7 +70,7 @@ const CheckboxInputField = ({ label, name, formik }) => {
 };
 
 const FileInputField = ({ label, name, formik }) => {
-  const { setFieldValue,values } = formik;
+  const { setFieldValue, values } = formik;
 
   const handleFileChange = (event) => {
     const file = event.currentTarget.files[0];
@@ -97,7 +97,7 @@ const FileInputField = ({ label, name, formik }) => {
       )}
       <Avatar
         src={values[name] ? URL.createObjectURL(values[name]) : ""}
-        style={{ width: 70, height: 70 ,marginLeft:"10px"}}
+        style={{ width: 70, height: 70, marginLeft: "10px" }}
       >
         {!values[name] && <PhotoCamera />}
       </Avatar>
@@ -118,7 +118,7 @@ const PAddAdmin = () => {
     <Container>
       <Grid
         container
-        style={{ minHeight: "100vh" }}
+        style={{ minHeight: "80vh", maxHeight: "100vh", overflow: "auto" }}
         alignItems="center"
         justifyContent="center"
       >
