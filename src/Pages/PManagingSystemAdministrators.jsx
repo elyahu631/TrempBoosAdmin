@@ -1,6 +1,6 @@
 // Pages/PManageSystemAdmin.jsx
 
-import React, { useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import {
@@ -14,48 +14,18 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import AddIcon from "@mui/icons-material/Add";
 import { useTheme } from "@mui/material/styles";
-
-const fetchUsers = async () => {
-  return [
-    {
-      id: 1,
-      username: "admin2",
-      email: "admin2@gmail.com",
-      first_name: "מנהל",
-      last_name: "מערכת",
-      role: "admin",
-      phone_number: "058-555-9874",
-      account_activated: true,
-    },
-    {
-      id: 2,
-      username: "admin2",
-      email: "admin2@gmail.com",
-      first_name: "מנהל",
-      last_name: "מערכת",
-      role: "admin",
-      phone_number: "058-555-9874",
-      account_activated: true,
-    },
-  ];
-};
+import { AdminContext } from "../Contexts/AdminContext ";
+import { LoginContext } from "../Contexts/LoginContext";
 
 const PManageSystemAdmin = () => {
-  const [users, setUsers] = useState([]);
+  const { adminUsers, deleteUsers } = useContext(AdminContext);
   const [selectedUsers, setSelectedUsers] = useState([]);
+  const { loading } = useContext(LoginContext);
 
   const navigate = useNavigate();
 
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("md"));
-
-  useEffect(() => {
-    const getUsers = async () => {
-      const fetchedUsers = await fetchUsers();
-      setUsers(fetchedUsers);
-    };
-    getUsers();
-  }, []);
 
   const handleAddUser = () => {
     navigate("/add-admin");
@@ -64,7 +34,7 @@ const PManageSystemAdmin = () => {
   const handleDelete = () => {
     console.log(selectedUsers);
     if (selectedUsers.length > 0) {
-      alert(`Deleting ${selectedUsers.length} user(s)`);
+      deleteUsers(selectedUsers.map((user) => user.id));
       setSelectedUsers([]);
     } else {
       alert("No users selected");
@@ -95,11 +65,13 @@ const PManageSystemAdmin = () => {
     },
   ];
 
-  const handleEditUser = (userId) => {
+  const handleEditUser = () => {
     navigate(`/update-admin`);
   };
-  
-  return (
+
+  return loading ? (
+    <p>Loading...</p>
+  ) : (
     <Box
       sx={{
         display: "flex",
@@ -138,15 +110,16 @@ const PManageSystemAdmin = () => {
         }}
       >
         <DataGrid
-          rows={users}
+          rows={adminUsers}
           columns={columns}
           checkboxSelection
           onRowClick={(params) => {
-            console.log("row= "+ params.row);
+            console.log("row= " + params.row);
           }}
           onRowSelectionModelChange={(newSelection) => {
             const selected = newSelection.map((id) => {
-              const user = users.find((user) => user.id === parseInt(id));
+              console.log("selectedUsers", selectedUsers);
+              const user = adminUsers.find((user) => user.id === id);
               return user;
             });
             setSelectedUsers(selected);

@@ -1,10 +1,12 @@
 import { createContext, useEffect, useState } from "react";
 
-export const LoginContext = createContext();
-
+export const LoginContext = createContext({
+  token: null
+});
 const LoginProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
+  const [loading, setLoading] = useState(true); 
 
   const login = (username, password) => {
     return fetch(
@@ -25,17 +27,15 @@ const LoginProvider = ({ children }) => {
         return response.json();
       })
       .then((data) => {
-        console.log("====================================");
-        console.log(data.user);
-        console.log(data.token);
-        console.log("====================================");
         setUser(data.user);
         setToken(data.token);
         localStorage.setItem("token", data.token);
+        setLoading(false); 
         return true;
       })
       .catch((error) => {
         console.error(error);
+        setLoading(false);
         return false;
       });
   };
@@ -60,7 +60,7 @@ const LoginProvider = ({ children }) => {
   };
 
   return (
-    <LoginContext.Provider value={{ user, token, login, logout, isLoggedIn: !!user }}>
+    <LoginContext.Provider value={{ user, token, login, logout, isLoggedIn: !!user, loading }}>
       {children}
     </LoginContext.Provider>
   );

@@ -9,10 +9,12 @@ import {
   Container,
   TextField,
   Typography,
+  Snackbar,
+  Alert,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { LoginContext } from "../Contexts/LoginContext";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 
 //הגדרת תנאים לנתונים שאנו רוצים לקבל ומתן הודעות בהתאם
 const schema = Yup.object().shape({
@@ -27,26 +29,28 @@ const initialValues = {
 
 const PLogin = () => {
   const navigate = useNavigate();
-  const {login } = useContext(LoginContext);
+  const { login } = useContext(LoginContext);
+  const [open, setOpen] = useState(false);
 
-  const handleFormSubmit = async (values, { setSubmitting }) => {
+  const handleFormSubmit = async (values, { setSubmitting, setFieldError }) => {
     console.log(values);
     setSubmitting(false);
-  
+
     try {
-      const isLoginSuccessful = await login(values.username, values.password); 
+      const isLoginSuccessful = await login(values.username, values.password);
       if (isLoginSuccessful) {
-        navigate('/home');
+        navigate("/home");
       } else {
-        // handle failed login attempt, for instance showing a notification
-        console.error('Login attempt failed');
+        // handle failed login attempt
+        console.error("Login attempt failed");
+        setOpen(true); // show snackbar error
       }
     } catch (error) {
-      // handle errors during the login attempt, for instance showing a notification
-      console.error('An error occurred during login', error);
+      // handle errors during the login attempt
+      console.error("An error occurred during login", error);
+      setOpen(true); // show snackbar error
     }
   };
-  
 
   return (
     <Container
@@ -59,6 +63,22 @@ const PLogin = () => {
         background: "transparent",
       }}
     >
+      <Snackbar
+        open={open}
+        autoHideDuration={6000}
+        onClose={() => setOpen(false)}
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+      >
+        <Alert
+          severity="error"
+          sx={{ backgroundColor: "#fc9790", color: "black" }}
+        >
+          <Typography variant="body1" fontWeight="bold">
+            Login failed. Please check your username and password.
+          </Typography>
+        </Alert>
+      </Snackbar>
+
       <Card
         variant="outlined"
         sx={{ p: 5 }}
@@ -101,16 +121,16 @@ const PLogin = () => {
                     </Box>
                     <TextField
                       size="small"
-                      label="Username" 
-                      type="text" 
+                      label="Username"
+                      type="text"
                       name="username"
-                      id="username" 
+                      id="username"
                       onChange={handleChange}
                       onBlur={handleBlur}
-                      value={values.username} 
-                      placeholder="Enter your username" 
-                      error={!!errors.username && !!touched.username} 
-                      helperText={touched.username && errors.username} 
+                      value={values.username}
+                      placeholder="Enter your username"
+                      error={!!errors.username && !!touched.username}
+                      helperText={touched.username && errors.username}
                     />
 
                     <TextField

@@ -1,5 +1,6 @@
 //Comps/Main.jsx
 import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
 
 import PLogin from "../Pages/PLogin";
 import PHome from "../Pages/PHome";
@@ -15,13 +16,25 @@ import PAddAdmin from "../Pages/PAddAdmin";
 import PUpdateAdmin from "../Pages/PUpdateAdmin ";
 import { useContext } from "react";
 import { LoginContext } from "../Contexts/LoginContext";
+import { Box } from "@mui/material";
 
 const Main = () => {
   const { isLoggedIn } = useContext(LoginContext);
+  const headerRef = useRef(null);
+  const [headerHeight, setHeaderHeight] = useState(0);
+
+  useEffect(() => {
+    if (headerRef.current) {
+      setHeaderHeight(headerRef.current.offsetHeight);
+    }
+  }, []);
 
   return (
     <div>
-      <Header/>
+      <Box ref={headerRef} position="fixed" top={0} left={0} right={0} zIndex="tooltip">
+        <Header />
+      </Box>
+      <Box marginTop={headerHeight/4}>
       <Router>
         <Routes>
           <Route path="/" element={<PLogin />} />
@@ -36,6 +49,7 @@ const Main = () => {
           <Route path="/reports-and-statistics" element={isLoggedIn ? <PReportsAndStatistics /> : <Navigate to="/" />} />
         </Routes>
       </Router>
+      </Box>
     </div>
   );
 };
