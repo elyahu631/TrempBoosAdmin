@@ -5,12 +5,12 @@ import { AdminContext } from "../Contexts/AdminContext";
 import { LoginContext } from "../Contexts/LoginContext";
 import SystemAdminsHeader from '../Components/admin/SystemAdminsHeader';
 import AdminTable from '../Components/admin/AdminTable';
+import { encode } from 'base-64';
 
 const PManageSystemAdmin = () => {
   const { adminUsers, deleteUsers } = useContext(AdminContext);
   const [selectedUsers, setSelectedUsers] = useState([]);
   const { loading } = useContext(LoginContext);
-
   const navigate = useNavigate();
 
 
@@ -29,9 +29,9 @@ const PManageSystemAdmin = () => {
   };
 
   const handleEditUser = (userId) => {
-    navigate(`/update-admin/${userId}`);
+    const encodedUserId = encode(userId);
+    navigate(`/update-admin/${encodedUserId}`);
   };
-  
   return loading ? (
     <p>Loading...</p>
   ) : (
