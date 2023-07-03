@@ -5,7 +5,7 @@ import { Box, Typography } from "@mui/material";
 const Header = () => {
   return (
     <Box bgcolor="primary.main" p={2} display="flex" justifyContent="center">
-      <Typography variant="h5" color="white">
+      <Typography  color="white" textAlign="center">
          TREMP-BOSS MANAGEMENT
       </Typography>
     </Box>

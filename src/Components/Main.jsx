@@ -10,7 +10,7 @@ import PUsers from "../Pages/TrempBossManagement/PUsers";
 import PGroups from "../Pages/TrempBossManagement/PGroups";
 import PTremps from "../Pages/TrempBossManagement/PTremps";
 import PGifts from "../Pages/TrempBossManagement/PGifts";
-import PManageSystemAdmin from "../Pages/PManagingSystemAdministrators";
+import PManageSystemAdmin from "../Pages/PManagingSystemAdmin";
 import PReportsAndStatistics from "../Pages/TrempBossManagement/PReportsAndStatistics";
 import PAddAdmin from "../Pages/PAddAdmin";
 import PUpdateAdmin from "../Pages/PUpdateAdmin ";
@@ -45,7 +45,7 @@ const Main = () => {
           <Route path="/gifts" element={isLoggedIn ? <PGifts /> : <Navigate to="/" />} />
           <Route path="/manage-system-admin" element={isLoggedIn ? <PManageSystemAdmin /> : <Navigate to="/" />} />
           <Route path="/add-admin" element={isLoggedIn ? <PAddAdmin /> : <Navigate to="/" />} />
-          <Route path="/update-admin" element={isLoggedIn ? <PUpdateAdmin /> : <Navigate to="/" />} />
+          <Route path="/update-admin/:id" element={isLoggedIn ? <PUpdateAdmin /> : <Navigate to="/" />} />
           <Route path="/reports-and-statistics" element={isLoggedIn ? <PReportsAndStatistics /> : <Navigate to="/" />} />
         </Routes>
       </Router>

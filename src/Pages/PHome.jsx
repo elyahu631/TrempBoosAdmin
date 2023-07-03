@@ -11,7 +11,7 @@ const PHome = () => {
   }
 
   return (
-    <Box display="flex" p={2} height="90vh" alignItems="center" justifyContent="space-around">
+    <Box display="flex" p={2} height="80vh" alignItems="center" justifyContent="space-around" >
       <Box display="flex" flexDirection="column" gap={2}>
         <Button variant="outlined" onClick={() => handleNavigation('/users')}>Users</Button>
         <Button variant="outlined" onClick={() => handleNavigation('/groups')}>Groups</Button>
