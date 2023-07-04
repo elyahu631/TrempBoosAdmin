@@ -5,7 +5,7 @@ export const CheckboxInputField = ({ label, name, formik }) => {
 
   return (
     <Box display="flex" alignItems="center">
-      <Checkbox name={name} checked={values[name]} onChange={handleChange} />
+      <Checkbox name={name} checked={!!values[name]} onChange={handleChange} />
       <Typography variant="body1">{label}</Typography>
     </Box>
   );

@@ -40,9 +40,8 @@ const AdminTable = ({ adminUsers, handleEditUser, setSelectedUsers }) => {
   return (
     <Box
       sx={{
-        height: 400,
         width: isSmallScreen ? "100%" : "90%",
-        marginBottom: "20px",
+        marginBottom: "50px",
       }}
     >
       <DataGrid

@@ -1,6 +1,7 @@
+// src/API/AdminAPI.jsx
 import axios from "axios";
 
-const API_BASE = "https://trempboss-nodeserver.up.railway.app/api/adminUsers";
+const API_BASE = "http://localhost:5500/api/adminUsers";
 
 export async function fetchAdminData(token) {
   const response = await axios.get(`${API_BASE}/all`, {
@@ -8,14 +9,27 @@ export async function fetchAdminData(token) {
   });
   return response.data.map((item) => ({ ...item, id: item._id }));
 }
-export async function addUser(token, user) {
-  await axios.post(`${API_BASE}/add`, user, {
+
+export async function addUser(token, user, file) {
+  const formData = new FormData();
+
+  for (const key in user) {
+    formData.append(key, user[key]);
+  }
+  formData.append("photo_URL", file);
+  try {
+    await axios.post(`${API_BASE}/add`, formData, {
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "multipart/form-data",
       Authorization: `Bearer ${token}`,
     },
   });
+  } catch (error) {
+    throw error.response.data.message; 
+  }
 }
+
+
 
 export async function deleteUser(token, id) {
   try {
@@ -31,12 +45,19 @@ export async function deleteUser(token, id) {
   }
 }
 
-export async function updateUser(token, user) {
+export async function updateUser(token, user, file) {
   let { id, ...userWithoutId } = user;
+  const formData = new FormData();
+  for (const key in userWithoutId) {
+    formData.append(key, userWithoutId[key]);
+  }
+  if (file) {
+    formData.append("photo_URL", file);
+  }
   try {
-    await axios.put(`${API_BASE}/updateAdmin/${id}`, userWithoutId, {
+    await axios.put(`${API_BASE}/updateAdmin/${id}`, formData, {
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "multipart/form-data",
         Authorization: `Bearer ${token}`,
       },
     });

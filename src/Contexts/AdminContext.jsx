@@ -30,15 +30,26 @@ export const AdminProvider = ({ children }) => {
   };
 
   const addUserHandler = async (user) => {
-    await addUser(token, user);
-    const fetchedAdmins = await fetchAdminData(token);
-    setAdmins(fetchedAdmins);
+    const { photo_URL, ...otherProps } = user;
+    try {
+      await addUser(token, otherProps, photo_URL);
+      const fetchedAdmins = await fetchAdminData(token);
+      setAdmins(fetchedAdmins);
+    } catch (error) {
+      return error;
+    }
   };
+  
+  
 
-  const updateUserHandler = async (updatedUser) => {
-    await updateUser(token, updatedUser);
-    const fetchedAdmins = await fetchAdminData(token);
-    setAdmins(fetchedAdmins);
+  const updateUserHandler = async (updatedUser, file) => {
+    try {
+      await updateUser(token, updatedUser, file);
+      const fetchedAdmins = await fetchAdminData(token);
+      setAdmins(fetchedAdmins);
+    } catch (error) {
+      console.error("Error updating user:", error);
+    }
   };
   
   return (

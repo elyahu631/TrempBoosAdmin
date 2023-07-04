@@ -50,7 +50,7 @@ const UserForm = ({
                   <RoleSelect
                     label="Role"
                     name="role"
-                    value={formik.values.role || "helpDesk"}
+                    value={formik.values.role || "helpdesk"}
                     onChange={formik.handleChange}
                     error={formik.touched.role && formik.errors.role}
                   />
