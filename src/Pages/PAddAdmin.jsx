@@ -53,7 +53,7 @@ const PAddAdmin = () => {
         onClose={handleClose}
         anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
       >
-        <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
+        <Alert onClose={handleClose} sx={{ width: "100%" }}>
           {typeof error === "string" ? error : JSON.stringify(error)}
         </Alert>
       </Snackbar>
