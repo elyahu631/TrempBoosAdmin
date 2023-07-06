@@ -6,7 +6,7 @@ import {
   MenuItem,
 } from '@mui/material';
 
-const RoleSelect = ({ label, name, value, onChange, error }) => {
+const RoleSelect = ({ label, name, value, onChange, error, options }) => {
   return (
     <FormControl fullWidth>
       <InputLabel id={`${name}-label`}>{label}</InputLabel>
@@ -18,10 +18,13 @@ const RoleSelect = ({ label, name, value, onChange, error }) => {
         label={label}
         value={value}
         onChange={onChange}
-        error={error}
+        error={!!error}
       >
-        <MenuItem value="helpdesk">Help Desk</MenuItem>
-        <MenuItem value="admin">Admin</MenuItem>
+        {options.map((option) => (
+          <MenuItem key={option.value} value={option.value}>
+            {option.label}
+          </MenuItem>
+        ))}
       </Select>
     </FormControl>
   );

@@ -19,13 +19,13 @@ export async function addUser(token, user, file) {
   formData.append("photo_URL", file);
   try {
     await axios.post(`${API_BASE}/add`, formData, {
-    headers: {
-      "Content-Type": "multipart/form-data",
-      Authorization: `Bearer ${token}`,
-    },
-  });
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${token}`,
+      },
+    });
   } catch (error) {
-    throw error.response.data.message; 
+    throw error.response.data.message;
   }
 }
 
@@ -33,13 +33,14 @@ export async function addUser(token, user, file) {
 
 export async function deleteUser(token, id) {
   try {
-    await axios.put(
+    let res = await axios.put(
       `${API_BASE}/markDeleted/${id}`,
       {},
       {
         headers: { Authorization: `Bearer ${token}` },
       }
     );
+    console.log(res);
   } catch (error) {
     console.error("Error deleting user:", error);
   }
@@ -55,6 +56,7 @@ export async function updateUser(token, user, file) {
     formData.append("photo_URL", file);
   }
   try {
+    console.log(id)
     await axios.put(`${API_BASE}/updateAdmin/${id}`, formData, {
       headers: {
         "Content-Type": "multipart/form-data",

@@ -4,8 +4,7 @@ import { AdminContext } from "../Contexts/AdminContext";
 import { AdminValues } from "../utils/initialValues";
 import { AddAdminSchema } from "../utils/validationSchema";
 import UserForm from "../Components/admin/UserForm";
-import Snackbar from "@mui/material/Snackbar";
-import Alert from "@mui/material/Alert";
+import CustomSnackbar from "../Components/CustomSnackbar";
 
 const PAddAdmin = () => {
   const context = useContext(AdminContext);
@@ -26,37 +25,29 @@ const PAddAdmin = () => {
       account_activated: values.account_activated ? true : false,
       photo_URL: values.photo_URL,
     };
-    console.log(data.account_activated);
     let res = await context.addUser(data);
-    console.log('====================================');
-    console.log(res);
-    console.log('====================================');
-    if (res === undefined){
-        res = "system user created"
+    if (res === undefined) {
+      res = "system user created"
     }
     setError(res);
     setOpen(true);
   };
-
+  const userAdminValuese = {...AdminValues, role: 'helpdesk'}
   return (
     <>
       <UserForm
-        initialValues={AdminValues}
+        initialValues={userAdminValuese}
         validationSchema={AddAdminSchema}
         onSubmit={handleSubmit}
         formTitle="Add Admin"
         submitButtonTitle="Add Admin"
       />
-      <Snackbar
+      <CustomSnackbar
         open={open}
-        autoHideDuration={6000}
-        onClose={handleClose}
-        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-      >
-        <Alert onClose={handleClose} sx={{ width: "100%" }}>
-          {typeof error === "string" ? error : JSON.stringify(error)}
-        </Alert>
-      </Snackbar>
+        handleClose={handleClose}
+        message={error}
+        severity={error === "system user created" ? "success" : "error"}
+      />
     </>
   );
 };

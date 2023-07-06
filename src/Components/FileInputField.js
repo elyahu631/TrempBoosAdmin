@@ -1,5 +1,6 @@
-import { Avatar, Button } from "@mui/material";
+import { Avatar, Button, Box, Typography } from "@mui/material";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
+import { grey } from "@mui/material/colors";
 
 export const FileInputField = ({ label, name, formik }) => {
   const { setFieldValue, values } = formik;
@@ -10,7 +11,30 @@ export const FileInputField = ({ label, name, formik }) => {
   };
 
   return (
-    <>
+    <Box 
+      sx={{ 
+        display: 'flex', 
+        flexDirection: 'column', 
+        alignItems: 'center',
+        gap: 2 
+      }}
+    >
+      <Avatar
+        src={
+          values[name] instanceof File || values[name] instanceof Blob
+            ? URL.createObjectURL(values[name])
+            : values[name]
+        }
+        sx={{ 
+          width: 100, 
+          height: 100, 
+          borderColor: grey[500], 
+          borderWidth: 1, 
+          borderStyle: 'dashed'
+        }}
+      >
+        {!values[name] && <PhotoCamera sx={{ fontSize: 40, color: grey[500] }}/>}
+      </Avatar>
       <input
         accept="image/*"
         id={name}
@@ -20,23 +44,13 @@ export const FileInputField = ({ label, name, formik }) => {
         onChange={handleFileChange}
       />
       <label htmlFor={name}>
-        <Button variant="outlined" component="span">
+        <Button variant="contained" color="primary" component="span" startIcon={<PhotoCamera />}>
           {label}
         </Button>
       </label>
       {formik.errors[name] && formik.touched[name] && (
-        <div>{formik.errors[name]}</div>
+        <Typography color="error">{formik.errors[name]}</Typography>
       )}
-      <Avatar
-        src={
-          values[name] instanceof File || values[name] instanceof Blob
-            ? URL.createObjectURL(values[name])
-            : values[name]
-        }
-        style={{ width: 70, height: 70, marginLeft: "10px" }}
-      >
-        {!values[name] && <PhotoCamera />}
-      </Avatar>
-    </>
+    </Box>
   );
 };

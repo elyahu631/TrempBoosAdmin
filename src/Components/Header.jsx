@@ -1,5 +1,3 @@
-// Components/Header.jsx
-
 import { Box, Typography } from "@mui/material";
 
 const Header = () => {

@@ -4,8 +4,8 @@ import { AdminContext } from "../Contexts/AdminContext";
 import { UpdateAdminSchema } from "../utils/validationSchema";
 import UserForm from "../Components/admin/UserForm";
 import { decode } from "base-64";
-import Snackbar from "@mui/material/Snackbar";
-import Alert from "@mui/material/Alert";
+import CustomSnackbar from "../Components/CustomSnackbar";
+import { AdminValues } from "../utils/initialValues";
 
 const PUpdateAdmin = () => {
   const { id } = useParams();
@@ -16,7 +16,7 @@ const PUpdateAdmin = () => {
   const [open, setOpen] = useState(false);
   const [error, setError] = useState(null);
 
-  const [initialValues, setInitialValues] = useState(user || {});
+  const [initialValues, setInitialValues] = useState(user || AdminValues);
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -24,11 +24,12 @@ const PUpdateAdmin = () => {
     }
     setOpen(false);
   };
+
   const handleSubmit = async (values) => {
     console.log("Form is submitted");
     delete values.updatedAt;
     // Only keep the fields that have changed
-    const changes = Object.keys(values)
+    let changes = Object.keys(values)
       .filter((key) => initialValues[key] !== values[key])
       .reduce((obj, key) => {
         obj[key] = values[key];
@@ -37,7 +38,7 @@ const PUpdateAdmin = () => {
 
     // Include id in changes but don't allow it to be modified
     changes.id = decodedUserId;
-    
+
     //If accountActivated field was updated
     if (changes.hasOwnProperty("account_activated")) {
       changes.account_activated = changes.account_activated ? true : false;
@@ -48,9 +49,10 @@ const PUpdateAdmin = () => {
       file = changes.photo_URL;
       delete changes.photo_URL;
     }
-    delete changes.id;
     let res = await context.updateUser(changes, file);
-    if(Object.keys(changes).length === 0){
+    console.log(file)
+    console.log(res)
+    if (Object.keys(changes).length === 1 && file === undefined) {
       res = "No field has been updated";
     }
     else if (res === undefined) {
@@ -61,7 +63,7 @@ const PUpdateAdmin = () => {
   };
 
   useEffect(() => {
-    setInitialValues(user || {});
+    setInitialValues(user || AdminValues);
   }, [user]);
 
   if (!user) return "Loading...";
@@ -75,16 +77,12 @@ const PUpdateAdmin = () => {
         formTitle="Edit Admin"
         submitButtonTitle="update"
       />
-      <Snackbar
+      <CustomSnackbar
         open={open}
-        autoHideDuration={6000}
-        onClose={handleClose}
-        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-      >
-        <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
-          {typeof error === "string" ? error : JSON.stringify(error)}
-        </Alert>
-      </Snackbar>
+        handleClose={handleClose}
+        message={error}
+        severity={error !== "User updated successfully" || error === "No field has been updated" ? "error" : "success"}
+      />
     </>
   );
 };

@@ -15,7 +15,7 @@ const UserForm = ({
   submitButtonTitle,
 }) => {
   const formik = useFormik({
-    initialValues ,
+    initialValues,
     validationSchema,
     onSubmit,
   });
@@ -52,7 +52,11 @@ const UserForm = ({
                     name="role"
                     value={formik.values.role || "helpdesk"}
                     onChange={formik.handleChange}
-                    error={formik.touched.role && formik.errors.role}
+                    error={Boolean(formik.touched.role && formik.errors.role)}
+                    options={[
+                      { value: 'helpdesk', label: 'Help Desk' },
+                      { value: 'admin', label: 'Admin' },
+                    ]}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
