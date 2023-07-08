@@ -2,29 +2,40 @@ import React from 'react';
 import { IconButton, Button, Box, Typography } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
+import RefreshIcon from "@mui/icons-material/Refresh";
 
-const SystemAdminsHeader = ({ handleDelete, handleAddUser }) => (
+const SystemAdminsHeader = ({ handleDelete, handleAddUser, handleRefresh }) => (
   <>
     <Typography variant="h4">System Administrators</Typography>
     <Box
       sx={{
         display: "flex",
-        justifyContent: "flex-end",
+        justifyContent: "space-between", // Changed from "flex-end" to "space-between"
         width: "90%",
         marginBottom: "10px",
       }}
     >
-      <IconButton color="primary" onClick={handleDelete}>
-        <DeleteIcon />
+      <IconButton color="load" onClick={handleRefresh}>
+        <RefreshIcon />
       </IconButton>
-      <Button
-        variant="contained"
-        color="primary"
-        startIcon={<AddIcon />}
-        onClick={handleAddUser}
+
+      <Box
+        sx={{
+          display: "flex",
+        }}
       >
-        Add User
-      </Button>
+        <IconButton color="primary" onClick={handleDelete}>
+          <DeleteIcon />
+        </IconButton>
+        <Button
+          variant="contained"
+          color="primary"
+          startIcon={<AddIcon />}
+          onClick={handleAddUser}
+        >
+          Add Admin User
+        </Button>
+      </Box>
     </Box>
   </>
 );

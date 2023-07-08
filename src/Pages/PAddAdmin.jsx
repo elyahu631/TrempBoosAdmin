@@ -3,7 +3,7 @@ import React, { useContext, useState } from "react";
 import { AdminContext } from "../Contexts/AdminContext";
 import { AdminValues } from "../utils/initialValues";
 import { AddAdminSchema } from "../utils/validationSchema";
-import UserForm from "../Components/admin/UserForm";
+import AdminForm from "../Components/admin/AdminForm";
 import CustomSnackbar from "../Components/CustomSnackbar";
 
 const PAddAdmin = () => {
@@ -35,7 +35,7 @@ const PAddAdmin = () => {
   const userAdminValuese = {...AdminValues, role: 'helpdesk'}
   return (
     <>
-      <UserForm
+      <AdminForm
         initialValues={userAdminValuese}
         validationSchema={AddAdminSchema}
         onSubmit={handleSubmit}

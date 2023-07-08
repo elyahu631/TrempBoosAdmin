@@ -32,6 +32,7 @@ export async function addUser(token, user, file) {
 
 
 export async function deleteUser(token, id) {
+  console.log("iddddd", id);
   try {
     let res = await axios.put(
       `${API_BASE}/markDeleted/${id}`,
@@ -48,6 +49,7 @@ export async function deleteUser(token, id) {
 
 export async function updateUser(token, user, file) {
   let { id, ...userWithoutId } = user;
+  console.log(userWithoutId);
   const formData = new FormData();
   for (const key in userWithoutId) {
     formData.append(key, userWithoutId[key]);

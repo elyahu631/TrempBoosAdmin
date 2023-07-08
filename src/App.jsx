@@ -5,7 +5,7 @@ import { AdminProvider } from "./Contexts/AdminContext";
 
 function App() {
   useEffect(() => {
-    document.body.style.backgroundColor = "#226e7f89";
+    document.body.style.backgroundColor = "#ebebeb";
   }, []);
 
   return (

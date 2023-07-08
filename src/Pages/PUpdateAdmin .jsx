@@ -2,7 +2,7 @@ import React, { useEffect, useContext, useState } from "react";
 import { useParams } from "react-router-dom";
 import { AdminContext } from "../Contexts/AdminContext";
 import { UpdateAdminSchema } from "../utils/validationSchema";
-import UserForm from "../Components/admin/UserForm";
+import AdminForm from "../Components/admin/AdminForm";
 import { decode } from "base-64";
 import CustomSnackbar from "../Components/CustomSnackbar";
 import { AdminValues } from "../utils/initialValues";
@@ -11,7 +11,7 @@ const PUpdateAdmin = () => {
   const { id } = useParams();
   const decodedUserId = decode(id);
   const context = useContext(AdminContext);
-  const user = context.adminUsers.find((user) => user.id === decodedUserId);
+  const user = context.adminUsers.find((user) => user._id === decodedUserId);
 
   const [open, setOpen] = useState(false);
   const [error, setError] = useState(null);
@@ -27,6 +27,7 @@ const PUpdateAdmin = () => {
 
   const handleSubmit = async (values) => {
     console.log("Form is submitted");
+    console.log(values);
     delete values.updatedAt;
     // Only keep the fields that have changed
     let changes = Object.keys(values)
@@ -38,7 +39,7 @@ const PUpdateAdmin = () => {
 
     // Include id in changes but don't allow it to be modified
     changes.id = decodedUserId;
-
+    console.log(changes);
     //If accountActivated field was updated
     if (changes.hasOwnProperty("account_activated")) {
       changes.account_activated = changes.account_activated ? true : false;
@@ -70,7 +71,7 @@ const PUpdateAdmin = () => {
 
   return (
     <>
-      <UserForm
+      <AdminForm
         initialValues={user}
         validationSchema={UpdateAdminSchema}
         onSubmit={handleSubmit}

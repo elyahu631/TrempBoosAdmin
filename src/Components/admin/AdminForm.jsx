@@ -24,7 +24,7 @@ const UserForm = ({
     <Container>
       <Grid
         container
-        style={{ minHeight: "80vh", maxHeight: "100vh", overflow: "auto" }}
+        style={{ minHeight: "80vh", maxHeight: "100vh", overflow: "none",marginBottom:"50px" }}
         alignItems="center"
         justifyContent="center"
       >

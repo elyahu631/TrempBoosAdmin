@@ -8,6 +8,16 @@ const LoginProvider = ({ children }) => {
   const [token, setToken] = useState(null);
   const [loading, setLoading] = useState(true); 
 
+  useEffect(() => {
+    const tokenFromStorage = localStorage.getItem("token");
+    const userFromStorage = JSON.parse(localStorage.getItem("user"));
+    if (tokenFromStorage && userFromStorage) {
+      setUser(userFromStorage);
+      setToken(tokenFromStorage);
+    }
+    setLoading(false);
+  }, []);
+
   const login = (username, password) => {
     return fetch(
       "http://localhost:5500/api/adminUsers/login",
@@ -30,6 +40,7 @@ const LoginProvider = ({ children }) => {
         setUser(data.user);
         setToken(data.token);
         localStorage.setItem("token", data.token);
+        localStorage.setItem("user", JSON.stringify(data.user));
         setLoading(false); 
         return true;
       })
@@ -39,19 +50,6 @@ const LoginProvider = ({ children }) => {
         return false;
       });
   };
-
-  useEffect(() => {
-    const handleBeforeUnload = () => {
-      logout();
-    };
-
-    window.addEventListener("beforeunload", handleBeforeUnload);
-
-    // remove event listener when the component is unmounted
-    return () => {
-      window.removeEventListener("beforeunload", handleBeforeUnload);
-    };
-  }, []);
 
   const logout = () => {
     setUser(null);
