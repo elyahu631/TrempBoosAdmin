@@ -1,13 +1,11 @@
-// UserForm.jsx
 import React from "react";
 import { useFormik } from "formik";
 import { Button, Card, Grid, Typography, Container } from "@mui/material";
 import { TextInputField } from "../TextInputField";
-import { CheckboxInputField } from "../CheckboxInputField";
 import { FileInputField } from "../FileInputField";
-import RoleSelect from "../RoleSelect";
+import GenderSelect from "../GenderSelect";
 
-const AdminForm = ({
+const UserForm = ({
   initialValues,
   validationSchema,
   onSubmit,
@@ -24,7 +22,7 @@ const AdminForm = ({
     <Container>
       <Grid
         container
-        style={{ minHeight: "80vh", maxHeight: "100vh", overflow: "none",marginBottom:"50px" }}
+        style={{ minHeight: "80vh", maxHeight: "100vh", overflow: "none", marginBottom:"50px" }}
         alignItems="center"
         justifyContent="center"
       >
@@ -34,11 +32,7 @@ const AdminForm = ({
               {formTitle}
             </Typography>
             <form onSubmit={formik.handleSubmit}>
-              <Grid
-                container
-                justifyContent="center"
-                style={{ padding: "2px", margin: "5px 0" }}
-              >
+              <Grid container justifyContent="center" style={{ padding: "8px", margin: "5px 0" }}>
                 <FileInputField
                   label="Profile Picture"
                   name="photo_URL"
@@ -46,19 +40,6 @@ const AdminForm = ({
                 />
               </Grid>
               <Grid container spacing={2}>
-                <Grid item xs={12}>
-                  <RoleSelect
-                    label="Role"
-                    name="role"
-                    value={formik.values.role || "helpdesk"}
-                    onChange={formik.handleChange}
-                    error={Boolean(formik.touched.role && formik.errors.role)}
-                    options={[
-                      { value: 'helpdesk', label: 'Help Desk' },
-                      { value: 'admin', label: 'Admin' },
-                    ]}
-                  />
-                </Grid>
                 <Grid item xs={12} sm={6}>
                   <TextInputField
                     label="First Name"
@@ -81,14 +62,7 @@ const AdminForm = ({
                   />
                 </Grid>
                 <Grid item xs={12}>
-                  <TextInputField label="Email" name="email" formik={formik} />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextInputField
-                    label="Username"
-                    name="username"
-                    formik={formik}
-                  />
+                  <TextInputField label="Email" name="user_email" formik={formik} />
                 </Grid>
                 <Grid item xs={12}>
                   <TextInputField
@@ -99,10 +73,30 @@ const AdminForm = ({
                   />
                 </Grid>
                 <Grid item xs={12}>
-                  <CheckboxInputField
-                    label="Account Activated"
-                    name="account_activated"
-                    formik={formik}
+                  <GenderSelect
+                    label="Gender"
+                    name="gender"
+                    value={formik.values.gender || "M"}
+                    onChange={formik.handleChange}
+                    error={Boolean(formik.touched.gender && formik.errors.gender)}
+                    options={[
+                      { value: 'M', label: 'Male' },
+                      { value: 'F', label: 'Female' },
+                      { value: 'O', label: 'Other' },
+                    ]}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <GenderSelect
+                    label="Status"
+                    name="status"
+                    value={formik.values.status || "active"}
+                    onChange={formik.handleChange}
+                    error={Boolean(formik.touched.status && formik.errors.status)}
+                    options={[
+                      { value: 'active', label: 'Active' },
+                      { value: 'inactive', label: 'Inactive' },
+                    ]}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -124,4 +118,4 @@ const AdminForm = ({
   );
 };
 
-export default AdminForm;
+export default UserForm;

@@ -15,3 +15,24 @@ export const LoginValues = {
   username: "",
   password: "",
 };
+
+
+export const UserValues = {
+  first_name: "",
+  last_name: "",
+  password: "",
+  phone_number: "",
+  user_email: "",
+  photo_URL: "",
+  gender: "M",
+  status: "active",
+  updatedAt: ""
+};
+
+
+
+
+
+
+
+

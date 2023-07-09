@@ -5,8 +5,9 @@ import { useEffect, useRef, useState } from "react";
 import PLogin from "../Pages/PLogin";
 import PHome from "../Pages/PHome";
 import Header from "./Header";
-
 import PUsers from "../Pages/TrempBossManagement/PUsers";
+import PAddUser from "../Pages/TrempBossManagement/PAddUser";
+import PUpdateUser from "../Pages/TrempBossManagement/PUpdateUser";
 import PGroups from "../Pages/TrempBossManagement/PGroups";
 import PTremps from "../Pages/TrempBossManagement/PTremps";
 import PGifts from "../Pages/TrempBossManagement/PGifts";
@@ -38,6 +39,8 @@ const Main = () => {
           <Route path="/" element={<PLogin />} />
           <Route path="/home" element={ <PHome /> } />
           <Route path="/users" element={ <PUsers /> } />
+          <Route path="/add-user" element={ <PAddUser /> } />
+          <Route path="/update-user/:id" element={ <PUpdateUser/> } />
           <Route path="/groups" element={ <PGroups />} />
           <Route path="/tremps" element={<PTremps />} />
           <Route path="/gifts" element={<PGifts /> } />

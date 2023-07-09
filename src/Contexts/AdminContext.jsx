@@ -45,7 +45,6 @@ export const AdminProvider = ({ children }) => {
   };
   
   
-
   const updateUserHandler = async (updatedUser, file) => {
     try {
       await updateUser(token, updatedUser, file);
