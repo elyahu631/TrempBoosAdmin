@@ -2,10 +2,10 @@
 import React from "react";
 import { useFormik } from "formik";
 import { Button, Card, Grid, Typography, Container } from "@mui/material";
-import { TextInputField } from "../TextInputField";
-import { CheckboxInputField } from "../CheckboxInputField";
-import { FileInputField } from "../FileInputField";
-import RoleSelect from "../RoleSelect";
+import { TextInputField } from "../../Components/TextInputField";
+import { CheckboxInputField } from "../../Components/CheckboxInputField";
+import { FileInputField } from "../../Components/FileInputField";
+import RoleSelect from "../../Components/RoleSelect";
 
 const AdminForm = ({
   initialValues,

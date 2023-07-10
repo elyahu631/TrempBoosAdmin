@@ -1,10 +1,10 @@
 // PAddAdmin.jsx
 import React, { useContext, useState } from "react";
-import { AdminContext } from "../Contexts/AdminContext";
-import { AdminValues } from "../utils/initialValues";
-import { AddAdminSchema } from "../utils/validationSchema";
-import AdminForm from "../Components/admin/AdminForm";
-import CustomSnackbar from "../Components/CustomSnackbar";
+import { AdminContext } from "../../Contexts/AdminContext";
+import { AdminValues } from "../../utils/initialValues";
+import { AddAdminSchema } from "../../utils/validationSchema";
+import AdminForm from "./AdminForm";
+import CustomSnackbar from "../../Components/CustomSnackbar";
 
 const PAddAdmin = () => {
   const context = useContext(AdminContext);

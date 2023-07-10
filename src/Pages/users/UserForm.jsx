@@ -1,9 +1,9 @@
 import React from "react";
 import { useFormik } from "formik";
 import { Button, Card, Grid, Typography, Container } from "@mui/material";
-import { TextInputField } from "../TextInputField";
-import { FileInputField } from "../FileInputField";
-import GenderSelect from "../GenderSelect";
+import { TextInputField } from "../../Components/TextInputField";
+import { FileInputField } from "../../Components/FileInputField";
+import GenderSelect from "../../Components/GenderSelect";
 
 const UserForm = ({
   initialValues,

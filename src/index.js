@@ -45,8 +45,8 @@ const theme = createTheme({
       main: `#950000`,
       darker: '#053e85',
     },
-    body1: {
-      color: '#000000', // Specify the desired text color for the body text
+    nav: {
+      main: '#b44c4c',
     },
 
   },

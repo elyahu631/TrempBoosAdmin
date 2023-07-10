@@ -1,8 +1,8 @@
 import React, { useEffect, useContext, useState } from "react";
 import { useParams } from "react-router-dom";
-import { UserContext } from "../../Contexts//UserContext";
+import { UserContext } from "../../Contexts/UserContext";
 import { UpdateUserSchema } from "../../utils/validationSchema";
-import UserForm from "../../Components/users/UserForm";
+import UserForm from "./UserForm";
 import { decode } from "base-64";
 import CustomSnackbar from "../../Components/CustomSnackbar";
 import { UserValues } from "../../utils/initialValues";

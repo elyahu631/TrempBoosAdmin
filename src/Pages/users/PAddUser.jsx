@@ -3,7 +3,7 @@ import React, { useContext, useState } from "react";
 import { UserContext } from "../../Contexts/UserContext";
 import { UserValues } from "../../utils/initialValues";
 import { UserSchema } from "../../utils/validationSchema";
-import UserFrom from "../../Components/users/UserForm";
+import UserFrom from "./UserForm";
 import CustomSnackbar from "../../Components/CustomSnackbar";
 
 const PAddAdmin = () => {

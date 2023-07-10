@@ -1,11 +1,11 @@
 import React, { useEffect, useContext, useState } from "react";
 import { useParams } from "react-router-dom";
-import { AdminContext } from "../Contexts/AdminContext";
-import { UpdateAdminSchema } from "../utils/validationSchema";
-import AdminForm from "../Components/admin/AdminForm";
+import { AdminContext } from "../../Contexts/AdminContext";
+import { UpdateAdminSchema } from "../../utils/validationSchema";
+import AdminForm from "./AdminForm";
 import { decode } from "base-64";
-import CustomSnackbar from "../Components/CustomSnackbar";
-import { AdminValues } from "../utils/initialValues";
+import CustomSnackbar from "../../Components/CustomSnackbar";
+import { AdminValues } from "../../utils/initialValues";
 
 const PUpdateAdmin = () => {
   const { id } = useParams();
