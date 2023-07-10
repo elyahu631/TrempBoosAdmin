@@ -2,11 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { Box, useTheme, useMediaQuery } from "@mui/material";
 
-const AdminTable = ({ rows, columns,tableData, setSelectedUsers }) => {
+const Table = ({ rows, columns,tableData, setSelectedData }) => {
   const [viewportHeight, setViewportHeight] = useState(window.innerHeight);
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("md"));
-
 
   useEffect(() => {
     const handleResize = () => setViewportHeight(window.innerHeight);
@@ -33,10 +32,11 @@ const AdminTable = ({ rows, columns,tableData, setSelectedUsers }) => {
         checkboxSelection
         onRowSelectionModelChange={(newSelection) => {
           const selected = newSelection.map((id) => {
-            const user = tableData.find((user) => user.id === id);
-            return user;
+            console.log(tableData);
+            const data = tableData.find((data) => data.id === id);
+            return data;
           });
-          setSelectedUsers(selected);
+          setSelectedData(selected);
         }}
         slots={{
           toolbar: GridToolbar,
@@ -46,4 +46,4 @@ const AdminTable = ({ rows, columns,tableData, setSelectedUsers }) => {
   );
 };
 
-export default AdminTable;
+export default Table;

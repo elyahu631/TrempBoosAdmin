@@ -1,21 +1,24 @@
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Box, CircularProgress, Backdrop, IconButton } from "@mui/material";
+import { Box, CircularProgress, Backdrop, IconButton, useTheme, useMediaQuery } from "@mui/material";
 import { LoginContext } from "../../Contexts/LoginContext";
-import AdminTable from '../../Components/Table';
+import Table from '../../Components/Table';
 import { encode } from 'base-64';
 import EditIcon from "@mui/icons-material/Edit";
 import { UserContext } from "../../Contexts/UserContext";
 import UsersHeader from "./UsersHeader";
 
 
-const PManageSystemAdmin = () => {
-  const { users ,refreshUsers,deleteUsers} = useContext(UserContext);
+const PUsers = () => {
+  const { users, refreshUsers, deleteUsers } = useContext(UserContext);
   const tableData = users;
-  const [selectedUsers, setSelectedUsers] = useState([]);  
+  const [selectedUsers, setSelectedUsers] = useState([]);
   const { loading } = useContext(LoginContext);
   const navigate = useNavigate();
   const [isRefreshing, setIsRefreshing] = useState(false);
+
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down("md"));
 
   const handleAddUser = () => {
     navigate("/add-user");
@@ -46,24 +49,24 @@ const PManageSystemAdmin = () => {
   }
 
   const rows = users.map((user, index) => ({
-    ...user, 
+    ...user,
     id: user._id,
     displayId: index + 1,
   }));
 
   const columns = [
-    { field: "displayId", headerName: "ID", flex: 0.2, hideable: false },
-    { field: "user_email", headerName: "Email", flex: 1 },
-    { field: "first_name", headerName: "First Name", flex: 1 },
-    { field: "last_name", headerName: "Last Name", flex: 1 },
-    { field: "phone_number", headerName: "Phone Number", flex: 1 },
-    { field: "status", headerName: "Status", flex: 0.5 },
-    { field: "gender", headerName: "Gender", flex: 0.5 },
-    { field: "coins", headerName: "Coins", flex: 0.5 },
-    { field: "createdAt", headerName: "Created At", flex: 1 },
-    { field: "updatedAt", headerName: "Updated At", flex: 1 },
-    { field: "last_login_date", headerName: "Last Login", flex: 1 },
-    { field: "deleted", headerName: "Deleted", flex: 0.5},
+    { field: "displayId", headerName: "ID", flex: 0.2, minWidth: 50, hideable: false, align: "center", headerAlign: "center" },
+    { field: "user_email", headerName: "Email", flex: 1, minWidth: 150, align: "center", headerAlign: "center" },
+    { field: "first_name", headerName: "First Name", flex: 1, minWidth: 80, align: "center", headerAlign: "center" },
+    { field: "last_name", headerName: "Last Name", flex: 1, minWidth: 80, align: "center", headerAlign: "center" },
+    { field: "phone_number", headerName: "Phone Number", flex: 1, minWidth: 110, align: "center", headerAlign: "center" },
+    { field: "status", headerName: "Status", flex: 0.5, minWidth: 80, align: "center", headerAlign: "center" },
+    { field: "gender", headerName: "Gender", flex: 0.5, minWidth: 80, align: "center", headerAlign: "center" },
+    { field: "coins", headerName: "Coins", flex: 0.5, minWidth: 70, align: "center", headerAlign: "center" },
+    { field: "createdAt", headerName: "Created At", flex: 1, minWidth: 150, align: "center", headerAlign: "center" },
+    { field: "updatedAt", headerName: "Updated At", flex: 1, minWidth: 150, align: "center", headerAlign: "center" },
+    { field: "last_login_date", headerName: "Last Login", flex: 1, minWidth: 150, align: "center", headerAlign: "center" },
+    { field: "deleted", headerName: "Deleted", flex: 0.5, minWidth: 150, align: "center", headerAlign: "center" },
     {
       field: "edit",
       headerName: "Edit",
@@ -73,12 +76,15 @@ const PManageSystemAdmin = () => {
         <IconButton
           color="edit"
           onClick={() => handleEditUser(params.row.id)}
+          style={{ textAlign: "center" }} // Apply center alignment to the cell
         >
           <EditIcon />
         </IconButton>
       ),
+      headerAlign: "center", // Align the header cell to the center
     },
   ];
+  
 
 
 
@@ -93,6 +99,8 @@ const PManageSystemAdmin = () => {
         alignItems: "center",
         justifyContent: "center",
         width: "100%",
+        paddingLeft: isSmallScreen ? theme.spacing(2) : 0,
+        paddingRight: isSmallScreen ? theme.spacing(2) : 0,
       }}
     >
       <UsersHeader
@@ -100,11 +108,11 @@ const PManageSystemAdmin = () => {
         handleAddUser={handleAddUser}
         handleRefresh={handleRefresh}
       />
-      <AdminTable
+      <Table
         rows={rows}
         columns={columns}
         tableData={tableData}
-        setSelectedUsers={setSelectedUsers}
+        setSelectedData={setSelectedUsers}
       />
       <Backdrop open={isRefreshing} sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}>
         <CircularProgress color="inherit" />
@@ -113,4 +121,4 @@ const PManageSystemAdmin = () => {
   );
 };
 
-export default PManageSystemAdmin;
+export default PUsers;

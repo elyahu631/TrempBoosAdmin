@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import { Button, Card, Grid, Typography, Container } from "@mui/material";
 import { TextInputField } from "../../Components/TextInputField";
 import { FileInputField } from "../../Components/FileInputField";
-import GenderSelect from "../../Components/GenderSelect";
+import GenderSelect from "../../Components/Select";
 
 const UserForm = ({
   initialValues,

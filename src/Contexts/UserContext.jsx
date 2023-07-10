@@ -16,8 +16,8 @@ export const UserProvider = ({ children }) => {
 
   const getUsers = useCallback(async () => { // Use useCallback here
     if (token) {
-      const fetchedAdmins = await fetchUsersData(token);
-      setUsers(fetchedAdmins);
+      const fetchedUsers = await fetchUsersData(token);
+      setUsers(fetchedUsers);
     }
   }, [token]); // It depends on 'token'
 
@@ -27,16 +27,16 @@ export const UserProvider = ({ children }) => {
 
   const deleteUsers = async (userIds) => {
     await Promise.all(userIds.map(id => deleteUser(token, id)));
-    const fetchedAdmins = await fetchUsersData(token);
-    setUsers(fetchedAdmins);
+    const fetchedUsers = await fetchUsersData(token);
+    setUsers(fetchedUsers);
   };
 
   const addUserHandler = async (user) => {
     const { photo_URL, ...otherProps } = user;
     try {
       await addUser(token, otherProps, photo_URL);
-      const fetchedAdmins = await fetchUsersData(token);
-      setUsers(fetchedAdmins);
+      const fetchedUsers = await fetchUsersData(token);
+      setUsers(fetchedUsers);
     } catch (error) {
       return error;
     }
@@ -46,16 +46,16 @@ export const UserProvider = ({ children }) => {
     try {
       await updateUser(token, updatedUser, file);
       console.log(file);
-      const fetchedAdmins = await fetchUsersData(token);
-      setUsers(fetchedAdmins);
+      const fetchedUsers = await fetchUsersData(token);
+      setUsers(fetchedUsers);
     } catch (error) {
       console.error("Error updating user:", error);
     }
   };
-  
+
   return (
     <UserContext.Provider
-      value={{ users, refreshUsers: getUsers,deleteUsers,addUser: addUserHandler,updateUser: updateUserHandler}} // Provide getUsers as refreshAdmins
+      value={{ users, refreshUsers: getUsers, deleteUsers, addUser: addUserHandler, updateUser: updateUserHandler }} // Provide getUsers as refreshAdmins
     >
       {children}
     </UserContext.Provider>

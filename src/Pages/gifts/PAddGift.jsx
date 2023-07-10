@@ -1,13 +1,13 @@
 // PAddAdmin.jsx
 import React, { useContext, useState } from "react";
-import { UserContext } from "../../Contexts/UserContext";
-import { UserValues } from "../../utils/initialValues";
-import { UserSchema } from "../../utils/validationSchema";
-import UserFrom from "./UserForm";
+import { GiftContext } from "../../Contexts/GiftsContext";
+import { GiftValues } from "../../utils/initialValues";
+import { GiftSchema } from "../../utils/validationSchema";
+import GiftForm from "./GiftForm";
 import CustomSnackbar from "../../Components/CustomSnackbar";
 
 const PAddUser = () => {
-  const context = useContext(UserContext);
+  const context = useContext(GiftContext);
   const [open, setOpen] = useState(false);
   const [error, setError] = useState(null);
 
@@ -22,9 +22,12 @@ const PAddUser = () => {
     console.log("Form is submitted");
     const data = {
       ...values,
-      photo_URL: values.photo_URL,
+      gift_image: values.gift_image,
     };
-    let res = await context.addUser(data);
+    console.log(data);
+    let res = await context.addGift(data);
+    console.log(res);
+
     if (res === undefined) {
       res = "system user created"
     }
@@ -32,15 +35,15 @@ const PAddUser = () => {
     setOpen(true);
   };
 
-  const userAdminValuese = {...UserValues, role: 'helpdesk'}
+
   return (
     <>
-      <UserFrom
-        initialValues={userAdminValuese}
-        validationSchema={UserSchema}
+      <GiftForm
+        initialValues={GiftValues}
+        validationSchema={GiftSchema}
         onSubmit={handleSubmit}
-        formTitle="Add User"
-        submitButtonTitle="Add User"
+        formTitle="Add Gift"
+        submitButtonTitle="Add Gift"
       />
       <CustomSnackbar
         open={open}

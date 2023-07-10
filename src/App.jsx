@@ -3,6 +3,7 @@ import Main from "./Components/Main";
 import LoginProvider from "./Contexts/LoginContext";
 import { AdminProvider } from "./Contexts/AdminContext";
 import { UserProvider } from "./Contexts/UserContext";
+import { GiftProvider } from "./Contexts/GiftsContext";
 
 function App() {
   useEffect(() => {
@@ -13,7 +14,9 @@ function App() {
     <LoginProvider>
       <AdminProvider>
         <UserProvider>
+          <GiftProvider>
         <Main />
+        </GiftProvider>
         </UserProvider>
       </AdminProvider>
     </LoginProvider>

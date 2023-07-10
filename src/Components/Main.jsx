@@ -12,12 +12,20 @@ import PUpdateUser from "../Pages/users/PUpdateUser";
 import PGroups from "../Pages/groups/PGroups";
 import PTremps from "../Pages/tremps/PTremps";
 import PGifts from "../Pages/gifts/PGifts";
+import PAddGift from "../Pages/gifts/PAddGift";
+import PUpdateGift from "../Pages/gifts/PUpdateGift";
 import PManageSystemAdmin from "../Pages/admin/PManagingSystemAdmin";
 import PReportsAndStatistics from "../Pages/TrempBossManagement/PReportsAndStatistics";
 import PAddAdmin from "../Pages/admin/PAddAdmin";
 import PUpdateAdmin from "../Pages/admin/PUpdateAdmin ";
-
 import { Box } from "@mui/material";
+//
+const NotFound = () => {
+  return (
+    <div> 
+    </div>
+  );
+};
 
 const Main = () => {
   const { isLoggedIn } = useContext(LoginContext);
@@ -31,21 +39,25 @@ const Main = () => {
         <Box marginTop={13}>
           {isLoggedIn ? (
             <Routes>
-              <Route path="/home" element={ <PHome /> } />
-              <Route path="/users" element={ <PUsers /> } />
-              <Route path="/add-user" element={ <PAddUser /> } />
-              <Route path="/update-user/:id" element={ <PUpdateUser/> } />
-              <Route path="/groups" element={ <PGroups />} />
+              <Route path="/home" element={<PHome />} />
+              <Route path="/users" element={<PUsers />} />
+              <Route path="/add-user" element={<PAddUser />} />
+              <Route path="/update-user/:id" element={<PUpdateUser />} />
+              <Route path="/groups" element={<PGroups />} />
               <Route path="/tremps" element={<PTremps />} />
-              <Route path="/gifts" element={<PGifts /> } />
-              <Route path="/manage-system-admin" element={ <PManageSystemAdmin />} />
-              <Route path="/add-admin" element={ <PAddAdmin />} />
-              <Route path="/update-admin/:id" element={ <PUpdateAdmin />} />
-              <Route path="/reports-and-statistics" element={ <PReportsAndStatistics/>} />
+              <Route path="/gifts" element={<PGifts />} />
+              <Route path="/add-gift" element={<PAddGift />} />
+              <Route path="/update-gift/:id" element={<PUpdateGift/>} />
+              <Route path="/manage-system-admin" element={<PManageSystemAdmin />} />
+              <Route path="/add-admin" element={<PAddAdmin />} />
+              <Route path="/update-admin/:id" element={<PUpdateAdmin />} />
+              <Route path="/reports-and-statistics" element={<PReportsAndStatistics />} />
             </Routes>
           ) : (
             <Routes>
               <Route path="/" element={<PLogin />} />
+              <Route path="*" element={<NotFound />} />
+
             </Routes>
           )}
         </Box>

@@ -9,6 +9,7 @@ import { encode } from 'base-64';
 import EditIcon from "@mui/icons-material/Edit";
 
 
+
 const PManageSystemAdmin = () => {
   const { adminUsers, deleteUsers ,refreshAdmins} = useContext(AdminContext);
   const tableData = adminUsers;
@@ -54,30 +55,35 @@ const PManageSystemAdmin = () => {
   }));
 
   const columns = [
-    { field: "displayId", headerName: "ID", flex: 0.2 ,hideable: false},
-    { field: "username", headerName: "Username", flex: 1 },
-    { field: "email", headerName: "Email", flex: 1.2 },
-    { field: "first_name", headerName: "First Name", flex: 1 },
-    { field: "last_name", headerName: "Last Name", flex: 1 },
-    { field: "role", headerName: "Role", flex: 0.5 },
-    { field: "phone_number", headerName: "Phone Number", flex: 1 },
-    { field: "account_activated", headerName: "Account Activated", flex: 1 },
-    { field: "deleted", headerName: "Deleted", flex: 0.5},
+    { field: "displayId", headerName: "ID", flex: 0.2, hideable: false, minWidth: 50, align: "center", headerAlign: "center" },
+    { field: "username", headerName: "Username", flex: 1, minWidth: 100, align: "center", headerAlign: "center" },
+    { field: "email", headerName: "Email", flex: 1.2, minWidth: 150, align: "center", headerAlign: "center" },
+    { field: "first_name", headerName: "First Name", flex: 1, minWidth: 100, align: "center", headerAlign: "center" },
+    { field: "last_name", headerName: "Last Name", flex: 1, minWidth: 100, align: "center", headerAlign: "center" },
+    { field: "role", headerName: "Role", flex: 0.5, minWidth: 100, align: "center", headerAlign: "center" },
+    { field: "phone_number", headerName: "Phone Number", flex: 1, minWidth: 110, align: "center", headerAlign: "center" },
+    { field: "account_activated", headerName: "Account Activated", flex: 1, minWidth: 100, align: "center", headerAlign: "center" },
+    { field: "deleted", headerName: "Deleted", flex: 0.5, minWidth: 50, align: "center", headerAlign: "center" },
     {
       field: "edit",
       headerName: "Edit",
       hideable: false,
       flex: 0.2,
+      minWidth: 50,
       renderCell: (params) => (
         <IconButton
           color="edit"
           onClick={() => handleEditUser(params.row.id)}
+          style={{ textAlign: "center" }} // Apply center alignment to the cell
         >
           <EditIcon />
         </IconButton>
       ),
+      headerAlign: "center", // Align the header cell to the center
     },
   ];
+  
+  
 
 
 
@@ -102,7 +108,7 @@ const PManageSystemAdmin = () => {
         rows={rows}
         columns={columns}
         tableData={tableData}
-        setSelectedUsers={setSelectedUsers}
+        setSelectedData={setSelectedUsers}
       />
       <Backdrop open={isRefreshing} sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}>
         <CircularProgress color="inherit" />

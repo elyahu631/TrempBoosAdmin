@@ -77,3 +77,21 @@ export const UpdateUserSchema = Yup.object().shape({
     .required("Status is required")
     .oneOf(["active", "inactive"], "Invalid status"),
 });
+
+
+export const GiftSchema = Yup.object().shape({
+  gift_image: Yup.mixed().optional("Gift picture is required"),
+  gift_name: Yup.string()
+    .required("Gift name is required"),
+  price: Yup.number()
+    .required("Price is required")
+    .positive("Price must be a positive number")
+    .typeError('Price must be a number'),
+  quantity: Yup.number()
+    .required("Quantity is required")
+    .positive("Quantity must be a positive number")
+    .integer("Quantity must be an integer")
+    .typeError('Quantity must be a number'),
+  collect_place: Yup.string()
+    .required("Collection place is required"),
+});

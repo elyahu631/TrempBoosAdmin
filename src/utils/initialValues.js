@@ -29,7 +29,13 @@ export const UserValues = {
   updatedAt: ""
 };
 
-
+export const GiftValues = {
+  gift_image: "",
+  gift_name: "",
+  price: "",
+  quantity: "",
+  collect_place: ""
+};
 
 
 
