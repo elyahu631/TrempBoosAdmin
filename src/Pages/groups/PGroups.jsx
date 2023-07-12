@@ -2,7 +2,7 @@
 
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { CircularProgress, Backdrop, IconButton, useTheme, useMediaQuery, Tooltip, Table, TableBody, TableRow, TableCell, Box, TableHead } from "@mui/material";
+import { CircularProgress, Backdrop, IconButton, useTheme, useMediaQuery,Box } from "@mui/material";
 import { LoginContext } from "../../Contexts/LoginContext";
 import MainTable from '../../Components/MainTable';
 import EditIcon from "@mui/icons-material/Edit";
@@ -65,60 +65,19 @@ const PGroups = () => {
   }
 
   const rows = groups.map((group, index) => {
-    const locationsComponents = group.locations.map((location, locIndex) =>
-      <TableRow key={locIndex}>
-        <TableCell component="th" scope="row" >
-          {location.name}
-        </TableCell>
-        <TableCell align="right">{location.coordinates.latitude}</TableCell>
-        <TableCell align="right">{location.coordinates.longitude}</TableCell>
-      </TableRow>
-    );
-
-    const locationTable = (
-      <Table size="small">
-        <TableHead>
-          <TableRow>
-            <TableCell>Place</TableCell>
-            <TableCell align="right">Latitude</TableCell>
-            <TableCell align="right">Longitude</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {locationsComponents}
-        </TableBody>
-      </Table>
-    );
-
     return {
       ...group,
       id: group._id,
       displayId: index + 1,
-      locations: locationTable,
       active: group.active === "active" ? "V" : "X"
     }
   });
 
   const columns = [
     { field: "displayId", headerName: "ID", minWidth: 50, flex: 0.2, hideable: false, align: "center", headerAlign: "center" },
-    { field: "group_name", headerName: "Group Name", minWidth: 150, flex: 1, align: "center", headerAlign: "center" },
-    { field: "type", headerName: "Type", minWidth: 80, flex: 0.5, align: "center", headerAlign: "center" },
-    {field: "locations",headerName: "Locations",minWidth: 250,flex: 1.5,align: "center", headerAlign: "center",
-      renderCell: (params) => (
-        <Tooltip
-          title={
-            <Box display="flex" flexDirection="column" overflow="auto" maxHeight={200} color={"white"}>
-              {params.value}
-            </Box>
-          }
-        >
-          <Box display="flex" flexDirection="column" overflow="hidden" textOverflow="ellipsis" whiteSpace="nowrap" >
-            {params.value}
-          </Box>
-        </Tooltip>
-      ),
-    },
-    { field: "active", headerName: "Active", minWidth: 80, flex: 0.5, align: "center", headerAlign: "center" },
+    { field: "group_name", headerName: "Group Name", minWidth: 100, flex: 1, align: "center", headerAlign: "center" },
+    { field: "type", headerName: "Type", minWidth: 80, flex: 1, align: "center", headerAlign: "center" },
+    { field: "active", headerName: "Active", minWidth: 80, flex: 1, align: "center", headerAlign: "center" },
     {
       field: "edit", headerName: "Edit", hideable: false, minWidth: 100, flex: 0.2,align: "center",
       renderCell: (params) => (
@@ -132,7 +91,6 @@ const PGroups = () => {
       headerAlign: "center", // Align the header cell to the center
     },
   ];
-
 
   return loading ? (
     <p>Loading...</p>

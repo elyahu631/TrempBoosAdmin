@@ -22,14 +22,10 @@ const PAddGroup = () => {
     console.log("Form is submitted");
   
     // Destructure location values and create a new group object
-    const { location_name, latitude, longitude, ...groupData } = values;
+    const { name, latitude, longitude, ...groupData } = values;
   
     const data = {
       ...groupData,
-      locations: [{
-        name: location_name,
-        coordinates: { latitude, longitude }
-      }],
     };
   
     console.log(data);

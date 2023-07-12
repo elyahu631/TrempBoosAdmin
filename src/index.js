@@ -48,16 +48,19 @@ const theme = createTheme({
     nav: {
       main: '#b44c4c',
     },
+    red: {
+      main: '#f44336',
+    },
 
   },
 
   typography: {
     fontFamily: [
-      'Montserrat',
       'Lato',
       'Roboto',
-      'Nunito Sans',
       'Helvetica',
+      'Montserrat',
+      'Nunito Sans',
       'Arial',
       'sans-serif',
       '"Apple Color Emoji"',

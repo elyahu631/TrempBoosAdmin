@@ -5,6 +5,7 @@ import { AdminProvider } from "./Contexts/AdminContext";
 import { UserProvider } from "./Contexts/UserContext";
 import { GiftProvider } from "./Contexts/GiftsContext";
 import { GroupProvider } from "./Contexts/GroupContext";
+import ErrorBoundary from "./Components/ErrorBoundary ";
 
 function App() {
   useEffect(() => {
@@ -12,17 +13,20 @@ function App() {
   }, []);
 
   return (
-    <LoginProvider>
-      <AdminProvider>
-        <UserProvider>
-          <GroupProvider>
-            <GiftProvider>
-              <Main />
-            </GiftProvider>
-          </GroupProvider>
-        </UserProvider>
-      </AdminProvider>
-    </LoginProvider>
+    <ErrorBoundary>
+      <LoginProvider>
+        <AdminProvider>
+          <UserProvider>
+            <GroupProvider>
+              <GiftProvider>
+                <Main />
+              </GiftProvider>
+            </GroupProvider>
+          </UserProvider>
+        </AdminProvider>
+      </LoginProvider>
+    </ErrorBoundary>
+
   );
 }
 

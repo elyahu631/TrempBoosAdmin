@@ -80,7 +80,7 @@ export const UpdateUserSchema = Yup.object().shape({
 
 
 export const GiftSchema = Yup.object().shape({
-  gift_image: Yup.mixed().optional("Gift picture is required"),
+  gift_image: Yup.mixed().optional(),
   gift_name: Yup.string()
     .required("Gift name is required"),
   price: Yup.number()
@@ -98,19 +98,31 @@ export const GiftSchema = Yup.object().shape({
 
 
 export const GroupSchema = Yup.object().shape({
+  image_URL: Yup.mixed().required("Group image is required"),
   group_name: Yup.string().required('Group name is required'),
   type: Yup.string()
     .required('Type is required')
     .oneOf(['CITIES', 'PRIVATE'], 'Type must be either Cities or Private'),
-  location_name: Yup.string().required('Location name is required'),
-  latitude: Yup.number()
-      .required('Latitude is required')
-      .typeError('Latitude must be a number')
-      .min(-90, 'Latitude must be between -90 and 90 degrees')
-      .max(90, 'Latitude must be between -90 and 90 degrees'),
-  longitude: Yup.number()
-      .required('Longitude is required')
-      .typeError('Longitude must be a number')
-      .min(-180, 'Longitude must be between -180 and 180 degrees')
-      .max(180, 'Longitude must be between -180 and 180 degrees'),
+    locations: Yup.array()
+    .of(
+      Yup.object().shape({
+        name: Yup.string().required('Location name is required'),
+        coordinates: Yup.object().shape({
+          latitude: Yup.number()
+            .required('Latitude is required')
+            .typeError('Latitude must be a number')
+            .min(-90, 'Latitude must be between -90 and 90 degrees')
+            .max(90, 'Latitude must be between -90 and 90 degrees'),
+          longitude: Yup.number()
+            .required('Longitude is required')
+            .typeError('Longitude must be a number')
+            .min(-180, 'Longitude must be between -180 and 180 degrees')
+            .max(180, 'Longitude must be between -180 and 180 degrees'),
+        }),
+      })
+    )
+    .required('At least one location must be entered'),
+  active: Yup.string()
+    .required('Type is required')
+    .oneOf(['active', 'inactive'], 'Type must be either Cities or Private'),
 });

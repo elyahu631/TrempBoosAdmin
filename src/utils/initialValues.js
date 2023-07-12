@@ -41,11 +41,18 @@ export const GiftValues = {
 export const GroupValues = {
   group_name: "",
   type: "",
-  location_name: "",
-  latitude: "",
-  longitude: ""
+  locations: [
+    {
+      name: "",
+      coordinates: {
+        latitude: "",
+        longitude: "",
+      },
+    },
+  ],
+  image_URL: "",
+  active: "active",
 };
-
 
 
 

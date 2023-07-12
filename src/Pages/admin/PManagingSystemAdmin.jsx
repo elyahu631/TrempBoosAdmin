@@ -62,8 +62,8 @@ const PManageSystemAdmin = () => {
     { field: "last_name", headerName: "Last Name", flex: 1, minWidth: 100, align: "center", headerAlign: "center" },
     { field: "role", headerName: "Role", flex: 0.5, minWidth: 100, align: "center", headerAlign: "center" },
     { field: "phone_number", headerName: "Phone Number", flex: 1, minWidth: 110, align: "center", headerAlign: "center" },
-    { field: "account_activated", headerName: "Account Activated", flex: 1, minWidth: 100, align: "center", headerAlign: "center" },
-    { field: "deleted", headerName: "Deleted", flex: 0.5, minWidth: 50, align: "center", headerAlign: "center" },
+    { field: "account_activated", headerName: "Activated", flex: 0.5, minWidth: 50, align: "center", headerAlign: "center" },
+    { field: "last_login_date", headerName: "last login date", flex: 1, minWidth: 100, align: "center", headerAlign: "center" },
     {
       field: "edit",
       headerName: "Edit",
