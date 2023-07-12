@@ -1,4 +1,4 @@
-// PAddAdmin.jsx
+// PAddGift.jsx
 import React, { useContext, useState } from "react";
 import { GiftContext } from "../../Contexts/GiftsContext";
 import { GiftValues } from "../../utils/initialValues";
@@ -6,7 +6,7 @@ import { GiftSchema } from "../../utils/validationSchema";
 import GiftForm from "./GiftForm";
 import CustomSnackbar from "../../Components/CustomSnackbar";
 
-const PAddUser = () => {
+const PAddGift= () => {
   const context = useContext(GiftContext);
   const [open, setOpen] = useState(false);
   const [error, setError] = useState(null);
@@ -55,4 +55,4 @@ const PAddUser = () => {
   );
 };
 
-export default PAddUser;
+export default PAddGift;

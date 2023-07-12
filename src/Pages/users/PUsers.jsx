@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Box, CircularProgress, Backdrop, IconButton, useTheme, useMediaQuery } from "@mui/material";
 import { LoginContext } from "../../Contexts/LoginContext";
-import Table from '../../Components/Table';
+import MainTable from '../../Components/MainTable';
 import { encode } from 'base-64';
 import EditIcon from "@mui/icons-material/Edit";
 import { UserContext } from "../../Contexts/UserContext";
@@ -52,6 +52,7 @@ const PUsers = () => {
     ...user,
     id: user._id,
     displayId: index + 1,
+    status: user.status === "active" ? "V" :"X"
   }));
 
   const columns = [
@@ -60,13 +61,12 @@ const PUsers = () => {
     { field: "first_name", headerName: "First Name", flex: 1, minWidth: 80, align: "center", headerAlign: "center" },
     { field: "last_name", headerName: "Last Name", flex: 1, minWidth: 80, align: "center", headerAlign: "center" },
     { field: "phone_number", headerName: "Phone Number", flex: 1, minWidth: 110, align: "center", headerAlign: "center" },
-    { field: "status", headerName: "Status", flex: 0.5, minWidth: 80, align: "center", headerAlign: "center" },
     { field: "gender", headerName: "Gender", flex: 0.5, minWidth: 80, align: "center", headerAlign: "center" },
     { field: "coins", headerName: "Coins", flex: 0.5, minWidth: 70, align: "center", headerAlign: "center" },
     { field: "createdAt", headerName: "Created At", flex: 1, minWidth: 150, align: "center", headerAlign: "center" },
     { field: "updatedAt", headerName: "Updated At", flex: 1, minWidth: 150, align: "center", headerAlign: "center" },
     { field: "last_login_date", headerName: "Last Login", flex: 1, minWidth: 150, align: "center", headerAlign: "center" },
-    { field: "deleted", headerName: "Deleted", flex: 0.5, minWidth: 150, align: "center", headerAlign: "center" },
+    { field: "status", headerName: "Status", flex: 0.5, minWidth: 80, align: "center", headerAlign: "center" },
     {
       field: "edit",
       headerName: "Edit",
@@ -108,7 +108,7 @@ const PUsers = () => {
         handleAddUser={handleAddUser}
         handleRefresh={handleRefresh}
       />
-      <Table
+      <MainTable
         rows={rows}
         columns={columns}
         tableData={tableData}

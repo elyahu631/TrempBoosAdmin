@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Box, CircularProgress, Backdrop, IconButton,useTheme,useMediaQuery } from "@mui/material";
 import { LoginContext } from "../../Contexts/LoginContext";
-import Table from '../../Components/Table';
+import MainTable from '../../Components/MainTable';
 import EditIcon from "@mui/icons-material/Edit";
 import { GiftContext } from "../../Contexts/GiftsContext";
 import GiftsHeader from "./GiftsHeader";
@@ -81,11 +81,11 @@ const PGifts = () => {
       hideable: false,
       minWidth: 100,
       flex: 0.2,
+      align: "center",
       renderCell: (params) => (
         <IconButton
           color="primary"
           onClick={() => handleEditGift(params.row.id)}
-          style={{ textAlign: "center" }} // Apply center alignment to the cell
         >
           <EditIcon />
         </IconButton>
@@ -114,7 +114,7 @@ const PGifts = () => {
         handleAddGift={handleAddGift}
         handleRefresh={handleRefresh}
       />
-      <Table
+      <MainTable
         rows={rows}
         columns={columns}
         tableData={tableData}

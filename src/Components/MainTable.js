@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { Box, useTheme, useMediaQuery } from "@mui/material";
 
-const Table = ({ rows, columns,tableData, setSelectedData }) => {
+const MainTable = ({ rows, columns,tableData, setSelectedData }) => {
   const [viewportHeight, setViewportHeight] = useState(window.innerHeight);
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("md"));
@@ -26,10 +26,12 @@ const Table = ({ rows, columns,tableData, setSelectedData }) => {
     >
       <DataGrid
         key={0}
-        density='compact'
+        density='standard'
         rows={rows}
         columns={columns}
         checkboxSelection
+        showCellVerticalBorder
+        showColumnVerticalBorder
         onRowSelectionModelChange={(newSelection) => {
           const selected = newSelection.map((id) => {
             console.log(tableData);
@@ -46,4 +48,4 @@ const Table = ({ rows, columns,tableData, setSelectedData }) => {
   );
 };
 
-export default Table;
+export default MainTable;

@@ -95,3 +95,22 @@ export const GiftSchema = Yup.object().shape({
   collect_place: Yup.string()
     .required("Collection place is required"),
 });
+
+
+export const GroupSchema = Yup.object().shape({
+  group_name: Yup.string().required('Group name is required'),
+  type: Yup.string()
+    .required('Type is required')
+    .oneOf(['CITIES', 'PRIVATE'], 'Type must be either Cities or Private'),
+  location_name: Yup.string().required('Location name is required'),
+  latitude: Yup.number()
+      .required('Latitude is required')
+      .typeError('Latitude must be a number')
+      .min(-90, 'Latitude must be between -90 and 90 degrees')
+      .max(90, 'Latitude must be between -90 and 90 degrees'),
+  longitude: Yup.number()
+      .required('Longitude is required')
+      .typeError('Longitude must be a number')
+      .min(-180, 'Longitude must be between -180 and 180 degrees')
+      .max(180, 'Longitude must be between -180 and 180 degrees'),
+});

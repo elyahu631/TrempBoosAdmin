@@ -4,6 +4,7 @@ import LoginProvider from "./Contexts/LoginContext";
 import { AdminProvider } from "./Contexts/AdminContext";
 import { UserProvider } from "./Contexts/UserContext";
 import { GiftProvider } from "./Contexts/GiftsContext";
+import { GroupProvider } from "./Contexts/GroupContext";
 
 function App() {
   useEffect(() => {
@@ -14,9 +15,11 @@ function App() {
     <LoginProvider>
       <AdminProvider>
         <UserProvider>
-          <GiftProvider>
-        <Main />
-        </GiftProvider>
+          <GroupProvider>
+            <GiftProvider>
+              <Main />
+            </GiftProvider>
+          </GroupProvider>
         </UserProvider>
       </AdminProvider>
     </LoginProvider>

@@ -2,7 +2,7 @@
 import React from 'react';
 import { TextField } from '@mui/material';
 
-const GenderSelect = ({
+const MainSelect = ({
   label,
   name,
   value,
@@ -35,5 +35,5 @@ const GenderSelect = ({
   );
 };
 
-export default GenderSelect;
+export default MainSelect;
 

@@ -40,7 +40,7 @@ const LoginProvider = ({ children }) => {
         setUser(data.user);
         setToken(data.token);
         localStorage.setItem("token", data.token);
-        localStorage.setItem("user", JSON.stringify(data.user));
+        localStorage.setItem("user", JSON.stringify(data.user._id));
         setLoading(false); 
         return true;
       })
@@ -55,6 +55,7 @@ const LoginProvider = ({ children }) => {
     setUser(null);
     setToken(null);
     localStorage.removeItem("token");
+    localStorage.removeItem("user");
   };
 
   return (

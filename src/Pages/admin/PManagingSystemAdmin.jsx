@@ -4,7 +4,7 @@ import { Box, CircularProgress, Backdrop, IconButton } from "@mui/material";
 import { AdminContext } from "../../Contexts/AdminContext";
 import { LoginContext } from "../../Contexts/LoginContext";
 import SystemAdminsHeader from './SystemAdminsHeader';
-import AdminTable from '../../Components/Table';
+import MainTable from '../../Components/MainTable';
 import { encode } from 'base-64';
 import EditIcon from "@mui/icons-material/Edit";
 
@@ -50,7 +50,7 @@ const PManageSystemAdmin = () => {
     ...user, 
     id: user._id,
     displayId: index + 1,
-    account_activated:user.account_activated? "yes":"no",
+    account_activated:user.account_activated? "V":"X",
     deleted:user.deleted? "yes":"no"
   }));
 
@@ -104,7 +104,7 @@ const PManageSystemAdmin = () => {
         handleAddUser={handleAddUser}
         handleRefresh={handleRefresh}
       />
-      <AdminTable
+      <MainTable
         rows={rows}
         columns={columns}
         tableData={tableData}

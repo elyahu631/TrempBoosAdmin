@@ -17,6 +17,7 @@ export const AdminProvider = ({ children }) => {
   const getAdmins = useCallback(async () => { // Use useCallback here
     if (token) {
       const fetchedAdmins = await fetchAdminData(token);
+      console.log(fetchedAdmins);
       setAdmins(fetchedAdmins);
     }
   }, [token]); // It depends on 'token'

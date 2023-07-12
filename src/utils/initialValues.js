@@ -38,6 +38,13 @@ export const GiftValues = {
 };
 
 
+export const GroupValues = {
+  group_name: "",
+  type: "",
+  location_name: "",
+  latitude: "",
+  longitude: ""
+};
 
 
 

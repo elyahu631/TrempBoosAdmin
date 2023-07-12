@@ -1,70 +1,9 @@
-// src/API/AdminAPI.jsx
-import axios from "axios";
+// src/API/UserAPI.jsx
+import { fetchAllData, addData, deleteData, updateData } from "./baseAPI.js";
 
-const API_BASE = "http://localhost:5500/api/users";
+const USERS_API = "users";
 
-export async function fetchUsersData(token) {
-  const response = await axios.get(`${API_BASE}/all`, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
-  return response.data.map((item) => ({ ...item, id: item._id }));
-}
-
-export async function deleteUser(token, id) {
-  try {
-    let res = await axios.put(
-      `${API_BASE}/markDeleted/${id}`,
-      {},
-      {
-        headers: { Authorization: `Bearer ${token}` },
-      }
-    );
-    console.log(res);
-  } catch (error) {
-    console.error("Error deleting user:", error);
-  }
-}
-
-
-export async function addUser(token, user, file) {
-  const formData = new FormData();
-
-  for (const key in user) {
-    formData.append(key, user[key]);
-  }
-  formData.append("photo_URL", file);
-  try {
-    await axios.post(`${API_BASE}/admin-add-user`, formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-        Authorization: `Bearer ${token}`,
-      },
-    });
-  } catch (error) {
-    throw error.response.data.message;
-  }
-}
-
-
-export async function updateUser(token, user, file) {
-  let { id, ...userWithoutId } = user;
-  console.log(userWithoutId);
-  const formData = new FormData();
-  for (const key in userWithoutId) {
-    formData.append(key, userWithoutId[key]);
-  }
-  if (file) {
-    formData.append("photo_URL", file);
-  }
-  try {
-    console.log(id)
-    await axios.put(`${API_BASE}/update-user/${id}`, formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-        Authorization: `Bearer ${token}`,
-      },
-    });
-  } catch (error) {
-    console.error("Error updating user:", error);
-  }
-}
+export const fetchUsersData = (token) => fetchAllData(token, `${USERS_API}/all`);
+export const addUser = (token, user, file) => addData(token, user, file, `${USERS_API}/admin-add-user`, "photo_URL");
+export const deleteUser = (token, id) => deleteData(token, id, `${USERS_API}/markDeleted`);
+export const updateUser = (token, user, file) => updateData(token, user, file, `${USERS_API}/update-user`, "photo_URL");

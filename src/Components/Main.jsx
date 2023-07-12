@@ -1,5 +1,5 @@
 //Comps/Main.jsx
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import { useContext } from 'react';
 import { LoginContext } from '../Contexts/LoginContext';
 
@@ -10,6 +10,7 @@ import PUsers from "../Pages/users/PUsers";
 import PAddUser from "../Pages/users/PAddUser";
 import PUpdateUser from "../Pages/users/PUpdateUser";
 import PGroups from "../Pages/groups/PGroups";
+import PAddGroup from "../Pages/groups/PAddGroup";
 import PTremps from "../Pages/tremps/PTremps";
 import PGifts from "../Pages/gifts/PGifts";
 import PAddGift from "../Pages/gifts/PAddGift";
@@ -22,7 +23,7 @@ import { Box } from "@mui/material";
 //
 const NotFound = () => {
   return (
-    <div> 
+    <div>
     </div>
   );
 };
@@ -39,15 +40,17 @@ const Main = () => {
         <Box marginTop={13}>
           {isLoggedIn ? (
             <Routes>
+              <Route path="/" element={<Navigate to="/home" replace />} />
               <Route path="/home" element={<PHome />} />
               <Route path="/users" element={<PUsers />} />
               <Route path="/add-user" element={<PAddUser />} />
               <Route path="/update-user/:id" element={<PUpdateUser />} />
               <Route path="/groups" element={<PGroups />} />
+              <Route path="/add-group" element={<PAddGroup />} />
               <Route path="/tremps" element={<PTremps />} />
               <Route path="/gifts" element={<PGifts />} />
               <Route path="/add-gift" element={<PAddGift />} />
-              <Route path="/update-gift/:id" element={<PUpdateGift/>} />
+              <Route path="/update-gift/:id" element={<PUpdateGift />} />
               <Route path="/manage-system-admin" element={<PManageSystemAdmin />} />
               <Route path="/add-admin" element={<PAddAdmin />} />
               <Route path="/update-admin/:id" element={<PUpdateAdmin />} />
@@ -57,7 +60,6 @@ const Main = () => {
             <Routes>
               <Route path="/" element={<PLogin />} />
               <Route path="*" element={<NotFound />} />
-
             </Routes>
           )}
         </Box>
