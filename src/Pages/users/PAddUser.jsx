@@ -25,10 +25,12 @@ const PAddUser = () => {
       photo_URL: values.photo_URL,
     };
     let res = await context.addUser(data);
-    if (res === undefined) {
-      res = "system user created"
+    if (!res.status) {
+      setError(res.error.message);
     }
-    setError(res);
+    else{
+      setError( "user created");
+    }
     setOpen(true);
   };
 
@@ -46,7 +48,7 @@ const PAddUser = () => {
         open={open}
         handleClose={handleClose}
         message={error}
-        severity={error === "system user created" ? "success" : "error"}
+        severity={error === "user created" ? "success" : "error"}
       />
     </>
   );

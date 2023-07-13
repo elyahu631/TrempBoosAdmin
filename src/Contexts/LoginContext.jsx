@@ -37,10 +37,11 @@ const LoginProvider = ({ children }) => {
         return response.json();
       })
       .then((data) => {
-        setUser(data.user);
-        setToken(data.token);
-        localStorage.setItem("token", data.token);
-        localStorage.setItem("user", JSON.stringify(data.user._id));
+        let dataReceived = data.data;
+        setUser(dataReceived.user);
+        setToken(dataReceived.token);
+        localStorage.setItem("token", dataReceived.token);
+        localStorage.setItem("user", JSON.stringify(dataReceived.user._id));
         setLoading(false); 
         return true;
       })

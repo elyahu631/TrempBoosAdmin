@@ -14,6 +14,12 @@ export const UserProvider = ({ children }) => {
   const [users, setUsers] = useState([]);
   const { token } = useContext(LoginContext);
 
+  const getUserWithoutToken = async () => {
+    const fetchedUsers = await fetchUsersData(token);
+    setUsers(fetchedUsers);
+  }
+
+
   const getUsers = useCallback(async () => { // Use useCallback here
     if (token) {
       const fetchedUsers = await fetchUsersData(token);
@@ -27,27 +33,23 @@ export const UserProvider = ({ children }) => {
 
   const deleteUsers = async (userIds) => {
     await Promise.all(userIds.map(id => deleteUser(token, id)));
-    const fetchedUsers = await fetchUsersData(token);
-    setUsers(fetchedUsers);
+    getUserWithoutToken();
   };
 
   const addUserHandler = async (user) => {
     const { photo_URL, ...otherProps } = user;
-    try {
-      await addUser(token, otherProps, photo_URL);
-      const fetchedUsers = await fetchUsersData(token);
-      setUsers(fetchedUsers);
-    } catch (error) {
-      return error;
-    }
+    let res = await addUser(token, otherProps, photo_URL);
+      if (res.status){
+        getUserWithoutToken();
+      }
+      return res;
   };
 
   const updateUserHandler = async (updatedUser, file) => {
     try {
       await updateUser(token, updatedUser, file);
       console.log(file);
-      const fetchedUsers = await fetchUsersData(token);
-      setUsers(fetchedUsers);
+      getUserWithoutToken();
     } catch (error) {
       console.error("Error updating user:", error);
     }

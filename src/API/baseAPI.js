@@ -6,7 +6,7 @@ async function fetchAllData(token, url) {
   const response = await axios.get(`${API_BASE}/${url}`, {
     headers: { Authorization: `Bearer ${token}` },
   });
-  return response.data.map((item) => ({ ...item, id: item._id }));
+  return response.data.data.map((item) => ({ ...item, id: item._id }));
 }
 
 async function addData(token, data, file, url, fileKey) {
@@ -20,14 +20,15 @@ async function addData(token, data, file, url, fileKey) {
   }
   formData.append(fileKey, file);
   try {
-    await axios.post(`${API_BASE}/${url}`, formData, {
+    return (await axios.post(`${API_BASE}/${url}`, formData, {
       headers: {
         "Content-Type": "multipart/form-data",
         Authorization: `Bearer ${token}`,
       },
-    });
+    })).data;
   } catch (error) {
-    throw error.response.data.message;
+    console.log(error);
+    return (error.response.data);
   }
 }
 

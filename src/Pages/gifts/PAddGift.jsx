@@ -24,14 +24,14 @@ const PAddGift= () => {
       ...values,
       gift_image: values.gift_image,
     };
-    console.log(data);
     let res = await context.addGift(data);
     console.log(res);
-
-    if (res === undefined) {
-      res = "system user created"
+    if (!res.status) {
+      setError(res.error.message);
     }
-    setError(res);
+    else{
+      setError("Gift created");
+    }
     setOpen(true);
   };
 
@@ -49,7 +49,7 @@ const PAddGift= () => {
         open={open}
         handleClose={handleClose}
         message={error}
-        severity={error === "system user created" ? "success" : "error"}
+        severity={error === "Gift created" ? "success" : "error"}
       />
     </>
   );

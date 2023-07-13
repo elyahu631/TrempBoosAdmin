@@ -29,6 +29,8 @@ const MainTable = ({ rows, columns,tableData, setSelectedData }) => {
         density='standard'
         rows={rows}
         columns={columns}
+        pageSize={10}
+        pageSizeOptions={[ 10,20,30,100]}
         checkboxSelection
         showCellVerticalBorder
         showColumnVerticalBorder

@@ -26,13 +26,17 @@ const PAddAdmin = () => {
       photo_URL: values.photo_URL,
     };
     let res = await context.addUser(data);
-    if (res === undefined) {
-      res = "system user created"
+    if (!res.status) {
+      setError(res.error.message);
     }
-    setError(res);
+    else{
+      setError( "system user created");
+    }
     setOpen(true);
   };
+
   const userAdminValuese = {...AdminValues, role: 'helpdesk'}
+
   return (
     <>
       <AdminForm

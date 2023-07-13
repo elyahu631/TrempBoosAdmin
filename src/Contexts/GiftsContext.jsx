@@ -14,6 +14,12 @@ export const GiftProvider = ({ children }) => {
   const [gifts, setGifts] = useState([]);
   const { token } = useContext(LoginContext);
 
+  const getGiftsWithoutToken = async () => {
+    const fetchedGifts = await fetchGiftsData(token);
+    setGifts(fetchedGifts);
+  }
+
+
   const getGifts = useCallback(async () => { // Use useCallback here
     if (token) {
       const fetchedGifts = await fetchGiftsData(token);
@@ -27,20 +33,17 @@ export const GiftProvider = ({ children }) => {
 
   const deleteGifts = async (giftIds) => {
     await Promise.all(giftIds.map(id => deleteGift(token, id)));
-    const fetchedGifts = await fetchGiftsData(token);
-    setGifts(fetchedGifts);
+    getGiftsWithoutToken();
   };
 
   const addGiftHandler = async (gift) => {
     const { gift_image, ...otherProps } = gift;
-    try {
-      console.log(gift);
-      await addGift(token, otherProps, gift_image);
-      const fetchedGifts = await fetchGiftsData(token);
-      setGifts(fetchedGifts);
-    } catch (error) {
-      return error;
+    let res = await addGift(token, otherProps, gift_image);
+    console.log(res.status);
+    if (res.status) {
+      getGiftsWithoutToken();
     }
+    return res;
   };
 
 
@@ -48,8 +51,7 @@ export const GiftProvider = ({ children }) => {
     try {
       await updateGift(token, updatedGift, file);
       console.log(file);
-      const fetchedGifts = await fetchGiftsData(token);
-      setGifts(fetchedGifts);
+      getGiftsWithoutToken();
     } catch (error) {
       console.error("Error updating user:", error);
     }
@@ -57,7 +59,7 @@ export const GiftProvider = ({ children }) => {
 
   return (
     <GiftContext.Provider
-      value={{ gifts, refreshGifts: getGifts, deleteGifts, addGift: addGiftHandler, updateGift: updateGiftHandler}} // Provide getUsers as refreshAdmins
+      value={{ gifts, refreshGifts: getGifts, deleteGifts, addGift: addGiftHandler, updateGift: updateGiftHandler }} // Provide getUsers as refreshAdmins
     >
       {children}
     </GiftContext.Provider>
