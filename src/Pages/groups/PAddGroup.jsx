@@ -23,20 +23,16 @@ const PAddGroup = () => {
   
     // Destructure location values and create a new group object
     const { name, latitude, longitude, ...groupData } = values;
-  
-    const data = {
-      ...groupData,
-    };
-  
+    const data = {...groupData};
     console.log(data);
-  
     let res = await context.addGroup(data);
     console.log(res);
-  
-    if (res === undefined) {
-      res = "Group created"
+    if (!res.status) {
+      setError(res.error.message);
     }
-    setError(res);
+    else{
+      setError("Group created");
+    }
     setOpen(true);
   };
   

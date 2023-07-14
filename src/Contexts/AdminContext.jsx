@@ -47,15 +47,14 @@ export const AdminProvider = ({ children }) => {
       return res;
   };
 
-
   const updateUserHandler = async (updatedUser, file) => {
-    try {
-      await updateUser(token, updatedUser, file);
+    let res =   await updateUser(token, updatedUser, file);
+    if (res.status) {
       getAdminWithoutToken();
-    } catch (error) {
-      console.error("Error updating user:", error);
     }
+    return res;
   };
+
 
   return (
     <AdminContext.Provider

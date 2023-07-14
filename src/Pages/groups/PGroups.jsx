@@ -44,18 +44,18 @@ const PGroups = () => {
   const handleDelete = () => {
     console.log(selectedGifts);
     if (selectedGifts.length > 0) {
-      deleteGroups(selectedGifts.map((gift) => gift.id));
+      deleteGroups(selectedGifts.map((group) => group.id));
       setSelectedGifts([]);
     } else {
       openSnackbar("No gifts selected", "error"); // Opens the Snackbar with a custom message
     }
   };
 
-  const handleEditGroup = (giftId) => {
+  const handleEditGroup = (gorupId) => {
     console.log('====================================');
-    console.log(giftId);
+    console.log(gorupId);
     console.log('====================================');
-    navigate(`/update-gift/${giftId}`);
+    navigate(`/update-group/${gorupId}`);
   };
 
   const handleRefresh = async () => {

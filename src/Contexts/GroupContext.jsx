@@ -14,6 +14,11 @@ export const GroupProvider = ({ children }) => {
   const [groups, setGroups] = useState([]);
   const { token } = useContext(LoginContext);
 
+  const getGroupsWithoutChakToken = async () => {
+    const fetchedGroups = await fetchGroupsData(token);
+    setGroups(fetchedGroups);
+  }
+
   const getGroups = useCallback(async () => {
     if (token) {
       const fetchedGroups = await fetchGroupsData(token);
@@ -29,37 +34,31 @@ export const GroupProvider = ({ children }) => {
 
   const deleteGroups = async (groupIds) => {
     await Promise.all(groupIds.map(id => deleteGroup(token, id)));
-    const fetchedGroups = await fetchGroupsData(token);
-    setGroups(fetchedGroups);
+    getGroupsWithoutChakToken();
   };
 
   const addGroupHandler = async (group, file) => {
-    try {
-      console.log(group); // Check the structure of the group object here
-      await addGroup(token, group, file);
-      const fetchedGroups = await fetchGroupsData(token);
-      setGroups(fetchedGroups);
-    } catch (error) {
-      return error;
+    let res = await addGroup(token, group, file);
+    if (res.status) {
+      getGroupsWithoutChakToken();
     }
+    return res;
   };
 
   const updateGroupHandler = async (updatedGroup, file) => {
-    try {
-      await updateGroup(token, updatedGroup, file);
-      const fetchedGroups = await fetchGroupsData(token);
-      setGroups(fetchedGroups);
-    } catch (error) {
-      console.error("Error updating group:", error);
+    let res = await updateGroup(token, updatedGroup, file);
+    if (res.status) {
+      getGroupsWithoutChakToken();
     }
+    return res;
   };
+
 
   return (
     <GroupContext.Provider
-      value={{ groups, refreshGroups: getGroups, deleteGroups, addGroup: addGroupHandler, updateGroup: updateGroupHandler}}
+      value={{ groups, refreshGroups: getGroups, deleteGroups, addGroup: addGroupHandler, updateGroup: updateGroupHandler }}
     >
       {children}
     </GroupContext.Provider>
   );
 };
- 

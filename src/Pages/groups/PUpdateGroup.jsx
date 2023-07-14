@@ -1,20 +1,20 @@
 import React, { useEffect, useContext, useState } from "react";
 import { useParams } from "react-router-dom";
-import { GiftContext } from "../../Contexts/GiftsContext";
-import { GiftSchema } from "../../utils/validationSchema";
-import GiftForm from "./GiftForm";
+import { GroupContext } from "../../Contexts/GroupContext";
+import { GroupSchema } from "../../utils/validationSchema";
+import GroupForm from "./GroupForm";
 import CustomSnackbar from "../../Components/CustomSnackbar";
-import { GiftValues } from "../../utils/initialValues";
+import { GroupValues } from "../../utils/initialValues";
 
-const PUpdateUser = () => {
+const PUpdateGroup = () => {
   const { id } = useParams();
-  const context = useContext(GiftContext);
-  const gift = context.gifts.find((gift) => gift._id === id);
+  const context = useContext(GroupContext);
+  const group = context.groups.find((group) => group._id === id);
 
   const [open, setOpen] = useState(false);
   const [error, setError] = useState(null);
 
-  const [initialValues, setInitialValues] = useState(gift || GiftValues);
+  const [initialValues, setInitialValues] = useState(group || GroupValues);
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -25,7 +25,6 @@ const PUpdateUser = () => {
 
   const handleSubmit = async (values) => {
     console.log("Form is submitted");
-    // Only keep the fields that have changed
     let changes = Object.keys(values)
       .filter((key) => initialValues[key] !== values[key])
       .reduce((obj, key) => {
@@ -33,52 +32,54 @@ const PUpdateUser = () => {
         return obj;
       }, {});
 
-    changes.id = values._id;
-    // Separate the photo_URL (if it exists) from the other changes
+    changes.id = id;
+
     let file;
-    if (changes.hasOwnProperty("photo_URL")) {
-      file = changes.gift_image;
-      delete changes.gift_image;
+    if (changes.hasOwnProperty("image_URL")) {
+      file = changes.image_URL;
+      delete changes.image_URL;
     }
+
     let res = "";
     if (Object.keys(changes).length === 1 && file === undefined) {
       setError("No field has been updated");
     }
     else {
-      res = await context.updateGift(changes, file);
+      console.log(file);
+      res = await context.updateGroup(changes, file);
       if (!res.status) {
         setError(res.error.message);
       }
       else {
-        setError("Gift updated successfully");
+        setError("Group updated successfully");
       }
     }
     setOpen(true);
   };
 
   useEffect(() => {
-    setInitialValues(gift || GiftValues);
-  }, [gift]);
+    setInitialValues(group || GroupValues);
+  }, [group]);
 
-  if (!gift) return "Loading...";
+  if (!group) return "Loading...";
 
   return (
     <>
-      <GiftForm
-        initialValues={gift}
-        validationSchema={GiftSchema}
+      <GroupForm
+        initialValues={group}
+        validationSchema={GroupSchema}
         onSubmit={handleSubmit}
-        formTitle="Edit Gift"
+        formTitle="Edit Group"
         submitButtonTitle="update"
       />
       <CustomSnackbar
         open={open}
         handleClose={handleClose}
         message={error}
-        severity={error !== "Gift updated successfully" || error === "No field has been updated" ? "error" : "success"}
+        severity={error !== "Group updated successfully" || error === "No field has been updated" ? "error" : "success"}
       />
     </>
   );
 };
 
-export default PUpdateUser;
+export default PUpdateGroup;

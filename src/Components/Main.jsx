@@ -11,6 +11,7 @@ import PAddUser from "../Pages/users/PAddUser";
 import PUpdateUser from "../Pages/users/PUpdateUser";
 import PGroups from "../Pages/groups/PGroups";
 import PAddGroup from "../Pages/groups/PAddGroup";
+import PUpdateGroup from "../Pages/groups/PUpdateGroup";
 import PTremps from "../Pages/tremps/PTremps";
 import PGifts from "../Pages/gifts/PGifts";
 import PAddGift from "../Pages/gifts/PAddGift";
@@ -47,6 +48,7 @@ const Main = () => {
               <Route path="/update-user/:id" element={<PUpdateUser />} />
               <Route path="/groups" element={<PGroups />} />
               <Route path="/add-group" element={<PAddGroup />} />
+              <Route path="/update-group/:id" element={<PUpdateGroup />} />
               <Route path="/tremps" element={<PTremps />} />
               <Route path="/gifts" element={<PGifts />} />
               <Route path="/add-gift" element={<PAddGift />} />

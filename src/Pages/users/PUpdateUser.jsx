@@ -49,16 +49,19 @@ const PUpdateUser = () => {
       file = changes.photo_URL;
       delete changes.photo_URL;
     }
-    let res = await context.updateUser(changes, file);
-    console.log(file)
-    console.log(res)
+    let res = "";
     if (Object.keys(changes).length === 1 && file === undefined) {
-      res = "No field has been updated";
+      setError("No field has been updated");
     }
-    else if (res === undefined) {
-      res = "User updated successfully";
+    else {
+      res = await context.updateUser(changes, file);
+      if (!res.status) {
+        setError(res.error.message);
+      }
+      else {
+        setError("User updated successfully");
+      }
     }
-    setError(res);
     setOpen(true);
   };
 

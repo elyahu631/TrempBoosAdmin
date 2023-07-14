@@ -6,6 +6,7 @@ import { TextInputField } from "../../Components/TextInputField";
 import { NumberInputField } from "../../Components/NumberInputField";
 
 const LocationFieldArray = ({ formik }) => (
+  
   <FieldArray
     name="locations"
     render={arrayHelpers => (

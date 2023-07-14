@@ -30,7 +30,7 @@ const MainTable = ({ rows, columns,tableData, setSelectedData }) => {
         rows={rows}
         columns={columns}
         pageSize={10}
-        pageSizeOptions={[ 10,20,30,100]}
+        pageSizeOptions={[20,30,100]}
         checkboxSelection
         showCellVerticalBorder
         showColumnVerticalBorder

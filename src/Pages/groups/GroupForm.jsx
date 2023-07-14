@@ -48,9 +48,9 @@ const GroupForm = ({
                     <MainSelect
                       label="Active"
                       name="active"
-                      value={formik.values.status || "active"}
+                      value={formik.values.active || "active"}
                       onChange={formik.handleChange}
-                      error={Boolean(formik.touched.status && formik.errors.status)}
+                      error={Boolean(formik.touched.active && formik.errors.active)}
                       options={[
                         { value: 'active', label: 'Active' },
                         { value: 'inactive', label: 'Inactive' },
@@ -76,8 +76,8 @@ const GroupForm = ({
                       />
                     </Grid>
                     <Grid item xs={12}>
-                      <Typography variant="h5"  align="center" sx={{ textDecoration: 'underline' }}>
-                      locations
+                      <Typography variant="h5" align="center" sx={{ textDecoration: 'underline' }}>
+                        locations
                       </Typography>
                     </Grid>
                     <Grid item xs={12}>

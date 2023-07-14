@@ -54,18 +54,20 @@ async function updateData(token, data, file, url, fileKey) {
     formData.append(key, dataWithoutId[key]);
   }
   if (file) {
+    console.log(file);
     formData.append(fileKey, file);
   }
   try {
-    await axios.put(`${API_BASE}/${url}/${id}`, formData, {
+    return await axios.put(`${API_BASE}/${url}/${id}`, formData, {
       headers: {
         "Content-Type": "multipart/form-data",
         Authorization: `Bearer ${token}`,
       },
     });
   } catch (error) {
-    console.error("Error updating item:", error);
-  }
+    console.log(error);
+    return (error.response.data); 
+   }
 }
 
 export { fetchAllData, addData, deleteData, updateData };

@@ -14,7 +14,7 @@ export const UserProvider = ({ children }) => {
   const [users, setUsers] = useState([]);
   const { token } = useContext(LoginContext);
 
-  const getUserWithoutToken = async () => {
+  const getUserWithoutCheckToken = async () => {
     const fetchedUsers = await fetchUsersData(token);
     setUsers(fetchedUsers);
   }
@@ -33,26 +33,24 @@ export const UserProvider = ({ children }) => {
 
   const deleteUsers = async (userIds) => {
     await Promise.all(userIds.map(id => deleteUser(token, id)));
-    getUserWithoutToken();
+    getUserWithoutCheckToken();
   };
 
   const addUserHandler = async (user) => {
     const { photo_URL, ...otherProps } = user;
     let res = await addUser(token, otherProps, photo_URL);
       if (res.status){
-        getUserWithoutToken();
+        getUserWithoutCheckToken();
       }
       return res;
   };
 
   const updateUserHandler = async (updatedUser, file) => {
-    try {
-      await updateUser(token, updatedUser, file);
-      console.log(file);
-      getUserWithoutToken();
-    } catch (error) {
-      console.error("Error updating user:", error);
+    let res =   await updateUser(token, updatedUser, file);
+    if (res.status) {
+      getUserWithoutCheckToken();
     }
+    return res;
   };
 
   return (

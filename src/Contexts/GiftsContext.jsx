@@ -48,13 +48,11 @@ export const GiftProvider = ({ children }) => {
 
 
   const updateGiftHandler = async (updatedGift, file) => {
-    try {
-      await updateGift(token, updatedGift, file);
-      console.log(file);
+    let res = await updateGift(token, updatedGift, file);
+    if (res.status) {
       getGiftsWithoutToken();
-    } catch (error) {
-      console.error("Error updating user:", error);
     }
+    return res;
   };
 
   return (
