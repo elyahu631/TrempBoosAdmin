@@ -5,7 +5,7 @@ import { Button, Card, Grid, Typography, Container } from "@mui/material";
 import { TextInputField } from "../../Components/TextInputField";
 import { FileInputField } from "../../Components/FileInputField";
 import MainSelect from "../../Components/Select";
-import LocationFieldArray from './LocationFieldArray';
+import MapComponent from "./MapComponent";
 
 const GroupForm = ({
   initialValues,
@@ -31,7 +31,7 @@ const GroupForm = ({
             alignItems="center"
             justifyContent="center"
           >
-            <Grid item xs={12} sm={10} md={8}>
+            <Grid item xs={12} sm={10} md={5}>
               <Card sx={{ padding: "20px", background: "transparent" }}>
                 <Typography variant="h4" component="h2" align="center">
                   {formTitle}
@@ -77,11 +77,13 @@ const GroupForm = ({
                     </Grid>
                     <Grid item xs={12}>
                       <Typography variant="h5" align="center" sx={{ textDecoration: 'underline' }}>
-                        locations
+                        Location
                       </Typography>
                     </Grid>
-                    <Grid item xs={12}>
-                      <LocationFieldArray formik={formik} />
+                    <Grid item xs={12} sm={6}>
+                      <MapComponent
+                        setLocation={(loc) => formik.setFieldValue('location', loc)}
+                      />
                     </Grid>
                     <Grid item xs={12}>
                       <Button

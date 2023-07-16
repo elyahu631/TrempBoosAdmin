@@ -103,25 +103,20 @@ export const GroupSchema = Yup.object().shape({
   type: Yup.string()
     .required('Type is required')
     .oneOf(['CITIES', 'PRIVATE'], 'Type must be either Cities or Private'),
-    locations: Yup.array()
-    .of(
-      Yup.object().shape({
-        name: Yup.string().required('Location name is required'),
-        coordinates: Yup.object().shape({
-          latitude: Yup.number()
-            .required('Latitude is required')
-            .typeError('Latitude must be a number')
-            .min(-90, 'Latitude must be between -90 and 90 degrees')
-            .max(90, 'Latitude must be between -90 and 90 degrees'),
-          longitude: Yup.number()
-            .required('Longitude is required')
-            .typeError('Longitude must be a number')
-            .min(-180, 'Longitude must be between -180 and 180 degrees')
-            .max(180, 'Longitude must be between -180 and 180 degrees'),
-        }),
-      })
-    )
-    .required('At least one location must be entered'),
+  location: Yup.array().of(
+    Yup.object().shape({
+      latitude: Yup.number()
+        .required('Latitude is required')
+        .typeError('Latitude must be a number')
+        .min(-90, 'Latitude must be between -90 and 90 degrees')
+        .max(90, 'Latitude must be between -90 and 90 degrees'),
+      longitude: Yup.number()
+        .required('Longitude is required')
+        .typeError('Longitude must be a number')
+        .min(-180, 'Longitude must be between -180 and 180 degrees')
+        .max(180, 'Longitude must be between -180 and 180 degrees'),
+    }),
+  ).required('Location is required'),
   active: Yup.string()
     .required('Type is required')
     .oneOf(['active', 'inactive'], 'Type must be either Cities or Private'),

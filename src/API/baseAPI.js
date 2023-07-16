@@ -12,7 +12,8 @@ async function fetchAllData(token, url) {
 async function addData(token, data, file, url, fileKey) {
   const formData = new FormData();
   for (const key in data) {
-    if (key === 'locations') {
+    // Stringify all object and array values
+    if (typeof data[key] === 'object') {
       formData.append(key, JSON.stringify(data[key]));
     } else {
       formData.append(key, data[key]);
@@ -28,9 +29,10 @@ async function addData(token, data, file, url, fileKey) {
     })).data;
   } catch (error) {
     console.log(error);
-    return (error.response.data);
+    return { status: false, error };
   }
 }
+
 
 async function deleteData(token, id, url) {
   try {
