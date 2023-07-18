@@ -17,7 +17,7 @@ import PGifts from "../Pages/gifts/PGifts";
 import PAddGift from "../Pages/gifts/PAddGift";
 import PUpdateGift from "../Pages/gifts/PUpdateGift";
 import PManageSystemAdmin from "../Pages/admin/PManagingSystemAdmin";
-import PReportsAndStatistics from "../Pages/TrempBossManagement/PReportsAndStatistics";
+import PKpi from "../Pages/kpis/PKpi";
 import PAddAdmin from "../Pages/admin/PAddAdmin";
 import PUpdateAdmin from "../Pages/admin/PUpdateAdmin ";
 import { Box } from "@mui/material";
@@ -56,7 +56,7 @@ const Main = () => {
               <Route path="/manage-system-admin" element={<PManageSystemAdmin />} />
               <Route path="/add-admin" element={<PAddAdmin />} />
               <Route path="/update-admin/:id" element={<PUpdateAdmin />} />
-              <Route path="/reports-and-statistics" element={<PReportsAndStatistics />} />
+              <Route path="/reports-and-statistics" element={<PKpi />} />
             </Routes>
           ) : (
             <Routes>

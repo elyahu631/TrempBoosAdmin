@@ -55,8 +55,8 @@ async function updateData(token, data, file, url, fileKey) {
   for (const key in dataWithoutId) {
     formData.append(key, dataWithoutId[key]);
   }
+  console.log(file);
   if (file) {
-    console.log(file);
     formData.append(fileKey, file);
   }
   try {
@@ -67,9 +67,15 @@ async function updateData(token, data, file, url, fileKey) {
       },
     });
   } catch (error) {
-    console.log(error);
     return (error.response.data); 
    }
 }
 
-export { fetchAllData, addData, deleteData, updateData };
+async function fetchKpiData(token, url) {
+  const response = await axios.get(`${API_BASE}/${url}`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  return response.data.data;
+}
+
+export { fetchAllData, addData, deleteData, updateData,fetchKpiData };

@@ -9,6 +9,7 @@
     "@mui/lab": "^5.0.0-alpha.135",
     "@mui/material": "^5.13.7",
     "@mui/material-next": "^6.0.0-alpha.92",
+    "@mui/x-charts": "^6.0.0-alpha.3",
     "@mui/x-data-grid": "^6.9.0",
     "@react-google-maps/api": "^2.18.1",
     "@testing-library/jest-dom": "^5.16.5",
@@ -22,6 +23,7 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.14.0",
     "react-scripts": "5.0.1",
+    "recharts": "^2.7.2",
     "web-vitals": "^2.1.4",
     "yup": "^1.2.0"
   },
