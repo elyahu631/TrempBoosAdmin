@@ -73,24 +73,24 @@ const AdminForm = ({
                     formik={formik}
                   />
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={12} sm={6}>
                   <TextInputField
                     label="Phone Number"
                     name="phone_number"
                     formik={formik}
                   />
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={12} sm={6}>
                   <TextInputField label="Email" name="email" formik={formik} />
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={12} sm={6}>
                   <TextInputField
                     label="Username"
                     name="username"
                     formik={formik}
                   />
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={12} sm={6}>
                   <TextInputField
                     label="Password"
                     name="password"

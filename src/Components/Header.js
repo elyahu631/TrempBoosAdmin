@@ -10,6 +10,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import MenuIcon from '@mui/icons-material/Menu';
+import ArrowBack from '@mui/icons-material/ArrowBack'; // Import for Back button
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
@@ -35,6 +36,10 @@ function Header(props) {
     logout();
     navigate('/');
   };
+
+  const handleBack = () => {
+    navigate(-1);
+  }
 
   const drawer = isLoggedIn ? (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
@@ -65,24 +70,43 @@ function Header(props) {
       <CssBaseline />
       <AppBar component="nav" sx={{ bgcolor: "primary.main" }}>
         <Toolbar>
+         
           <IconButton
             color="inherit"
             aria-label="open drawer"
-            edge="start"
+            edge="end"
             onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: 'none' } }}
+            sx={{ mr: 2, display: { xs: 'block', sm: 'none' },  }}
           >
             <MenuIcon />
           </IconButton>
+          <IconButton
+            color="inherit"
+            aria-label="go back"
+            edge="end"
+            onClick={handleBack}
+            sx={{ mr: 2, display: { xs: 'none', sm: 'block' },  }}
+          >
+            <ArrowBack />
+          </IconButton>
           <Typography
-            variant="h6"
             component="div"
-            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+            sx={{ flexGrow: 1, display: { xs: 'block', sm: 'block' }, textAlign: 'center' }}
             color="white"
-            textAlign="left"
           >
             TREMP-BOSS MANAGEMENT
           </Typography>
+         
+          <IconButton
+            color="inherit"
+            aria-label="go back"
+            edge="end"
+            onClick={handleBack}
+            sx={{ mr: 2, display: { xs: 'block', sm: 'none' },  }}
+          >
+            <ArrowBack />
+          </IconButton>
+        
           {isLoggedIn && (<Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             {navItems.map((item) => (
               <Button key={item} sx={{ color: '#fff' }} onClick={() => item === 'Home' ? navigate('/home') : handleSignOut()}>

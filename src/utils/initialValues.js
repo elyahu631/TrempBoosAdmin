@@ -7,7 +7,7 @@ export const AdminValues = {
   phone_number: "",
   account_activated: false,
   email: "",
-  image_URL: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXuzt2s8nfTKBrSQTx1lNn9M8vIRY0xujttj2HD75gu1yTGxF8Gz75KAMpWf1qlgMlV_U&usqp=CAU",
+  image_URL: "",
   updatedAt:""
 };
 
@@ -39,7 +39,7 @@ export const GiftValues = {
 
 
 export const GroupValues = {
-  image_URL: '',
+  image_URL: "",
   group_name: "",
   type: "CITIES",
   location: [],

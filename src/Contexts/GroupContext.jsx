@@ -37,8 +37,9 @@ export const GroupProvider = ({ children }) => {
     getGroupsWithoutChakToken();
   };
 
-  const addGroupHandler = async (group, file) => {
-    let res = await addGroup(token, group, file);
+  const addGroupHandler = async (group) => {
+    const { image_URL, ...otherProps } = group;
+    let res = await addGroup(token, otherProps, image_URL);
     if (res.status) {
       getGroupsWithoutChakToken();
     }

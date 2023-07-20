@@ -21,9 +21,10 @@ const PAddGroup = () => {
   const handleSubmit = async (values) => {
     console.log("Form is submitted");
   
-    // Destructure location values and create a new group object
-    const { name, latitude, longitude, ...groupData } = values;
-    const data = {...groupData};
+    const data = {
+      ...values,
+      image_URL: values.image_URL,
+    };
     console.log(data);
     let res = await context.addGroup(data);
     console.log(res);
