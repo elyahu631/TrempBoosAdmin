@@ -70,25 +70,25 @@ function Header(props) {
       <CssBaseline />
       <AppBar component="nav" sx={{ bgcolor: "primary.main" }}>
         <Toolbar>
-         
+
           <IconButton
             color="inherit"
             aria-label="open drawer"
             edge="end"
             onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { xs: 'block', sm: 'none' },  }}
+            sx={{ mr: 2, display: { xs: 'block', sm: 'none' }, }}
           >
             <MenuIcon />
           </IconButton>
-          <IconButton
+          {isLoggedIn && (<IconButton
             color="inherit"
             aria-label="go back"
             edge="end"
             onClick={handleBack}
-            sx={{ mr: 2, display: { xs: 'none', sm: 'block' },  }}
+            sx={{ mr: 2, display: { xs: 'none', sm: 'block' }, }}
           >
             <ArrowBack />
-          </IconButton>
+          </IconButton>)}
           <Typography
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'block', sm: 'block' }, textAlign: 'center' }}
@@ -96,17 +96,17 @@ function Header(props) {
           >
             TREMP-BOSS MANAGEMENT
           </Typography>
-         
-          <IconButton
+
+          {isLoggedIn && (<IconButton
             color="inherit"
             aria-label="go back"
             edge="end"
             onClick={handleBack}
-            sx={{ mr: 2, display: { xs: 'block', sm: 'none' },  }}
+            sx={{ mr: 2, display: { xs: 'block', sm: 'none' }, }}
           >
             <ArrowBack />
-          </IconButton>
-        
+          </IconButton>)}
+
           {isLoggedIn && (<Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             {navItems.map((item) => (
               <Button key={item} sx={{ color: '#fff' }} onClick={() => item === 'Home' ? navigate('/home') : handleSignOut()}>
