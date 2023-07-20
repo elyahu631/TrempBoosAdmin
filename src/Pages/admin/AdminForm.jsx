@@ -41,7 +41,7 @@ const AdminForm = ({
               >
                 <FileInputField
                   label="Profile Picture"
-                  name="photo_URL"
+                  name="image_URL"
                   formik={formik}
                 />
               </Grid>

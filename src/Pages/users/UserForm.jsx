@@ -35,7 +35,7 @@ const UserForm = ({
               <Grid container justifyContent="center" style={{ padding: "8px", margin: "5px 0" }}>
                 <FileInputField
                   label="Profile Picture"
-                  name="photo_URL"
+                  name="image_URL"
                   formik={formik}
                 />
               </Grid>
@@ -54,14 +54,14 @@ const UserForm = ({
                     formik={formik}
                   />
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={12} sm={6}>
                   <TextInputField
                     label="Phone Number"
                     name="phone_number"
                     formik={formik}
                   />
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={12} sm={6}>
                   <TextInputField label="Email" name="user_email" formik={formik} />
                 </Grid>
                 <Grid item xs={12}>
@@ -72,7 +72,7 @@ const UserForm = ({
                     type="password"
                   />
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={12} sm={6}>
                   <GenderSelect
                     label="Gender"
                     name="gender"
@@ -86,7 +86,7 @@ const UserForm = ({
                     ]}
                   />
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={12} sm={6}>
                   <GenderSelect
                     label="Status"
                     name="status"

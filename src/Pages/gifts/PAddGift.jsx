@@ -22,7 +22,7 @@ const PAddGift= () => {
     console.log("Form is submitted");
     const data = {
       ...values,
-      gift_image: values.gift_image,
+      image_URL: values.image_URL,
     };
     let res = await context.addGift(data);
     console.log(res);

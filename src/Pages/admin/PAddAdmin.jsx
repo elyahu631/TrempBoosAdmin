@@ -23,7 +23,7 @@ const PAddAdmin = () => {
     const data = {
       ...values,
       account_activated: values.account_activated ? true : false,
-      photo_URL: values.photo_URL,
+      image_URL: values.image_URL,
     };
     let res = await context.addUser(data);
     if (!res.status) {

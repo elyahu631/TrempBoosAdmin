@@ -37,8 +37,8 @@ export const UserProvider = ({ children }) => {
   };
 
   const addUserHandler = async (user) => {
-    const { photo_URL, ...otherProps } = user;
-    let res = await addUser(token, otherProps, photo_URL);
+    const { image_URL, ...otherProps } = user;
+    let res = await addUser(token, otherProps, image_URL);
       if (res.status){
         getUserWithoutCheckToken();
       }

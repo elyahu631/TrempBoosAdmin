@@ -28,8 +28,7 @@ async function addData(token, data, file, url, fileKey) {
       },
     })).data;
   } catch (error) {
-    console.log(error);
-    return { status: false, error };
+    return (error.response.data); 
   }
 }
 

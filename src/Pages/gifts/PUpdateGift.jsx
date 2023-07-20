@@ -36,9 +36,9 @@ const PUpdateUser = () => {
     changes.id = values._id;
     // Separate the photo_URL (if it exists) from the other changes
     let file;
-    if (changes.hasOwnProperty("photo_URL")) {
-      file = changes.gift_image;
-      delete changes.gift_image;
+    if (changes.hasOwnProperty("image_URL")) {
+      file = changes.image_URL;
+      delete changes.image_URL;
     }
     let res = "";
     if (Object.keys(changes).length === 1 && file === undefined) {

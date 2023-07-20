@@ -14,7 +14,7 @@ export const AddAdminSchema = Yup.object().shape({
     .required("Phone number is required")
     .matches(/^(05)[0-9]{8}$/, "Phone number must be 10 digits and start with 05"),
   email: Yup.string().email("Email is invalid").required("Email is required"),
-  photo_URL: Yup.mixed().required("Profile picture is required"),
+  image_URL: Yup.mixed().required("Profile picture is required"),
   password: Yup.string()
     .required("Password is required")
     .matches(
@@ -30,7 +30,7 @@ export const UpdateAdminSchema = Yup.object().shape({
   role: Yup.string().required("Role is required"),
   phone_number: Yup.string().required("Phone number is required"),
   email: Yup.string().email("Email is invalid").required("Email is required"),
-  photo_URL: Yup.mixed().required("Profile picture is required"),
+  image_URL: Yup.mixed().required("Profile picture is required"),
 });
 
 export const UserSchema = Yup.object().shape({
@@ -46,7 +46,7 @@ export const UserSchema = Yup.object().shape({
     .required("Phone number is required")
     .matches(/^(05)[0-9]{8}$/, "Phone number must be 10 digits and start with 05"),
   user_email: Yup.string().email("Email is invalid").required("Email is required"),
-  photo_URL: Yup.mixed().optional("Profile picture is required"),
+  image_URL: Yup.mixed().optional("Profile picture is required"),
   gender: Yup.string()
     .required("Gender is required")
     .oneOf(["M", "F", "O"], "Invalid gender"),
@@ -69,7 +69,7 @@ export const UpdateUserSchema = Yup.object().shape({
     .optional("Phone number is required")
     .matches(/^(05)[0-9]{8}$/, "Phone number must be 10 digits and start with 05"),
   user_email: Yup.string().email("Email is invalid").required("Email is required"),
-  photo_URL: Yup.mixed().optional("Profile picture is required"),
+  image_URL: Yup.mixed().optional("Profile picture is required"),
   gender: Yup.string()
     .required("Gender is required")
     .oneOf(["M", "F", "O"], "Invalid gender"),
@@ -80,9 +80,10 @@ export const UpdateUserSchema = Yup.object().shape({
 
 
 export const GiftSchema = Yup.object().shape({
-  gift_image: Yup.mixed().optional(),
+  image_URL: Yup.mixed().optional(),
   gift_name: Yup.string()
-    .required("Gift name is required"),
+  .max(50, 'Gift name must be less than 50 characters')
+  .required('Gift name is required'),
   price: Yup.number()
     .required("Price is required")
     .positive("Price must be a positive number")

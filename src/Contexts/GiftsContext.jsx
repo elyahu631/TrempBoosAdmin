@@ -37,8 +37,8 @@ export const GiftProvider = ({ children }) => {
   };
 
   const addGiftHandler = async (gift) => {
-    const { gift_image, ...otherProps } = gift;
-    let res = await addGift(token, otherProps, gift_image);
+    const { image_URL, ...otherProps } = gift;
+    let res = await addGift(token, otherProps, image_URL);
     console.log(res.status);
     if (res.status) {
       getGiftsWithoutToken();

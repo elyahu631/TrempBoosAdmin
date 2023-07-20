@@ -32,7 +32,7 @@ const GiftForm  = ({
               <Box sx={{ padding: "8px", marginY: "5px" }}>
                 <FileInputField
                   label="Gift Image"
-                  name="gift_image"
+                  name="image_URL"
                   formik={formik}
                 />
               </Box>

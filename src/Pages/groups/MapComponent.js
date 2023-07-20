@@ -55,21 +55,21 @@ const MapComponent = ({setLocation }) => {
   };
 
 
-  useEffect(() => {
-    if(drawingManager) {
-      window.google.maps.event.addListener(drawingManager, 'polygoncomplete', (polygon) => {
-        if(selectedShape){
-          selectedShape.setMap(null);
-        }
-        polygon.setEditable(true);
-        setSelectedShape(polygon);
-        const newLocation = getPolygonCoords(polygon);
-        setLocation(newLocation);
-      });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [drawingManager, selectedShape]);
-  
+useEffect(() => {
+  if(drawingManager) {
+    window.google.maps.event.addListener(drawingManager, 'polygoncomplete', (polygon) => {
+      if(selectedShape){
+        selectedShape.setMap(null);
+      }
+      polygon.setEditable(true);
+      setSelectedShape(polygon);
+      const newLocation = getPolygonCoords(polygon);
+      setLocation(newLocation);
+    });
+  }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+}, [drawingManager, selectedShape]);
+
 
   const getPolygonCoords = (polygon) => {
     const len = polygon.getPath().getLength();

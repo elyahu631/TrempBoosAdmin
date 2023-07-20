@@ -7,7 +7,7 @@ export const AdminValues = {
   phone_number: "",
   account_activated: false,
   email: "",
-  photo_URL: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXuzt2s8nfTKBrSQTx1lNn9M8vIRY0xujttj2HD75gu1yTGxF8Gz75KAMpWf1qlgMlV_U&usqp=CAU",
+  image_URL: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXuzt2s8nfTKBrSQTx1lNn9M8vIRY0xujttj2HD75gu1yTGxF8Gz75KAMpWf1qlgMlV_U&usqp=CAU",
   updatedAt:""
 };
 
@@ -23,14 +23,14 @@ export const UserValues = {
   password: "",
   phone_number: "",
   user_email: "",
-  photo_URL: "",
+  image_URL: "",
   gender: "M",
   status: "active",
   updatedAt: ""
 };
 
 export const GiftValues = {
-  gift_image: "",
+  image_URL: "",
   gift_name: "",
   price: "",
   quantity: "",
@@ -41,7 +41,7 @@ export const GiftValues = {
 export const GroupValues = {
   image_URL: '',
   group_name: "",
-  type: "",
+  type: "CITIES",
   location: [],
-  active: '',
+  active: 'active',
 };
