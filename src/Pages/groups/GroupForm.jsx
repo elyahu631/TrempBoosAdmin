@@ -27,7 +27,6 @@ const GroupForm = ({
     onSubmit,
   });
 
-  const [mapOpen, setMapOpen] = useState(false);
 
   return (
     <Container>
