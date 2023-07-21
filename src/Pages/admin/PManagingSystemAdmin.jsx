@@ -46,14 +46,20 @@ const PManageSystemAdmin = () => {
     setIsRefreshing(false);
   }
 
-  const rows = adminUsers.map((user, index) => ({
-    ...user, 
-    id: user._id,
-    displayId: index + 1,
-    account_activated:user.account_activated? "V":"X",
-    deleted:user.deleted? "yes":"no"
-  }));
-
+  const rows = adminUsers.map((user, index) => {
+    const date = new Date(user.last_login_date);
+    const formattedDate = `${date.toLocaleDateString()}, ${date.toLocaleTimeString()}`;
+  
+    return {
+      ...user, 
+      id: user._id,
+      displayId: index + 1,
+      account_activated:user.account_activated? "V":"X",
+      deleted:user.deleted? "yes":"no",
+      last_login_date: formattedDate // Updated line
+    };
+  });
+  
   const columns = [
     { field: "displayId", headerName: "ID", flex: 0.2, hideable: false, minWidth: 50, align: "center", headerAlign: "center" },
     { field: "username", headerName: "Username", flex: 1, minWidth: 100, align: "center", headerAlign: "center" },

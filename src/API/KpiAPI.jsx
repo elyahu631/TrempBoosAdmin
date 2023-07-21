@@ -1,7 +1,9 @@
 // // src/API/KpiAPI.jsx
-// import { fetchKpiData } from "./baseAPI.js";
+import { fetchKpiData } from "./baseAPI.js";
 
-// const KPI_API = "kpis";
+const KPI_API = "kpis";
 
-// export const fetchHitchhikerStatistics = (token) => fetchKpiData(token, `${KPI_API}/hitchhikers`);
-// export const fetchDriverStatistics = (token) => fetchKpiData(token, `${KPI_API}/drivers`);
+export const fetchTrempsStatistics = (token) => fetchKpiData(token, `${KPI_API}/get-people-and-tremps-counts`);
+export const fetchTopHours = (token) => fetchKpiData(token, `${KPI_API}/get-top-hours`);
+export const fetchTopDrivers = (token) => fetchKpiData(token, `${KPI_API}/get-top-drivers`);
+export const fetchTopRoots = (token) => fetchKpiData(token, `${KPI_API}/get-top-routes`);

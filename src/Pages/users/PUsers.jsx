@@ -48,13 +48,32 @@ const PUsers = () => {
     setIsRefreshing(false);
   }
 
-  const rows = users.map((user, index) => ({
-    ...user,
-    id: user._id,
-    displayId: index + 1,
-    status: user.status === "active" ? "V" :"X"
-  }));
+  const rows = users.map((user, index) => {
+    const lastLoginDate = new Date(user.last_login_date);
+    const formattedLastLoginDate = `${lastLoginDate.toLocaleDateString()}, ${lastLoginDate.toLocaleTimeString()}`;
+  
+    const createdAt = new Date(user.createdAt);
+    const formattedCreatedAt = `${createdAt.toLocaleDateString()}, ${createdAt.toLocaleTimeString()}`;
+  
+    const updatedAt = new Date(user.updatedAt);
+    const formattedUpdatedAt = `${updatedAt.toLocaleDateString()}, ${updatedAt.toLocaleTimeString()}`;
+    let formattedPhoneNumber = user.phone_number;
+    if (user.phone_number) {
+      formattedPhoneNumber = user.phone_number.slice(0,3) + '-' + user.phone_number.slice(3);
+    }
+  
+    return {
+      ...user,
+      id: user._id,
+      displayId: index + 1,
+      status: user.status === "active" ? "V" :"X",
+      last_login_date: formattedLastLoginDate,
+      createdAt: formattedCreatedAt, 
+      updatedAt: formattedUpdatedAt, 
+      phone_number: formattedPhoneNumber 
 
+    };
+  });
   const columns = [
     { field: "displayId", headerName: "ID", flex: 0.2, minWidth: 50, hideable: false, align: "center", headerAlign: "center" },
     { field: "user_email", headerName: "Email", flex: 1, minWidth: 150, align: "center", headerAlign: "center" },

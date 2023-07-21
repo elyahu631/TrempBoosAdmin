@@ -1,47 +1,51 @@
-// import React from 'react';
-// import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-// import { KpiContext } from '../../Contexts/KpiContext';
-// import { useContext } from 'react';
-// import CircularProgress from '@mui/material/CircularProgress';
-// import Box from '@mui/material/Box';
-// import Typography from '@mui/material/Typography';
+import React, { useContext } from "react";
+import { KpiContext } from "../../Contexts/KpiContext";
+import CardContainer from "./CardContainer";
+import TopHoursChart from "./TopHoursChart";
+import TopDriversChart from "./TopDriversChart";
+import CustomChart from "./CustomTooltip"; // Import the new chart component
 
-// export default function PKpi() {
-//   const { driverStatistics, hitchhikerStatistics } = useContext(KpiContext);
+const PKpi = () => {
+  const { trempsStatistics, topHours, topDrivers, topRoots } = useContext(KpiContext);
 
-//   // If driverStatistics or hitchhikerStatistics or any of their properties is null or undefined, show loading
-//   if (!driverStatistics 
-//     || driverStatistics.openedDrivers === undefined 
-//     || driverStatistics.approvedDrivers === undefined 
-//     || !hitchhikerStatistics 
-//     || hitchhikerStatistics.openedHitchhikers === undefined 
-//     || hitchhikerStatistics.approvedHitchhikers === undefined) {
-//     return <CircularProgress />;
-//   }
+  if (trempsStatistics.length === 0) {
+    return <div>Loading...</div>;
+  }
 
-//   // Preparing data for the BarChart
-//   const data = [
-//     { name: 'ride offers', amount: driverStatistics.openedDrivers },
-//     { name: 'Approved offers', amount: driverStatistics.approvedDrivers },
-//     { name: 'ride requests', amount: hitchhikerStatistics.openedHitchhikers },
-//     { name: 'Approved requests', amount: hitchhikerStatistics.approvedHitchhikers },
-//   ];
+  const { total_people, total_approved_trips, average_people_per_trip } =
+    trempsStatistics[0];
 
-//   return (
-//     <Box width={600}>
-//       <Typography variant="subtitle1" fontWeight="bold" fontSize="smaller" style={{textAlign:"center"}}>
-//           Proposals and Travel Requests Opened and Approved
-//       </Typography>
-//       <ResponsiveContainer width="100%" height={400}>
-//         <BarChart data={data}>
-//           <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-//           <XAxis dataKey="name" stroke="#8884d8"/>
-//           <YAxis />
-//           <Tooltip />
-//     <Legend width={100} wrapperStyle={{ top: 40, right: 20, backgroundColor: '#f5f5f5', border: '1px solid #d5d5d5', borderRadius: 3, lineHeight: '40px' }} />
-//           <Bar dataKey="amount" fill="#8884d8" barSize={30}/>
-//         </BarChart>
-//       </ResponsiveContainer>
-//     </Box>
-//   );
-// }
+  const totalHitchhikers = total_people - total_approved_trips;
+
+  return (
+    <div>
+      <CardContainer
+        total_approved_trips={total_approved_trips}
+        average_people_per_trip={average_people_per_trip}
+        totalHitchhikers={totalHitchhikers}
+      />
+      <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-around", flexWrap: "wrap" }}>
+        <TopHoursChart
+          data={topHours}
+          title="Top 5 Hours"
+          fillColor="#8884d8"
+          style={{ flex: "1 0 20%", minWidth: "300px", margin: "10px" }}
+          dataKey="_id"
+        />
+        <TopDriversChart
+          data={topDrivers}
+          title="Top 5 Drivers"
+          fillColor="#82ca9d"
+        />
+        <CustomChart
+          data={topRoots}
+          title="Top Roots"
+          fillColor="#ffc658"
+        />
+      </div>
+
+    </div>
+  );
+};
+
+export default PKpi;

@@ -78,3 +78,23 @@ async function fetchKpiData(token, url) {
 }
 
 export { fetchAllData, addData, deleteData, updateData,fetchKpiData };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

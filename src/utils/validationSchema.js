@@ -6,7 +6,7 @@ export const LoginSchema = Yup.object().shape({
 });
 
 export const AddAdminSchema = Yup.object().shape({
-  username: Yup.string().required("Username is required"),
+  username: Yup.string().min(3).max(15).required("Username is required"),
   first_name: Yup.string().required("First name is required"),
   last_name: Yup.string().required("Last name is required"),
   role: Yup.string().required("Role is required"),
@@ -18,13 +18,13 @@ export const AddAdminSchema = Yup.object().shape({
   password: Yup.string()
     .required("Password is required")
     .matches(
-      /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
+      /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,18}$/,
       "Password must be at least 8 characters, including at least one letter and one number"
     ),
 });
 
 export const UpdateAdminSchema = Yup.object().shape({
-  username: Yup.string().required("Username is required"),
+  username: Yup.string().min(3).max(15).required("Username is required"),
   first_name: Yup.string().required("First name is required"),
   last_name: Yup.string().required("Last name is required"),
   role: Yup.string().required("Role is required"),
