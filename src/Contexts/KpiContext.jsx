@@ -1,7 +1,7 @@
 // src/contexts/KpiContext.jsx
 import React, { createContext, useState, useEffect, useContext, useCallback } from "react";
 import { LoginContext } from "./LoginContext";
-import { fetchTrempsStatistics,fetchTopHours, fetchTopDrivers, fetchTopRoots  } from '../API/KpiAPI';
+import { fetchTrempsStatistics,fetchTopHours, fetchTopDrivers, fetchTopRoots, fetchPercentages  } from '../API/KpiAPI';
 
 export const KpiContext = createContext();
 
@@ -10,6 +10,7 @@ export const KpiProvider = ({ children }) => {
   const [topHours, setTopHours] = useState([]);
   const [topDrivers, setTopDrivers] = useState([]);
   const [topRoots, setTopRoots] = useState([]);
+  const [percentages , setPercentages ] = useState([]);
 
   const { token } = useContext(LoginContext);
 
@@ -44,23 +45,32 @@ export const KpiProvider = ({ children }) => {
     }
   }, [token])
 
+
+  const fetchPercentagesState = useCallback(async () => {
+    if (token) {
+      const fetchedPercentages= await fetchPercentages(token);
+      setPercentages(fetchedPercentages);
+    }
+  }, [token])
+
   useEffect(() => {
     // Define the async function inside useEffect
     const fetchData = async () => {
       await fetchTrempsState();
       await fetchTopHoursState();
       await fetchTopDriverssState(); 
-      await fetchTopRootsState();  
+      await fetchTopRootsState(); 
+      await fetchPercentagesState(); 
     };
   
     // Call the async function inside useEffect
     fetchData();
-  }, [fetchTrempsState, fetchTopHoursState,fetchTopDriverssState,fetchTopRootsState]);
+  }, [fetchTrempsState, fetchTopHoursState,fetchTopDriverssState,fetchTopRootsState,fetchPercentagesState]);
   
 
   return (
     <KpiContext.Provider
-    value={{ trempsStatistics, topHours,topDrivers,topRoots }} 
+    value={{ trempsStatistics, topHours,topDrivers,topRoots ,percentages }} 
     >
       {children}
     </KpiContext.Provider>

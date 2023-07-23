@@ -18,22 +18,14 @@ const StyledCard = styled(Card)`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-`;
+  border-radius: 15px; 
+  background-color: #f3f3f3; /* Light Grey */
+  box-shadow: 0px 8px 16px rgba(0,0,0,0.2); /* Shadow effect */
+  transition: all 0.3s ease-in-out; /* Animation for hover effect */
 
-const TotalRidesCard = styled(StyledCard)`
-  background-color: #d1c4e9; /* Purple */
-`;
-
-const AveragePeopleCard = styled(StyledCard)`
-  background-color: #e1bee7; /* Light Purple */
-`;
-
-const TotalHitchhikersCard = styled(StyledCard)`
-  background-color: #ffe0b2; /* Orange */
-`;
-
-const NumberText = styled(Typography)`
-  font-size: 28px;
+  &:hover {
+    transform: scale(1.05);
+  }
 `;
 
 const IconContainer = styled.div`
@@ -41,16 +33,24 @@ const IconContainer = styled.div`
   align-items: center;
   justify-content: center;
   font-size: 48px;
+
+  svg {
+    color: ${props => props.color || "black"}; /* Color from props */
+  }
+`;
+
+const NumberText = styled(Typography)`
+  font-size: 28px;
 `;
 
 const CardContainer = ({ total_approved_trips, average_people_per_trip, totalHitchhikers }) => {
   return (
     <CardContainerWrapper>
-      <Grid container spacing={2}>
+      <Grid container spacing={5}>
         <Grid item xs={12} sm={4}>
-          <TotalRidesCard>
+          <StyledCard>
             <CardContent>
-              <IconContainer>
+              <IconContainer color="#4caf50">  {/* Green */}
                 <CarIcon />
               </IconContainer>
               <Typography variant="h5" align="center">
@@ -60,12 +60,12 @@ const CardContainer = ({ total_approved_trips, average_people_per_trip, totalHit
                 {total_approved_trips.toLocaleString()}
               </NumberText>
             </CardContent>
-          </TotalRidesCard>
+          </StyledCard>
         </Grid>
         <Grid item xs={12} sm={4}>
-          <AveragePeopleCard>
+          <StyledCard>
             <CardContent>
-              <IconContainer>
+              <IconContainer color="#f44336"> {/* Red */}
                 <PersonIcon />
               </IconContainer>
               <Typography variant="h5" align="center">
@@ -75,12 +75,12 @@ const CardContainer = ({ total_approved_trips, average_people_per_trip, totalHit
                 {average_people_per_trip.toLocaleString()}
               </NumberText>
             </CardContent>
-          </AveragePeopleCard>
+          </StyledCard>
         </Grid>
         <Grid item xs={12} sm={4}>
-          <TotalHitchhikersCard>
+          <StyledCard>
             <CardContent>
-              <IconContainer>
+              <IconContainer color="#ffeb3b"> {/* Yellow */}
                 <ThumbsUpIcon />
               </IconContainer>
               <Typography variant="h5" align="center">
@@ -90,7 +90,7 @@ const CardContainer = ({ total_approved_trips, average_people_per_trip, totalHit
                 {totalHitchhikers.toLocaleString()}
               </NumberText>
             </CardContent>
-          </TotalHitchhikersCard>
+          </StyledCard>
         </Grid>
       </Grid>
     </CardContainerWrapper>

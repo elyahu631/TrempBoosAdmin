@@ -58,6 +58,8 @@ async function updateData(token, data, file, url, fileKey) {
   if (file) {
     formData.append(fileKey, file);
   }
+
+  console.log(formData);
   try {
     return await axios.put(`${API_BASE}/${url}/${id}`, formData, {
       headers: {

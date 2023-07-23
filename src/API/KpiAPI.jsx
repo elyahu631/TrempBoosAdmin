@@ -7,3 +7,4 @@ export const fetchTrempsStatistics = (token) => fetchKpiData(token, `${KPI_API}/
 export const fetchTopHours = (token) => fetchKpiData(token, `${KPI_API}/get-top-hours`);
 export const fetchTopDrivers = (token) => fetchKpiData(token, `${KPI_API}/get-top-drivers`);
 export const fetchTopRoots = (token) => fetchKpiData(token, `${KPI_API}/get-top-routes`);
+export const fetchPercentages = (token) => fetchKpiData(token, `${KPI_API}/get-percentages-per-type`);
