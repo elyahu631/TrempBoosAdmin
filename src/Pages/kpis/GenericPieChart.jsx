@@ -57,7 +57,7 @@ const GenericPieChart = ({ data, title }) => {
           from: 'color',
           modifiers: [['darker', 0.2]]
         }}
-        arcLabel={d => `${d.value}%`}
+        arcLabel={d => `${d.value.toFixed(2)}%`}
         arcLabelsSkipAngle={10}
         arcLabelsTextColor={{ from: 'color', modifiers: [['darker', 2]] }}
         tooltip={({ datum }) => {

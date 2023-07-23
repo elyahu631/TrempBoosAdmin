@@ -1,7 +1,7 @@
 // src/contexts/KpiContext.jsx
 import React, { createContext, useState, useEffect, useContext, useCallback } from "react";
 import { LoginContext } from "./LoginContext";
-import { fetchTrempsStatistics,fetchTopHours, fetchTopDrivers, fetchTopRoots, fetchPercentages  } from '../API/KpiAPI';
+import { fetchTrempsStatistics,fetchTopHours, fetchTopDrivers, fetchTopRoots, fetchPercentages, fetchMonthlyCounts  } from '../API/KpiAPI';
 
 export const KpiContext = createContext();
 
@@ -11,6 +11,7 @@ export const KpiProvider = ({ children }) => {
   const [topDrivers, setTopDrivers] = useState([]);
   const [topRoots, setTopRoots] = useState([]);
   const [percentages , setPercentages ] = useState([]);
+  const [monthlyCounts , setMonthlyCounts ] = useState([]);
 
   const { token } = useContext(LoginContext);
 
@@ -53,6 +54,13 @@ export const KpiProvider = ({ children }) => {
     }
   }, [token])
 
+  const fetchMonthlyCountsState = useCallback(async () => {
+    if (token) {
+      const fetchedMonthlyCounts = await fetchMonthlyCounts(token);
+      setMonthlyCounts(fetchedMonthlyCounts);
+    }
+  }, [token]);
+
   useEffect(() => {
     // Define the async function inside useEffect
     const fetchData = async () => {
@@ -61,16 +69,17 @@ export const KpiProvider = ({ children }) => {
       await fetchTopDriverssState(); 
       await fetchTopRootsState(); 
       await fetchPercentagesState(); 
+      await fetchMonthlyCountsState(); 
     };
   
     // Call the async function inside useEffect
     fetchData();
-  }, [fetchTrempsState, fetchTopHoursState,fetchTopDriverssState,fetchTopRootsState,fetchPercentagesState]);
+  }, [fetchTrempsState, fetchTopHoursState,fetchTopDriverssState,fetchTopRootsState,fetchPercentagesState,fetchMonthlyCountsState]);
   
 
   return (
     <KpiContext.Provider
-    value={{ trempsStatistics, topHours,topDrivers,topRoots ,percentages }} 
+    value={{ trempsStatistics, topHours,topDrivers,topRoots ,percentages, monthlyCounts }} 
     >
       {children}
     </KpiContext.Provider>

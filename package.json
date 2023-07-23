@@ -11,6 +11,7 @@
     "@mui/material-next": "^6.0.0-alpha.92",
     "@mui/x-charts": "^6.0.0-alpha.3",
     "@mui/x-data-grid": "^6.9.0",
+    "@nivo/bar": "^0.83.0",
     "@nivo/pie": "^0.83.0",
     "@react-google-maps/api": "^2.18.1",
     "@testing-library/jest-dom": "^5.16.5",
