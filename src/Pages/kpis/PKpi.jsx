@@ -53,7 +53,7 @@ const PKpi = () => {
         />
         <GenericBarChart
           data={topRoots}
-          title="To 5 Roots"
+          title="To 5 Routes"
           fillColor="#ffc658"
           dataKey="count"
           yAxisDataKey={(data) => `${data._id.from_root}-${data._id.to_root}`}
