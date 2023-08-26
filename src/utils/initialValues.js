@@ -22,7 +22,7 @@ export const UserValues = {
   last_name: "",
   password: "",
   phone_number: "",
-  user_email: "",
+  email: "",
   image_URL: "",
   gender: "M",
   status: "active",

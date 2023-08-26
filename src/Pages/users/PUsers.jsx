@@ -76,7 +76,7 @@ const PUsers = () => {
   });
   const columns = [
     { field: "displayId", headerName: "ID", flex: 0.2, minWidth: 50, hideable: false, align: "center", headerAlign: "center" },
-    { field: "user_email", headerName: "Email", flex: 1, minWidth: 150, align: "center", headerAlign: "center" },
+    { field: "email", headerName: "Email", flex: 1, minWidth: 150, align: "center", headerAlign: "center" },
     { field: "first_name", headerName: "First Name", flex: 1, minWidth: 80, align: "center", headerAlign: "center" },
     { field: "last_name", headerName: "Last Name", flex: 1, minWidth: 80, align: "center", headerAlign: "center" },
     { field: "phone_number", headerName: "Phone Number", flex: 1, minWidth: 110, align: "center", headerAlign: "center" },

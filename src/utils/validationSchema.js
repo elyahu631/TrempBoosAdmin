@@ -45,7 +45,7 @@ export const UserSchema = Yup.object().shape({
   phone_number: Yup.string()
     .required("Phone number is required")
     .matches(/^(05)[0-9]{8}$/, "Phone number must be 10 digits and start with 05"),
-  user_email: Yup.string().email("Email is invalid").required("Email is required"),
+  email: Yup.string().email("Email is invalid").required("Email is required"),
   image_URL: Yup.mixed().optional("Profile picture is required"),
   gender: Yup.string()
     .required("Gender is required")

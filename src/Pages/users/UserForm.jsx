@@ -62,7 +62,7 @@ const UserForm = ({
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                  <TextInputField label="Email" name="user_email" formik={formik} />
+                  <TextInputField label="Email" name="email" formik={formik} />
                 </Grid>
                 <Grid item xs={12}>
                   <TextInputField

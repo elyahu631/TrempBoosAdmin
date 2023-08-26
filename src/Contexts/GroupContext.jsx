@@ -23,7 +23,6 @@ export const GroupProvider = ({ children }) => {
     if (token) {
       const fetchedGroups = await fetchGroupsData(token);
       setGroups(fetchedGroups);
-      console.log(fetchedGroups);
     }
 
   }, [token]);

@@ -14,7 +14,7 @@ export const TextInputField = ({ label, name, formik,type = "text"}) => {
       id={name}
       onChange={handleChange}
       onBlur={handleBlur}
-      value={values[name]}
+      value={values[name] == null ? "" : values[name]}
       placeholder={`Enter your ${label.toLowerCase()}`}
       error={touched[name] && Boolean(errors[name])}
       helperText={touched[name] && errors[name]}
