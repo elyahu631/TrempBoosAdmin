@@ -17,7 +17,7 @@ const PGroups = () => {
 
   const { groups, refreshGroups, deleteGroups } = useContext(GroupContext);
   const tableData = groups;
-  const [selectedGifts, setSelectedGifts] = useState([]);
+  const [selectedGroups, setSelectedGroups] = useState([]);
   const { loading } = useContext(LoginContext);
   const navigate = useNavigate();
   const [isRefreshing, setIsRefreshing] = useState(false);
@@ -42,10 +42,9 @@ const PGroups = () => {
   };
 
   const handleDelete = () => {
-    console.log(selectedGifts);
-    if (selectedGifts.length > 0) {
-      deleteGroups(selectedGifts.map((group) => group.id));
-      setSelectedGifts([]);
+    if (selectedGroups.length > 0) {
+      deleteGroups(selectedGroups.map((group) => group.id));
+      setSelectedGroups([]);
     } else {
       openSnackbar("No gifts selected", "error"); // Opens the Snackbar with a custom message
     }
@@ -115,7 +114,7 @@ const PGroups = () => {
         rows={rows}
         columns={columns}
         tableData={tableData}
-        setSelectedData={setSelectedGifts}
+        setSelectedData={setSelectedGroups}
       />
       <Backdrop open={isRefreshing} sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}>
         <CircularProgress color="inherit" />

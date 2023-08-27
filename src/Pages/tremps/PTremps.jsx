@@ -35,8 +35,8 @@ const PTremps = () => {
       displayId: index + 1,
       create_date: formattedCreateDate,
       tremp_time: formattedTrempTime,
-      fromRootName: tremp.from_root.name,
-      toRootName: tremp.to_root.name,
+      fromRootName: tremp.from_route.name,
+      toRootName: tremp.to_route.name,
 
     };
   });
@@ -50,7 +50,9 @@ const PTremps = () => {
     { field: "toRootName", headerName: "To", flex: 1, minWidth: 50, align: "center", headerAlign: "center" },
     { field: "seats_amount", headerName: "Seat Amount", flex: 0.5, minWidth: 80, align: "center", headerAlign: "center" },
     { field: "is_full", headerName: "Is Full?", flex: 0.5, minWidth: 80, align: "center", headerAlign: "center" },
+    { field: "is_completed", headerName: "Is Completed?", flex: 0.5, minWidth: 80, align: "center", headerAlign: "center" },
   ];
+
   
   return loading ? (
     <p>Loading...</p>

@@ -26,6 +26,7 @@ const PHome = () => {
       <Box display="flex" flexDirection="column" gap={2}>
         <Button variant="outlined" onClick={() => handleNavigation('/manage-system-admin')}>Managing System Admin</Button>
         <Button variant="outlined" onClick={() => handleNavigation('/reports-and-statistics')}>Reports And Statistics</Button>
+        <Button variant="outlined" onClick={() => handleNavigation('/group-request')}>Group Request</Button>
       </Box>
     </Box>
   );

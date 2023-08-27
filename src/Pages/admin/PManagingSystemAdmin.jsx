@@ -56,7 +56,7 @@ const PManageSystemAdmin = () => {
       displayId: index + 1,
       account_activated:user.account_activated? "V":"X",
       deleted:user.deleted? "yes":"no",
-      last_login_date: formattedDate // Updated line
+      last_login_date: formattedDate 
     };
   });
   

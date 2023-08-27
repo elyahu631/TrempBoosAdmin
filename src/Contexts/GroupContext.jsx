@@ -13,7 +13,7 @@ export const GroupContext = createContext();
 export const GroupProvider = ({ children }) => {
   const [groups, setGroups] = useState([]);
   const { token } = useContext(LoginContext);
-
+//#####################################
   const getGroupsWithoutChakToken = async () => {
     const fetchedGroups = await fetchGroupsData(token);
     setGroups(fetchedGroups);

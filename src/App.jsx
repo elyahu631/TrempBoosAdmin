@@ -8,6 +8,7 @@ import { GroupProvider } from "./Contexts/GroupContext";
 import ErrorBoundary from "./Components/ErrorBoundary ";
 import { KpiProvider } from "./Contexts/KpiContext";
 import { TrempProvider } from "./Contexts/TrempContext";
+import { GroupReqProvider } from "./Contexts/GroupReqContext";
 
 function App() {
   useEffect(() => {
@@ -20,13 +21,15 @@ function App() {
         <AdminProvider>
           <UserProvider>
             <TrempProvider>
-              <GroupProvider>
-                <GiftProvider>
-                  <KpiProvider>
-                    <Main />
-                  </KpiProvider>
-                </GiftProvider>
-              </GroupProvider>
+              <GroupReqProvider>
+                <GroupProvider>
+                  <GiftProvider>
+                    <KpiProvider>
+                      <Main />
+                    </KpiProvider>
+                  </GiftProvider>
+                </GroupProvider>
+              </GroupReqProvider>
             </TrempProvider>
           </UserProvider>
         </AdminProvider>

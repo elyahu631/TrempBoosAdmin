@@ -10,6 +10,7 @@ import PUsers from "../Pages/users/PUsers";
 import PAddUser from "../Pages/users/PAddUser";
 import PUpdateUser from "../Pages/users/PUpdateUser";
 import PGroups from "../Pages/groups/PGroups";
+import PGroupReq from "../Pages/groupRequest/PGroupReq";
 import PAddGroup from "../Pages/groups/PAddGroup";
 import PUpdateGroup from "../Pages/groups/PUpdateGroup";
 import PTremps from "../Pages/tremps/PTremps";
@@ -46,6 +47,7 @@ const Main = () => {
               <Route path="/users" element={<PUsers />} />
               <Route path="/add-user" element={<PAddUser />} />
               <Route path="/update-user/:id" element={<PUpdateUser />} />
+              <Route path="/group-request" element={<PGroupReq/>} />
               <Route path="/groups" element={<PGroups />} />
               <Route path="/add-group" element={<PAddGroup />} />
               <Route path="/update-group/:id" element={<PUpdateGroup />} />
