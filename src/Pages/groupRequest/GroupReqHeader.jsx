@@ -3,10 +3,8 @@
 import React from 'react';
 import { IconButton, Box, Typography } from '@mui/material';
 import RefreshIcon from '@mui/icons-material/Refresh';
-import CheckIcon from '@mui/icons-material/Check';
-import CloseIcon from '@mui/icons-material/Close';
 
-const GroupReqsHeader = ({ handleApprove, handleDecline, handleRefresh }) => (
+const GroupReqsHeader = ({handleRefresh }) => (
   <>
     <Typography variant="h4">Group Requests</Typography>
     <Box
@@ -20,19 +18,6 @@ const GroupReqsHeader = ({ handleApprove, handleDecline, handleRefresh }) => (
       <IconButton color="primary" onClick={handleRefresh}>
         <RefreshIcon />
       </IconButton>
-
-      <Box
-        sx={{
-          display: 'flex',
-        }}
-      >
-        <IconButton color="primary" onClick={handleDecline}>
-          <CloseIcon />
-        </IconButton>
-        <IconButton color="primary" onClick={handleApprove}>
-          <CheckIcon />
-        </IconButton>
-      </Box>
     </Box>
   </>
 );

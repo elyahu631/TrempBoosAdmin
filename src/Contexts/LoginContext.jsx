@@ -20,7 +20,7 @@ const LoginProvider = ({ children }) => {
 
   const login = (username, password) => {
     return fetch(
-      "https://tremp-boss-api.cyclic.app/api/adminUsers/login",
+      "http://localhost:5500/api/adminUsers/login",
       {
         method: "POST",
         headers: {

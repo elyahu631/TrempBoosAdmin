@@ -44,7 +44,7 @@ function Header(props) {
   const drawer = isLoggedIn ? (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
       <Typography variant="h6" sx={{ my: 2 }} >
-        TREMP-BOSS MANAGEMENT
+        TREMP-BOSS MANAGER
       </Typography>
       <Divider />
       <List>
@@ -59,7 +59,7 @@ function Header(props) {
     </Box>
   ) : <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
     <Typography variant="h6" sx={{ my: 2 }} >
-      TREMP-BOSS MANAGEMENT
+    TREMP-BOSS MANAGER
     </Typography>
   </Box>
 
@@ -94,7 +94,7 @@ function Header(props) {
             sx={{ flexGrow: 1, display: { xs: 'block', sm: 'block' }, textAlign: 'center' }}
             color="white"
           >
-            TREMP-BOSS MANAGEMENT
+        TREMP-BOSS MANAGER
           </Typography>
 
           {isLoggedIn && (<IconButton

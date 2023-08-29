@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect, useContext, useCallback } from 'react';
-import { fetchGroupReqsData,} from '../API/GroupReqAPI';
+import { denyGroupReqsData, fetchGroupReqsData, updateGroupReqsData,} from '../API/GroupReqAPI';
 import { LoginContext } from './LoginContext';
 
 export const GroupReqContext = createContext();
@@ -19,9 +19,25 @@ export const GroupReqProvider = ({ children }) => {
     getGroupReqs();
   }, [getGroupReqs]);
 
+
+  const updateGroupReqHandler = async (id) => {
+    const res = await updateGroupReqsData(token, id);
+    if (res.status) {
+      getGroupReqs();  // refresh the data
+    }
+    return res;
+  };
+
+  const denyGroupReqHandler = async (id) => {
+    const res = await denyGroupReqsData(token, id);
+    if (res.status) {
+      getGroupReqs();  // refresh the data
+    }
+    return res;
+  };
   
   return (
-    <GroupReqContext.Provider value={{ groupReqs, refreshGroupsReqs:getGroupReqs }}>
+    <GroupReqContext.Provider value={{ groupReqs, refreshGroupsReqs:getGroupReqs,updateGroupReq: updateGroupReqHandler,denyGroupReq:denyGroupReqHandler }}>
       {children}
     </GroupReqContext.Provider>
   );

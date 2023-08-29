@@ -72,6 +72,19 @@ async function updateData(token, data, file, url, fileKey) {
    }
 }
 
+async function updateDataOnly(token,id, url) {
+  try {
+    return await axios.put(`${API_BASE}/${url}/${id}`, {}, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  } catch (error) {
+    return (error.response.data);
+  }
+}
+
 async function fetchKpiData(token, url) {
   const response = await axios.get(`${API_BASE}/${url}`, {
     headers: { Authorization: `Bearer ${token}` },
@@ -79,7 +92,7 @@ async function fetchKpiData(token, url) {
   return response.data.data;
 }
 
-export { fetchAllData, addData, deleteData, updateData,fetchKpiData };
+export { fetchAllData, addData, deleteData, updateData,updateDataOnly,fetchKpiData };
 
 
 
