@@ -16,16 +16,26 @@ const StyledCard = styled(Card)`
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  border-radius: 15px; 
-  background-color: #f3f3f3; /* Light Grey */
-  box-shadow: 0px 8px 16px rgba(0,0,0,0.2); /* Shadow effect */
-  transition: all 0.3s ease-in-out; /* Animation for hover effect */
+  border-radius: 15px;
+  background: linear-gradient(135deg, #f7f8fa, #e6e7e9);
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 
   &:hover {
-    transform: scale(1.05);
+    transform: translateY(-5px);
+    box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.2);
   }
+`;
+
+const CardHeader = styled.div`
+  width: 100%;
+  padding: 8px 0;
+  background-color: ${props => props.color || "#ccc"};
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  transition: background-color 0.3s ease-in-out;
 `;
 
 const IconContainer = styled.div`
@@ -33,64 +43,66 @@ const IconContainer = styled.div`
   align-items: center;
   justify-content: center;
   font-size: 48px;
+  margin-top: 16px;
 
   svg {
-    color: ${props => props.color || "black"}; /* Color from props */
+    color: ${props => props.color || "black"};
   }
 `;
 
 const NumberText = styled(Typography)`
-  font-size: 28px;
+  font-size: 36px;
+  font-weight: bold;
+  margin: 20px 0;
 `;
+
+const TitleText = styled(Typography)`
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.7);
+`;
+
+const KpiCard = ({ color, icon: Icon, number, title }) => (
+  <StyledCard>
+    <CardHeader color={color}></CardHeader>
+    <CardContent>
+      <IconContainer color={color}>
+        <Icon />
+      </IconContainer>
+      <NumberText align="center">
+        {number.toLocaleString()}
+      </NumberText>
+      <TitleText align="center">{title}</TitleText>
+    </CardContent>
+  </StyledCard>
+);
 
 const CardContainer = ({ total_approved_trips, average_people_per_trip, totalHitchhikers }) => {
   return (
     <CardContainerWrapper>
       <Grid container spacing={5}>
         <Grid item xs={12} sm={4}>
-          <StyledCard>
-            <CardContent>
-              <IconContainer color="#4caf50">  {/* Green */}
-                <CarIcon />
-              </IconContainer>
-              <Typography variant="h5" align="center">
-                Total Rides
-              </Typography>
-              <NumberText align="center">
-                {total_approved_trips.toLocaleString()}
-              </NumberText>
-            </CardContent>
-          </StyledCard>
+          <KpiCard 
+            color="#4caf50"
+            icon={CarIcon}
+            number={total_approved_trips}
+            title="Total Rides"
+          />
         </Grid>
         <Grid item xs={12} sm={4}>
-          <StyledCard>
-            <CardContent>
-              <IconContainer color="#f44336"> {/* Red */}
-                <PersonIcon />
-              </IconContainer>
-              <Typography variant="h5" align="center">
-                Average People Per Ride
-              </Typography>
-              <NumberText align="center">
-                {average_people_per_trip.toLocaleString()}
-              </NumberText>
-            </CardContent>
-          </StyledCard>
+          <KpiCard 
+            color="#f44336"
+            icon={PersonIcon}
+            number={average_people_per_trip}
+            title="Average People Per Ride"
+          />
         </Grid>
         <Grid item xs={12} sm={4}>
-          <StyledCard>
-            <CardContent>
-              <IconContainer color="#ffeb3b"> {/* Yellow */}
-                <ThumbsUpIcon />
-              </IconContainer>
-              <Typography variant="h5" align="center">
-                Total Hitchhikers
-              </Typography>
-              <NumberText align="center">
-                {totalHitchhikers.toLocaleString()}
-              </NumberText>
-            </CardContent>
-          </StyledCard>
+          <KpiCard 
+            color="#ff8a05"
+            icon={ThumbsUpIcon}
+            number={totalHitchhikers}
+            title="Total Hitchhikers"
+          />
         </Grid>
       </Grid>
     </CardContainerWrapper>
@@ -98,3 +110,5 @@ const CardContainer = ({ total_approved_trips, average_people_per_trip, totalHit
 };
 
 export default CardContainer;
+
+

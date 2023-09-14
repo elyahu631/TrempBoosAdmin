@@ -10,3 +10,4 @@ export const fetchTopRoots = (token) => fetchKpiData(token, `${KPI_API}/get-top-
 export const fetchPercentages = (token) => fetchKpiData(token, `${KPI_API}/get-percentages-per-type`);
 export const fetchMonthlyCounts = (token) => fetchKpiData(token, `${KPI_API}/get-hitchhiker-monthly-counts-by-gender`);
 export const fetchMostActiveGroups = (token) => fetchKpiData(token, `${KPI_API}/get-most-active-groups`);
+export const fetchInactiveGroups = (token) => fetchKpiData(token, `${KPI_API}/get-inactive-groups`);

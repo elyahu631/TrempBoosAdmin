@@ -43,13 +43,13 @@ function Header(props) {
 
   const drawer = isLoggedIn ? (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
-      <Typography variant="h6" sx={{ my: 2 }} >
+      <Typography  sx={{ my: 2}} >
         TREMP-BOSS MANAGER
       </Typography>
       <Divider />
       <List>
         {navItems.map((item) => (
-          <ListItem key={item} disablePadding>
+          <ListItem key={item} >
             <ListItemButton sx={{ textAlign: 'center' }} onClick={() => item === 'Home' ? navigate('/home') : handleSignOut()}>
               <ListItemText primary={item} />
             </ListItemButton>

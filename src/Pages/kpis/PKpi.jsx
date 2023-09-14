@@ -4,9 +4,10 @@ import CardContainer from "./CardContainer";
 import GenericBarChart from "./GenericBarChart";
 import GenericPieChart from "./GenericPieChart";
 import ConsolidatedRidesChart from "./ConsolidatedRidesChart";
+import DataTable from './InactiveGroupsTable';
 
 const PKpi = () => {
-  const { trempsStatistics, topHours, topDrivers, topRoots, percentages, monthlyCounts, mostActiveGroups } = useContext(KpiContext);
+  const { trempsStatistics, topHours, topDrivers, topRoots, percentages, monthlyCounts, mostActiveGroups, inactiveGroups } = useContext(KpiContext);
 
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
@@ -107,7 +108,11 @@ const PKpi = () => {
           data={monthlyCounts}
           windowWidth={windowWidth}
         />
+        <DataTable data={inactiveGroups} />
       </div>
+      <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-around", flexWrap: "wrap", marginTop: 50 }}>
+      </div>
+
     </div>
   );
 };

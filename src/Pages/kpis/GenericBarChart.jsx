@@ -10,7 +10,7 @@ const GenericBarChart = ({ data, title, fillColor, dataKey, yAxisDataKey, custom
       backgroundColor: '#FFF',
       padding: '10px',
       border: '1px solid #e0e0e0',
-      borderRadius: '4px',
+      borderRadius: '5px',
       boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
       fontSize: windowWidth < 360 ? '12px' : windowWidth < 500 ? '14px' : '16px'
     },
@@ -24,11 +24,18 @@ const GenericBarChart = ({ data, title, fillColor, dataKey, yAxisDataKey, custom
       whiteSpace: 'nowrap'
     },
     chartContainer: {
-      boxShadow: '0 4px 8px rgba(0, 0, 0, 0.05)',
-      padding: windowWidth < 500 ? '10px 5px' : '10px 15px 10px 50px',
+      boxShadow: '0px 5px 20px rgba(0, 0, 0, 0.1)',
+      transition: 'all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)',
+      padding: windowWidth < 500 ? '10px 5px' : '10px 0px',
       margin: '10px 5px',
-      borderRadius: '6px',
-      backgroundColor: '#CCC'
+      borderRadius: '15px',
+      background: 'linear-gradient(135deg, #f7f8fa, #e6e7e9)',
+
+      // On hover, similar to the StyledCard
+      '&:hover': {
+        transform: 'translateY(-5px)',
+        boxShadow: '0px 8px 30px rgba(0, 0, 0, 0.2)'
+      }
     }
   };
 
@@ -48,7 +55,8 @@ const GenericBarChart = ({ data, title, fillColor, dataKey, yAxisDataKey, custom
         height={windowWidth < 580 ? 200 : 250}
         layout="vertical"
         data={data}
-        margin={{ top: 15, right: 30, left: 85, bottom: 15 }}
+        backgroundColor={"red"}
+        margin={{ top: 15, right: 30, left: 30, bottom: 15 }}
       >
         <CartesianGrid strokeDasharray="2 3" />
         <XAxis type="number" />

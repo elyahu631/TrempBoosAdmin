@@ -1,7 +1,7 @@
 // src/contexts/KpiContext.jsx
 import React, { createContext, useState, useEffect, useContext, useCallback } from "react";
 import { LoginContext } from "./LoginContext";
-import { fetchTrempsStatistics, fetchTopHours, fetchTopDrivers, fetchTopRoots, fetchPercentages, fetchMonthlyCounts, fetchMostActiveGroups } from '../API/KpiAPI';
+import { fetchTrempsStatistics, fetchTopHours, fetchTopDrivers, fetchTopRoots, fetchPercentages, fetchMonthlyCounts, fetchMostActiveGroups, fetchInactiveGroups } from '../API/KpiAPI';
 
 export const KpiContext = createContext();
 
@@ -13,6 +13,7 @@ export const KpiProvider = ({ children }) => {
   const [percentages, setPercentages] = useState([]);
   const [monthlyCounts, setMonthlyCounts] = useState([]);
   const [mostActiveGroups, setMostActiveGroups] = useState([]);
+  const [inactiveGroups, setInactiveGroups] = useState([]);
 
   const { token } = useContext(LoginContext);
 
@@ -70,6 +71,12 @@ export const KpiProvider = ({ children }) => {
     }
   }, [token]);
 
+  const fetchInactiveGroupsState = useCallback(async () => {
+    if (token) {
+      const fetchedGroups = await fetchInactiveGroups(token);
+      setInactiveGroups(fetchedGroups);
+    }
+}, [token]);
 
   useEffect(() => {
     // Define the async function inside useEffect
@@ -81,16 +88,17 @@ export const KpiProvider = ({ children }) => {
       await fetchPercentagesState();
       await fetchMonthlyCountsState();
       await fetchMostActiveGroupsState();
+      await fetchInactiveGroupsState(); 
     };
 
     // Call the async function inside useEffect
     fetchData();
-  }, [fetchTrempsState, fetchTopHoursState, fetchTopDriverssState, fetchTopRootsState, fetchPercentagesState, fetchMonthlyCountsState, fetchMostActiveGroupsState]); // Add fetchMostActiveGroupsState to the dependency array
+  }, [fetchTrempsState, fetchTopHoursState, fetchTopDriverssState, fetchTopRootsState, fetchPercentagesState, fetchMonthlyCountsState, fetchMostActiveGroupsState,fetchInactiveGroupsState]); // Add fetchMostActiveGroupsState to the dependency array
 
 
   return (
     <KpiContext.Provider
-      value={{ trempsStatistics, topHours, topDrivers, topRoots, percentages, monthlyCounts, mostActiveGroups }}
+      value={{ trempsStatistics, topHours, topDrivers, topRoots, percentages, monthlyCounts, mostActiveGroups,inactiveGroups }}
     >
       {children}
     </KpiContext.Provider>

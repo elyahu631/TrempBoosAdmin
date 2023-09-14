@@ -42,14 +42,15 @@ const GenericPieChart = ({ data, title,windowWidth }) => {
   }));
 
   return (
-    <div style={{ height: 400, width: windowWidth < 500 ? windowWidth - 30 : 500 }}>
+    <div style={{ height: 400, width: windowWidth < 500 ? windowWidth-50 : 500 }}>
       <h4 style={{ textAlign: "center" }}>{title}</h4>
 
       <ResponsivePie
         data={chartData}
+        enableArcLinkLabels={windowWidth < 500 ? false : true}
         margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
         innerRadius={0.5}
-        padAngle={0.7}
+        padAngle={1}
         cornerRadius={3}
         activeOuterRadiusOffset={8}
         borderWidth={1}
