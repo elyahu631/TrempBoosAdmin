@@ -98,27 +98,62 @@ export const GiftSchema = Yup.object().shape({
 });
 
 
+
 export const GroupSchema = Yup.object().shape({
-  image_URL: Yup.mixed().required("Group image is required"),
   group_name: Yup.string().required('Group name is required'),
-  type: Yup.string()
-    .required('Type is required')
-    .oneOf(['CITIES', 'PRIVATE'], 'Type must be either Cities or Private'),
-  location: Yup.array().of(
+  description: Yup.string().required('Description is required'),
+  image_URL: Yup.string().required('Group image is required'),
+  locations: Yup.array().of(
     Yup.object().shape({
-      latitude: Yup.number()
-        .required('Latitude is required')
-        .typeError('Latitude must be a number')
-        .min(-90, 'Latitude must be between -90 and 90 degrees')
-        .max(90, 'Latitude must be between -90 and 90 degrees'),
-      longitude: Yup.number()
-        .required('Longitude is required')
-        .typeError('Longitude must be a number')
-        .min(-180, 'Longitude must be between -180 and 180 degrees')
-        .max(180, 'Longitude must be between -180 and 180 degrees'),
-    }),
-  ).required('Location is required'),
+      name: Yup.string().required('Location name is required'),
+      coordinates: Yup.object().shape({
+        latitude: Yup.number()
+          .required('Latitude is required')
+          .typeError('Latitude must be a number')
+          .min(-90, 'Latitude must be between -90 and 90 degrees')
+          .max(90, 'Latitude must be between -90 and 90 degrees'),
+        longitude: Yup.number()
+          .required('Longitude is required')
+          .typeError('Longitude must be a number')
+          .min(-180, 'Longitude must be between -180 and 180 degrees')
+          .max(180, 'Longitude must be between -180 and 180 degrees')
+      }).required('Coordinates are required')
+    })
+  ).required('Locations are required'),
+  admin_email: Yup.string()
+    .required('Admin email is required')
+    .email('Invalid email address'),
   active: Yup.string()
-    .required('Type is required')
-    .oneOf(['active', 'inactive'], 'Type must be either Cities or Private'),
+    .required('Status is required')
+    .oneOf(['active', 'inactive'], 'Status must be either active or inactive')
 });
+
+export const updateGroupSchema = Yup.object().shape({
+  group_name: Yup.string(),
+  description: Yup.string(),
+  image_URL: Yup.string(),
+  locations: Yup.array().of(
+    Yup.object().shape({
+      name: Yup.string(),
+      coordinates: Yup.object().shape({
+        latitude: Yup.number()
+          .typeError('Latitude must be a number')
+          .min(-90, 'Latitude must be between -90 and 90 degrees')
+          .max(90, 'Latitude must be between -90 and 90 degrees'),
+        longitude: Yup.number()
+          .typeError('Longitude must be a number')
+          .min(-180, 'Longitude must be between -180 and 180 degrees')
+          .max(180, 'Longitude must be between -180 and 180 degrees')
+      })
+    })
+  ),
+  admin_email: Yup.string()
+    .email('Invalid email address'),
+  active: Yup.string()
+    .oneOf(['active', 'inactive'], 'Status must be either active or inactive')
+});
+
+
+
+
+

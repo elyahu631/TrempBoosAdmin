@@ -1,7 +1,7 @@
 // src/contexts/KpiContext.jsx
 import React, { createContext, useState, useEffect, useContext, useCallback } from "react";
 import { LoginContext } from "./LoginContext";
-import { fetchTrempsStatistics,fetchTopHours, fetchTopDrivers, fetchTopRoots, fetchPercentages, fetchMonthlyCounts  } from '../API/KpiAPI';
+import { fetchTrempsStatistics, fetchTopHours, fetchTopDrivers, fetchTopRoots, fetchPercentages, fetchMonthlyCounts, fetchMostActiveGroups } from '../API/KpiAPI';
 
 export const KpiContext = createContext();
 
@@ -10,8 +10,9 @@ export const KpiProvider = ({ children }) => {
   const [topHours, setTopHours] = useState([]);
   const [topDrivers, setTopDrivers] = useState([]);
   const [topRoots, setTopRoots] = useState([]);
-  const [percentages , setPercentages ] = useState([]);
-  const [monthlyCounts , setMonthlyCounts ] = useState([]);
+  const [percentages, setPercentages] = useState([]);
+  const [monthlyCounts, setMonthlyCounts] = useState([]);
+  const [mostActiveGroups, setMostActiveGroups] = useState([]);
 
   const { token } = useContext(LoginContext);
 
@@ -31,7 +32,7 @@ export const KpiProvider = ({ children }) => {
 
   const fetchTopDriverssState = useCallback(async () => {
     if (token) {
-      const fetchedDrivers= await fetchTopDrivers(token);
+      const fetchedDrivers = await fetchTopDrivers(token);
       setTopDrivers(fetchedDrivers);
       console.log(
         fetchedDrivers
@@ -41,7 +42,7 @@ export const KpiProvider = ({ children }) => {
 
   const fetchTopRootsState = useCallback(async () => {
     if (token) {
-      const fetchedRoots= await fetchTopRoots(token);
+      const fetchedRoots = await fetchTopRoots(token);
       setTopRoots(fetchedRoots);
     }
   }, [token])
@@ -49,7 +50,7 @@ export const KpiProvider = ({ children }) => {
 
   const fetchPercentagesState = useCallback(async () => {
     if (token) {
-      const fetchedPercentages= await fetchPercentages(token);
+      const fetchedPercentages = await fetchPercentages(token);
       setPercentages(fetchedPercentages);
     }
   }, [token])
@@ -61,25 +62,35 @@ export const KpiProvider = ({ children }) => {
     }
   }, [token]);
 
+
+  const fetchMostActiveGroupsState = useCallback(async () => {
+    if (token) {
+      const fetchedGroups = await fetchMostActiveGroups(token);
+      setMostActiveGroups(fetchedGroups.slice(0, 5));
+    }
+  }, [token]);
+
+
   useEffect(() => {
     // Define the async function inside useEffect
     const fetchData = async () => {
       await fetchTrempsState();
       await fetchTopHoursState();
-      await fetchTopDriverssState(); 
-      await fetchTopRootsState(); 
-      await fetchPercentagesState(); 
-      await fetchMonthlyCountsState(); 
+      await fetchTopDriverssState();
+      await fetchTopRootsState();
+      await fetchPercentagesState();
+      await fetchMonthlyCountsState();
+      await fetchMostActiveGroupsState();
     };
-  
+
     // Call the async function inside useEffect
     fetchData();
-  }, [fetchTrempsState, fetchTopHoursState,fetchTopDriverssState,fetchTopRootsState,fetchPercentagesState,fetchMonthlyCountsState]);
-  
+  }, [fetchTrempsState, fetchTopHoursState, fetchTopDriverssState, fetchTopRootsState, fetchPercentagesState, fetchMonthlyCountsState, fetchMostActiveGroupsState]); // Add fetchMostActiveGroupsState to the dependency array
+
 
   return (
     <KpiContext.Provider
-    value={{ trempsStatistics, topHours,topDrivers,topRoots ,percentages, monthlyCounts }} 
+      value={{ trempsStatistics, topHours, topDrivers, topRoots, percentages, monthlyCounts, mostActiveGroups }}
     >
       {children}
     </KpiContext.Provider>

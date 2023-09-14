@@ -20,11 +20,11 @@ export const AdminProvider = ({ children }) => {
   }
 
 
-  const getAdmins = useCallback(async () => { // Use useCallback here
+  const getAdmins = useCallback(async () => { 
     if (token) {
       const fetchedAdmins = await fetchAdminData(token);
       setAdmins(fetchedAdmins);
-    }
+    } 
   }, [token]); // It depends on 'token'
 
   useEffect(() => {

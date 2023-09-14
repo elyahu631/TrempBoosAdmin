@@ -41,7 +41,8 @@ export const GiftValues = {
 export const GroupValues = {
   image_URL: "",
   group_name: "",
-  type: "CITIES",
-  location: [],
+  description:"",
+  locations: [],
+  admin_email:"",
   active: 'active',
 };

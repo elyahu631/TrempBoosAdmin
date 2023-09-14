@@ -52,9 +52,8 @@ async function updateData(token, data, file, url, fileKey) {
   let { id, ...dataWithoutId } = data;
   const formData = new FormData();
   for (const key in dataWithoutId) {
-    formData.append(key, dataWithoutId[key]);
+    formData.append(key, JSON.stringify(dataWithoutId[key]));
   }
-  console.log(file);
   if (file) {
     formData.append(fileKey, file);
   }

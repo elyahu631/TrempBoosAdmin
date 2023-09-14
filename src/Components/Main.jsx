@@ -14,9 +14,6 @@ import PGroupReq from "../Pages/groupRequest/PGroupReq";
 import PAddGroup from "../Pages/groups/PAddGroup";
 import PUpdateGroup from "../Pages/groups/PUpdateGroup";
 import PTremps from "../Pages/tremps/PTremps";
-import PGifts from "../Pages/gifts/PGifts";
-import PAddGift from "../Pages/gifts/PAddGift";
-import PUpdateGift from "../Pages/gifts/PUpdateGift";
 import PManageSystemAdmin from "../Pages/admin/PManagingSystemAdmin";
 import PKpi from "../Pages/kpis/PKpi";
 import PAddAdmin from "../Pages/admin/PAddAdmin";
@@ -52,9 +49,6 @@ const Main = () => {
               <Route path="/add-group" element={<PAddGroup />} />
               <Route path="/update-group/:id" element={<PUpdateGroup />} />
               <Route path="/tremps" element={<PTremps />} />
-              <Route path="/gifts" element={<PGifts />} />
-              <Route path="/add-gift" element={<PAddGift />} />
-              <Route path="/update-gift/:id" element={<PUpdateGift />} />
               <Route path="/manage-system-admin" element={<PManageSystemAdmin />} />
               <Route path="/add-admin" element={<PAddAdmin />} />
               <Route path="/update-admin/:id" element={<PUpdateAdmin />} />

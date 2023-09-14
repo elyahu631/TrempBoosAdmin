@@ -21,7 +21,6 @@ const PHome = () => {
         <Button variant="outlined" onClick={() => handleNavigation('/users')}>Users</Button>
         <Button variant="outlined" onClick={() => handleNavigation('/groups')}>Groups</Button>
         <Button variant="outlined" onClick={() => handleNavigation('/tremps')}>Tremps</Button>
-        <Button variant="outlined" onClick={() => handleNavigation('/gifts')}>Gifts</Button>
       </Box>
       <Box display="flex" flexDirection="column" gap={2}>
         <Button variant="outlined" onClick={() => handleNavigation('/manage-system-admin')}>Managing System Admin</Button>

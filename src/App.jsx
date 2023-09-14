@@ -3,7 +3,6 @@ import Main from "./Components/Main";
 import LoginProvider from "./Contexts/LoginContext";
 import { AdminProvider } from "./Contexts/AdminContext";
 import { UserProvider } from "./Contexts/UserContext";
-import { GiftProvider } from "./Contexts/GiftsContext";
 import { GroupProvider } from "./Contexts/GroupContext";
 import ErrorBoundary from "./Components/ErrorBoundary ";
 import { KpiProvider } from "./Contexts/KpiContext";
@@ -23,11 +22,9 @@ function App() {
             <TrempProvider>
               <GroupReqProvider>
                 <GroupProvider>
-                  <GiftProvider>
                     <KpiProvider>
                       <Main />
                     </KpiProvider>
-                  </GiftProvider>
                 </GroupProvider>
               </GroupReqProvider>
             </TrempProvider>

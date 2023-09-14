@@ -18,16 +18,17 @@ const PAddGroup = () => {
     setOpen(false);
   };
 
-  const handleSubmit = async (values) => {
+  const handleSubmit = async (values,locations) => {
     console.log("Form is submitted");
   
     const data = {
       ...values,
       image_URL: values.image_URL,
+      locations: locations  
     };
-    console.log(data);
+
     let res = await context.addGroup(data);
-    console.log(res);
+    
     if (!res.status) {
       setError(res.error.message);
     }

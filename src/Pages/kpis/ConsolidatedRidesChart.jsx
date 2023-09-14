@@ -1,11 +1,11 @@
 import React from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 
-const ConsolidatedRidesChart = ({ data }) => {
+const ConsolidatedRidesChart = ({ data ,windowWidth}) => {
   if (!data || data.length === 0) {
     return <div>Loading...</div>;
   }
-
+  console.log(windowWidth);
   const creators = data.creators_by_month_and_gender;
   const passengers = data.passengers_by_month_and_gender;
 
@@ -23,10 +23,10 @@ const ConsolidatedRidesChart = ({ data }) => {
   const chartData = Object.values(counts);
 
   return (
-    <div style={{ height: 600, width: 600 }}>
-      <h4 style={{ textAlign: "center" }}>females vs men count tremps</h4>
+    <div style={{ height: windowWidth < 500 ? windowWidth - 40 : 500, width: windowWidth < 500 ? windowWidth - 80 : 500 }}>
+      <h4 style={{ textAlign: "center" }}>Females vs men tremps count</h4>
       <BarChart
-        width={500}
+        width={windowWidth < 500 ? windowWidth - 80 : 500}
         height={300}
         data={chartData}
         margin={{

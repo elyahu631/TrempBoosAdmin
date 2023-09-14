@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { KpiContext } from "../../Contexts/KpiContext";
 import CardContainer from "./CardContainer";
 import GenericBarChart from "./GenericBarChart";
@@ -6,7 +6,18 @@ import GenericPieChart from "./GenericPieChart";
 import ConsolidatedRidesChart from "./ConsolidatedRidesChart";
 
 const PKpi = () => {
-  const { trempsStatistics, topHours, topDrivers, topRoots, percentages,monthlyCounts } = useContext(KpiContext);
+  const { trempsStatistics, topHours, topDrivers, topRoots, percentages, monthlyCounts ,mostActiveGroups} = useContext(KpiContext);
+
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   if (trempsStatistics.length === 0) {
     return <div>Loading...</div>;
@@ -28,6 +39,7 @@ const PKpi = () => {
       <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-around", flexWrap: "wrap", marginBottom: "20px" }}>
         <GenericBarChart
           data={topHours}
+          windowWidth={windowWidth}
           title="Top 5 Hours"
           fillColor="#8884d8"
           style={{ flex: "1 0 20%", minWidth: "300px", margin: "10px" }}
@@ -41,6 +53,7 @@ const PKpi = () => {
         />
         <GenericBarChart
           data={topDrivers}
+          windowWidth={windowWidth}
           title="Top 5 Drivers"
           fillColor="#82ca9d"
           dataKey="count"
@@ -54,25 +67,44 @@ const PKpi = () => {
         <GenericBarChart
           data={topRoots}
           title="To 5 Routes"
+          windowWidth={windowWidth}
           fillColor="#ffc658"
           dataKey="count"
-          yAxisDataKey={(data) => `${data._id.from_root}-${data._id.to_root}`}
+          
+          yAxisDataKey={(data) => `${data._id.from_route.substring(0, 18)}`}
           customTooltip={(payload) => (<>
             <label>{`amount : ${payload[0].value}`}</label>
-            <p>{`From: ${payload[0].payload._id.from_root}`}</p>
-            <p>{`To: ${payload[0].payload._id.to_root}`}</p>
+            <p>{`From: ${payload[0].payload._id.from_route}`}</p>
+            <p>{`To: ${payload[0].payload._id.to_route}`}</p>
           </>)}
         />
+        <GenericBarChart
+          data={mostActiveGroups}
+          windowWidth={windowWidth}
+          title="Top 5 Active Groups"
+          fillColor="#123456"  // choose any color
+          dataKey="total_activity"
+          yAxisDataKey="group_name"
+          customTooltip={(payload) => (
+            <>
+              <label>{`Group: ${payload[0].payload.group_name}`}</label>
+              <p>{`Total Activity: ${payload[0].value}`}</p>
+            </>
+          )}
+        />
+
       </div>
       <hr />
-      <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-around", flexWrap: "wrap" }}>
+      <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-around", flexWrap: "wrap",gap:50 }}>
         <GenericPieChart
           data={percentages[0]}
+          windowWidth={windowWidth}
           title="Rides and Trips Percentages"
           style={{ flex: "1 0 20%", minWidth: "300px", margin: "10px" }}
         />
         <ConsolidatedRidesChart
           data={monthlyCounts}
+          windowWidth={windowWidth}          
         />
       </div>
     </div>

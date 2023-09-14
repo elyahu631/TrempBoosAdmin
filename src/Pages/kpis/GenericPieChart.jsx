@@ -1,6 +1,6 @@
 import { ResponsivePie } from '@nivo/pie';
 
-const GenericPieChart = ({ data, title }) => {
+const GenericPieChart = ({ data, title,windowWidth }) => {
   if (!data) {
     return <div>Loading...</div>;
   }
@@ -42,7 +42,7 @@ const GenericPieChart = ({ data, title }) => {
   }));
 
   return (
-    <div style={{ height: 400, width: 500 }}>
+    <div style={{ height: 400, width: windowWidth < 500 ? windowWidth - 30 : 500 }}>
       <h4 style={{ textAlign: "center" }}>{title}</h4>
 
       <ResponsivePie

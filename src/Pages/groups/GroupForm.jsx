@@ -1,52 +1,142 @@
 // GroupForm.js
 import { useFormik } from "formik";
-import { Button, Card, Grid, Typography, Container } from "@mui/material";
+import { Button, Card, Grid, Typography, Container, Table, TableBody, TableCell, TableContainer,TableHead, TableRow, IconButton,Box } from "@mui/material";
 import { TextInputField } from "../../Components/TextInputField";
 import { FileInputField } from "../../Components/FileInputField";
 import MainSelect from "../../Components/Select";
-import MapComponent from "./MapComponent";
+import LocationInput from "./LocationInput";
+import { useState } from "react";
+import DeleteIcon from '@mui/icons-material/Delete';
 
-const GroupForm = ({
-  initialValues,
-  validationSchema,
-  onSubmit,
-  formTitle,
-  submitButtonTitle,
-}) => {
+const LocationsTable = ({ locationsList, handleDeleteLocation }) => {
+  return (
+    <>
+      <Typography variant="h6">Selected Locations:</Typography>
+      <Box sx={{ height: 300, overflowY: "auto" }}>
+        <TableContainer>
+          <Table aria-label="sticky table">
+            <TableHead>
+              <TableRow>
+                <TableCell>Name</TableCell>
+                <TableCell>Latitude</TableCell>
+                <TableCell>Longitude</TableCell>
+                <TableCell>Action</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {locationsList.map((loc, idx) => (
+                <TableRow key={idx}>
+                  <TableCell>{loc.name}</TableCell>
+                  <TableCell>{loc.coordinates.latitude}</TableCell> 
+                  <TableCell>{loc.coordinates.longitude}</TableCell>
+                  <TableCell>
+                    <IconButton
+                      color="secondary"
+                      onClick={() => handleDeleteLocation(idx)}
+                    >
+                      <DeleteIcon />
+                    </IconButton>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Box>
+    </>
+  );
+};
 
+
+const GroupForm = ({ initialValues, validationSchema, onSubmit, formTitle, submitButtonTitle, initialLocations = [] }) => {
+
+  const [locationsList, setLocationsList] = useState(initialLocations); // <-- Use initialLocations here
+  const [selectedLocation, setSelectedLocation] = useState({ lat: null, lng: null });
+
+  const setLocation = (location) => {
+    console.log(selectedLocation);
+    setSelectedLocation(location);
+  };
+
+  const handleAddLocation = (loc) => {
+    console.log(loc);
+    if (loc) {
+      const newLoc = {
+        name: loc.name,
+        coordinates: {
+          latitude: loc.lat,
+          longitude: loc.lng
+        }
+      };
   
-  const typeOptions = [
-    { value: "CITIES", label: "Cities" },
-    { value: "PRIVATE", label: "Private" },
-  ];
+      setLocationsList([...locationsList, newLoc]);
+    }
+  };
+  
+
+  const handleDeleteLocation = (idx) => {
+    const updatedLocations = [...locationsList];
+    updatedLocations.splice(idx, 1);
+    setLocationsList(updatedLocations);
+  }
+
 
   const formik = useFormik({
     initialValues,
     validationSchema,
-    onSubmit,
+    onSubmit: (values) => onSubmit(values, locationsList)  
   });
+  
 
 
   return (
     <Container>
-      <Grid container sx={{ minHeight: "80vh", maxHeight: "100vh", overflow: "none", marginBottom: "50px" }}
+      <Grid
+        container
+        sx={{
+          minHeight: "80vh",
+          maxHeight: "100vh",
+          marginBottom: "50px"
+        }}
         alignItems="center"
         justifyContent="center"
+        spacing={3}
       >
-        <Grid item xs={12} sm={8} md={6}>
-          <Card sx={{ padding: "20px", background: "transparent" }}>
-            <Typography variant="h4" component="h2" align="center">
+        <Grid item xs={14} sm={12} md={12} lg={15}>
+          <Card sx={{ padding: "20px", background: "transparent", width: '100%', marginBottom: '30px' }}>
+            <Typography variant="h4" component="h2" align="center" mb={2}>
               {formTitle}
             </Typography>
             <form onSubmit={formik.handleSubmit}>
-              <Grid container justifyContent="center" sx={{ padding: "8px", margin: "5px 0" }}>
-                <FileInputField
-                  label="Group Image"
-                  name="image_URL"
-                  formik={formik}
-                />
-              </Grid>
-              <Grid container spacing={2}>
+              <Grid container justifyContent="center" spacing={2}>
+                <Grid item xs={12}>
+                  <FileInputField
+                    label="Group Image"
+                    name="image_URL"
+                    formik={formik}
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextInputField
+                    label="Group Name"
+                    name="group_name"
+                    formik={formik}
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextInputField
+                    label="Group Description"
+                    name="description"
+                    formik={formik}
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextInputField
+                    label="Admin Email"
+                    name="admin_email"
+                    formik={formik}
+                  />
+                </Grid>
                 <Grid item xs={12} sm={6}>
                   <MainSelect
                     label="Active"
@@ -60,23 +150,6 @@ const GroupForm = ({
                     ]}
                   />
                 </Grid>
-                <Grid item xs={12} sm={6}>
-                  <MainSelect
-                    label="Type"
-                    name="type"
-                    value={formik.values.type || "CITIES"}
-                    onChange={formik.handleChange}
-                    error={Boolean(formik.touched.type && Boolean(formik.errors.type))}
-                    options={typeOptions}
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextInputField
-                    label="Group Name"
-                    name="group_name"
-                    formik={formik}
-                  />
-                </Grid>
 
                 <Grid item xs={12}>
                   <Typography variant="h5" align="center" sx={{ textDecoration: 'underline' }}>
@@ -84,8 +157,15 @@ const GroupForm = ({
                   </Typography>
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                  <MapComponent
-                    setLocation={(loc) => formik.setFieldValue('location', loc)}
+                  <LocationInput
+                    onAddLocation={handleAddLocation}
+                    setLocation={setLocation}
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <LocationsTable
+                    locationsList={locationsList}
+                    handleDeleteLocation={handleDeleteLocation}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -105,6 +185,7 @@ const GroupForm = ({
       </Grid>
     </Container>
   );
+
 };
 
 export default GroupForm;
