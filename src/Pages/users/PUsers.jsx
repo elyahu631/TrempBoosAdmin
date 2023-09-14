@@ -81,7 +81,6 @@ const PUsers = () => {
     { field: "last_name", headerName: "Last Name", flex: 1, minWidth: 80, align: "center", headerAlign: "center" },
     { field: "phone_number", headerName: "Phone Number", flex: 1, minWidth: 110, align: "center", headerAlign: "center" },
     { field: "gender", headerName: "Gender", flex: 0.5, minWidth: 80, align: "center", headerAlign: "center" },
-    { field: "coins", headerName: "Coins", flex: 0.5, minWidth: 70, align: "center", headerAlign: "center" },
     { field: "createdAt", headerName: "Created At", flex: 1, minWidth: 150, align: "center", headerAlign: "center" },
     { field: "updatedAt", headerName: "Updated At", flex: 1, minWidth: 150, align: "center", headerAlign: "center" },
     { field: "last_login_date", headerName: "Last Login", flex: 1, minWidth: 150, align: "center", headerAlign: "center" },

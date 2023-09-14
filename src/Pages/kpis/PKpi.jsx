@@ -6,7 +6,7 @@ import GenericPieChart from "./GenericPieChart";
 import ConsolidatedRidesChart from "./ConsolidatedRidesChart";
 
 const PKpi = () => {
-  const { trempsStatistics, topHours, topDrivers, topRoots, percentages, monthlyCounts ,mostActiveGroups} = useContext(KpiContext);
+  const { trempsStatistics, topHours, topDrivers, topRoots, percentages, monthlyCounts, mostActiveGroups } = useContext(KpiContext);
 
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
@@ -70,7 +70,7 @@ const PKpi = () => {
           windowWidth={windowWidth}
           fillColor="#ffc658"
           dataKey="count"
-          
+
           yAxisDataKey={(data) => `${data._id.from_route.substring(0, 18)}`}
           customTooltip={(payload) => (<>
             <label>{`amount : ${payload[0].value}`}</label>
@@ -88,14 +88,15 @@ const PKpi = () => {
           customTooltip={(payload) => (
             <>
               <label>{`Group: ${payload[0].payload.group_name}`}</label>
-              <p>{`Total Activity: ${payload[0].value}`}</p>
+              <p>{`Tremps: ${payload[0].payload.tremp_count}`}</p>
+              <p>{`Members: ${payload[0].payload.user_count}`}</p>
             </>
           )}
         />
 
       </div>
       <hr />
-      <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-around", flexWrap: "wrap",gap:50 }}>
+      <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-around", flexWrap: "wrap", gap: 50 }}>
         <GenericPieChart
           data={percentages[0]}
           windowWidth={windowWidth}
@@ -104,7 +105,7 @@ const PKpi = () => {
         />
         <ConsolidatedRidesChart
           data={monthlyCounts}
-          windowWidth={windowWidth}          
+          windowWidth={windowWidth}
         />
       </div>
     </div>
