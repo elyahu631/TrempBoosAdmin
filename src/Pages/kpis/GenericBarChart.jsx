@@ -31,7 +31,6 @@ const GenericBarChart = ({ data, title, fillColor, dataKey, yAxisDataKey, custom
       borderRadius: '15px',
       background: 'linear-gradient(135deg, #f7f8fa, #e6e7e9)',
 
-      // On hover, similar to the StyledCard
       '&:hover': {
         transform: 'translateY(-5px)',
         boxShadow: '0px 8px 30px rgba(0, 0, 0, 0.2)'

@@ -40,7 +40,9 @@ const MainTable = ({ rows, columns,tableData, setSelectedData ,showCheckBox = tr
             const data = tableData.find((data) => data.id === id);
             return data;
           });
-          setSelectedData(selected);
+          if (showCheckBox){
+            setSelectedData(selected);
+          }
         }}
         slots={{
           toolbar: GridToolbar,

@@ -20,9 +20,9 @@ const StyledTableContainer = styled(TableContainer)`
 `;
 
 const StyledTableRow = styled(TableRow)`
-  background: linear-gradient(135deg, #f7f8fa, #e6e7e9);  // Same gradient as the CardContainer
+  background: linear-gradient(135deg, #f7f8fa, #e6e7e9); 
   &:hover {
-    background-color: rgba(63, 81, 181, 0.1);  // subtle hover effect
+    background-color: rgba(63, 81, 181, 0.1);
   }
 `;
 

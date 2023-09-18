@@ -7,7 +7,7 @@ import ConsolidatedRidesChart from "./ConsolidatedRidesChart";
 import DataTable from './InactiveGroupsTable';
 
 const PKpi = () => {
-  const { trempsStatistics, topHours, topDrivers, topRoots, percentages, monthlyCounts, mostActiveGroups, inactiveGroups } = useContext(KpiContext);
+  const { trempsStatistics, topFive, percentages, monthlyCounts, mostActiveGroups, inactiveGroups } = useContext(KpiContext);
 
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
@@ -39,7 +39,7 @@ const PKpi = () => {
       <hr />
       <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-around", flexWrap: "wrap", marginBottom: "20px" }}>
         <GenericBarChart
-          data={topHours}
+          data={topFive.top_hours}
           windowWidth={windowWidth}
           title="Top 5 Hours"
           fillColor="#8884d8"
@@ -53,7 +53,7 @@ const PKpi = () => {
           </>)}
         />
         <GenericBarChart
-          data={topDrivers}
+          data={topFive.top_drivers}
           windowWidth={windowWidth}
           title="Top 5 Drivers"
           fillColor="#82ca9d"
@@ -66,7 +66,7 @@ const PKpi = () => {
           </>)}
         />
         <GenericBarChart
-          data={topRoots}
+          data={topFive.top_routes}
           title="To 5 Routes"
           windowWidth={windowWidth}
           fillColor="#ffc658"
@@ -79,6 +79,23 @@ const PKpi = () => {
             <p>{`To: ${payload[0].payload._id.to_route}`}</p>
           </>)}
         />
+
+
+      </div>
+      <hr />
+      <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-around", flexWrap: "wrap", gap: 50 }}>
+        <GenericPieChart
+          data={percentages[0]}
+          windowWidth={windowWidth}
+          title="Rides and Trips Percentages"
+          style={{ flex: "1 0 20%", minWidth: "300px", margin: "10px" }}
+        />
+        <ConsolidatedRidesChart
+          data={monthlyCounts}
+          windowWidth={windowWidth}
+        />
+      </div>
+      <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-around", flexWrap: "wrap", marginTop: 50 }}>
         <GenericBarChart
           data={mostActiveGroups}
           windowWidth={windowWidth}
@@ -94,23 +111,8 @@ const PKpi = () => {
             </>
           )}
         />
-
-      </div>
-      <hr />
-      <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-around", flexWrap: "wrap", gap: 50 }}>
-        <GenericPieChart
-          data={percentages[0]}
-          windowWidth={windowWidth}
-          title="Rides and Trips Percentages"
-          style={{ flex: "1 0 20%", minWidth: "300px", margin: "10px" }}
-        />
-        <ConsolidatedRidesChart
-          data={monthlyCounts}
-          windowWidth={windowWidth}
-        />
         <DataTable data={inactiveGroups} />
-      </div>
-      <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-around", flexWrap: "wrap", marginTop: 50 }}>
+
       </div>
 
     </div>

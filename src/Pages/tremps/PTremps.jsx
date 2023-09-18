@@ -9,6 +9,7 @@ import { LoginContext } from "../../Contexts/LoginContext";
 
 const PTremps = () => {
   const { tremps, refreshTremps } = useContext(TrempContext);
+
   const { loading } = useContext(LoginContext);
 
   const tableData = tremps;
@@ -44,6 +45,7 @@ const PTremps = () => {
   const columns = [
     { field: "displayId", headerName: "ID", flex: 0.2, minWidth: 50, hideable: false, align: "center", headerAlign: "center" },
     { field: "tremp_type", headerName: "Tremp Type", flex: 1, minWidth: 50, align: "center", headerAlign: "center" },
+    { field: "tremp_group", headerName: "group", flex: 1, minWidth: 50, align: "center", headerAlign: "center" },
     { field: "create_date", headerName: "Creation Date", flex: 1, minWidth: 50, align: "center", headerAlign: "center" },
     { field: "tremp_time", headerName: "Tremp Time", flex: 1, minWidth: 50, align: "center", headerAlign: "center" },
     { field: "fromRootName", headerName: "From", flex: 1, minWidth: 50, align: "center", headerAlign: "center" },
@@ -75,6 +77,7 @@ const PTremps = () => {
         rows={rows}
         columns={columns}
         tableData={tableData}
+        showCheckBox={false}
       />
       <Backdrop open={isRefreshing} sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}>
         <CircularProgress color="inherit" />
