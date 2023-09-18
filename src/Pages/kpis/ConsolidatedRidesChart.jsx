@@ -5,7 +5,6 @@ const ConsolidatedRidesChart = ({ data ,windowWidth}) => {
   if (!data || data.length === 0) {
     return <div>Loading...</div>;
   }
-  console.log(windowWidth);
   const creators = data.creators_by_month_and_gender;
   const passengers = data.passengers_by_month_and_gender;
 

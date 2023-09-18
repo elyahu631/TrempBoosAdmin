@@ -13,7 +13,6 @@ export const TrempProvider = ({ children }) => {
     if (token) {
       const fetchedTremps = await fetchTrempsData(token);
       setTremps(fetchedTremps);
-      console.log(fetchedTremps);
     }
   }, [token]);
 

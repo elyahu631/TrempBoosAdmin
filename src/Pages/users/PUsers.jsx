@@ -25,7 +25,6 @@ const PUsers = () => {
   };
 
   const handleDelete = () => {
-    console.log(selectedUsers);
     if (selectedUsers.length > 0) {
       deleteUsers(selectedUsers.map((user) => user.id));
       setSelectedUsers([]);
@@ -35,9 +34,6 @@ const PUsers = () => {
   };
 
   const handleEditUser = (userId) => {
-    console.log('====================================');
-    console.log(userId);
-    console.log('====================================');
     const encodedUserId = encode(userId);
     navigate(`/update-user/${encodedUserId}`);
   };

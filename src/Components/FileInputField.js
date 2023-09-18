@@ -7,7 +7,6 @@ export const FileInputField = ({ label, name, formik }) => {
 
   const handleFileChange = (event) => {
     const file = event.currentTarget.files[0];
-    console.log(file);
     setFieldValue(name, file);
   };
 

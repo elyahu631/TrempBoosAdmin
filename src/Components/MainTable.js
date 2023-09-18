@@ -36,7 +36,6 @@ const MainTable = ({ rows, columns,tableData, setSelectedData ,showCheckBox = tr
         showColumnVerticalBorder
         onRowSelectionModelChange={(newSelection) => {
           const selected = newSelection.map((id) => {
-            console.log(tableData);
             const data = tableData.find((data) => data.id === id);
             return data;
           });

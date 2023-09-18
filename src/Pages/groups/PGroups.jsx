@@ -51,9 +51,6 @@ const PGroups = () => {
   };
 
   const handleEditGroup = (gorupId) => {
-    console.log('====================================');
-    console.log(gorupId);
-    console.log('====================================');
     navigate(`/update-group/${gorupId}`);
   };
 

@@ -41,7 +41,6 @@ const PUpdateUser = () => {
 
     // Include id in changes but don't allow it to be modified
     changes.id = decodedUserId;
-    console.log(changes);
   
     // Separate the photo_URL (if it exists) from the other changes
     let file;

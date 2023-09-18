@@ -48,7 +48,6 @@ const PGroupReq = () => {
 
   const handleConfirm = async () => {
     if (selectedGroupReq) {
-      console.log(selectedGroupReq.id);
       await updateGroupReq(selectedGroupReq.id);
     }
     handleClose();

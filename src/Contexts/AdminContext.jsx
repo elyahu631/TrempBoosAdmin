@@ -33,7 +33,6 @@ export const AdminProvider = ({ children }) => {
 
 
   const deleteUsers = async (userIds) => {
-    console.log(userIds);
     await Promise.all(userIds.map(id => deleteUser(token, id)));
     getAdminWithoutToken();
   };

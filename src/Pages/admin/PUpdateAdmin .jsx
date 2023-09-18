@@ -27,7 +27,6 @@ const PUpdateAdmin = () => {
 
   const handleSubmit = async (values) => {
     console.log("Form is submitted");
-    console.log(values);
     delete values.updatedAt;
     // Only keep the fields that have changed
     let changes = Object.keys(values)
@@ -39,7 +38,6 @@ const PUpdateAdmin = () => {
 
     // Include id in changes but don't allow it to be modified
     changes.id = decodedUserId;
-    console.log(changes);
     //If accountActivated field was updated
     if (changes.hasOwnProperty("account_activated")) {
       changes.account_activated = changes.account_activated ? true : false;

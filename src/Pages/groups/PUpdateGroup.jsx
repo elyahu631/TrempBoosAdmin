@@ -44,7 +44,6 @@ const PUpdateGroup = () => {
       delete changes.image_URL;
     }
     delete changes.admins_ids;
-    console.log(changes);
     let res = await context.updateGroup(changes, file);
     if (!res.status) {
       setError(res.error.message);

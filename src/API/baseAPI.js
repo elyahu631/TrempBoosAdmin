@@ -35,14 +35,13 @@ async function addData(token, data, file, url, fileKey) {
 
 async function deleteData(token, id, url) {
   try {
-    let res = await axios.put(
+    await axios.put(
       `${API_BASE}/${url}/${id}`,
       {},
       {
         headers: { Authorization: `Bearer ${token}` },
       }
     );
-    console.log(res);
   } catch (error) {
     console.error("Error deleting item:", error);
   }
@@ -57,8 +56,7 @@ async function updateData(token, data, file, url, fileKey) {
   if (file) {
     formData.append(fileKey, file);
   }
-
-  console.log(formData);
+  
   try {
     return await axios.put(`${API_BASE}/${url}/${id}`, formData, {
       headers: {

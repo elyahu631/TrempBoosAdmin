@@ -2,8 +2,7 @@ import { TextField } from "@mui/material";
 
 export const TextInputField = ({ label, name, formik,type = "text"}) => {
   const { handleChange, handleBlur, values, touched, errors } = formik;
-  // console.log(values[name]);
-  // console.log(name);
+
   return (
     <TextField
       fullWidth

@@ -59,7 +59,6 @@ const GroupForm = ({ initialValues, validationSchema, onSubmit, formTitle, submi
   };
 
   const handleAddLocation = (loc) => {
-    console.log(loc);
     if (loc) {
       const newLoc = {
         name: loc.name,
