@@ -20,12 +20,12 @@ export const UserProvider = ({ children }) => {
   }
 
 
-  const getUsers = useCallback(async () => { // Use useCallback here
+  const getUsers = useCallback(async () => { 
     if (token) {
       const fetchedUsers = await fetchUsersData(token);
       setUsers(fetchedUsers);
     }
-  }, [token]); // It depends on 'token'
+  }, [token]);
 
   useEffect(() => {
     getUsers();
