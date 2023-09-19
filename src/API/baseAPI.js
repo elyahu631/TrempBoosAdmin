@@ -1,6 +1,6 @@
 // baseAPI.js
 import axios from "axios";
-const API_BASE = "https://tremp-boss-api.cyclic.cloud.app/api";
+const API_BASE = "https://tremp-boss-api.cyclic.cloud/api";
 
 async function fetchAllData(token, url) {
   const response = await axios.get(`${API_BASE}/${url}`, {

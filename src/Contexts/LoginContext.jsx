@@ -4,7 +4,7 @@ export const LoginContext = createContext({
   token: null,
 });
 
-const API_BASE_URL = "tremp-boss-api.cyclic.cloud.app/api/adminUsers";
+const API_BASE_URL = "tremp-boss-api.cyclic.cloud/api/adminUsers";
 const VALIDATE_TOKEN_URL = `${API_BASE_URL}/validateToken`;
 const LOGIN_URL = `${API_BASE_URL}/login`;
 const SECRET_PASSWORD = process.env.REACT_APP_SECRET_KEY;
