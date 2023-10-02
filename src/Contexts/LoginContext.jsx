@@ -4,7 +4,7 @@ export const LoginContext = createContext({
   token: null,
 });
 
-const API_BASE_URL = "https://trempboss.up.railway.app/api/adminUsers";
+const API_BASE_URL = process.env.REACT_APP_API_URL + "/adminUsers";
 const VALIDATE_TOKEN_URL = `${API_BASE_URL}/validateToken`;
 const LOGIN_URL = `${API_BASE_URL}/login`;
 const SECRET_PASSWORD = process.env.REACT_APP_SECRET_KEY;
@@ -59,7 +59,9 @@ const LoginProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
   const [loading, setLoading] = useState(true);
-
+  console.log("API Base URL:", process.env.REACT_APP_API_URL);
+  console.log("Secret Key:", process.env.REACT_APP_SECRET_KEY);
+  
   const decryptData = useCallback(async (encryptedObj, password) => {
     try {
       const decoder = new TextDecoder();

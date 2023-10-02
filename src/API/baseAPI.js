@@ -1,6 +1,6 @@
 // baseAPI.js
 import axios from "axios";
-const API_BASE = "https://trempboss.up.railway.app/api";
+const API_BASE = process.env.REACT_APP_API_URL;
 
 async function fetchAllData(token, url) {
   const response = await axios.get(`${API_BASE}/${url}`, {
@@ -89,7 +89,20 @@ async function fetchKpiData(token, url) {
   return response.data.data;
 }
 
-export { fetchAllData, addData, deleteData, updateData,updateDataOnly,fetchKpiData };
+async function postData(token, url,data = {startDate:"2023-05-20T00:00:00Z",endDate:"2023-10-23T23:59:59Z"}) {
+  try {
+    return (await axios.post(`${API_BASE}/${url}`, data, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    })).data.data;
+  } catch (error) {
+    return (error.response.data); 
+  }
+}
+
+export { fetchAllData, addData, deleteData, updateData,updateDataOnly,fetchKpiData,postData };
 
 
 

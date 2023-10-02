@@ -8,6 +8,12 @@ const PHome = () => {
     navigate(path);
   }
 
+  const buttonStyle = {
+    fontWeight: 'bold', 
+    border: 'solid 3px',
+    fontFamily:'Arial'
+  };
+
   return (
     <Box 
       display="flex" 
@@ -17,15 +23,15 @@ const PHome = () => {
       alignItems="center" 
       justifyContent="space-around" 
     >
-      <Box display="flex" flexDirection="column" gap={2}>
-        <Button variant="outlined" onClick={() => handleNavigation('/users')}>Users</Button>
-        <Button variant="outlined" onClick={() => handleNavigation('/groups')}>Groups</Button>
-        <Button variant="outlined" onClick={() => handleNavigation('/tremps')}>Tremps</Button>
+      <Box display="flex" flexDirection="column" gap={2} >
+        <Button  style={buttonStyle}  variant="outlined" onClick={() => handleNavigation('/users')}>Users</Button>
+        <Button  style={buttonStyle} variant="outlined" onClick={() => handleNavigation('/groups')}>Groups</Button>
+        <Button  style={buttonStyle} variant="outlined" onClick={() => handleNavigation('/tremps')}>Tremps</Button>
       </Box>
-      <Box display="flex" flexDirection="column" gap={2}>
-        <Button variant="outlined" onClick={() => handleNavigation('/manage-system-admin')}>Managing System Admin</Button>
-        <Button variant="outlined" onClick={() => handleNavigation('/reports-and-statistics')}>Reports And Statistics</Button>
-        <Button variant="outlined" onClick={() => handleNavigation('/group-request')}>Group Request</Button>
+      <Box   display="flex" flexDirection="column" gap={2} >
+        <Button  style={buttonStyle} variant="outlined" onClick={() => handleNavigation('/manage-system-admin')}>Managing System Admin</Button>
+        <Button  style={buttonStyle} variant="outlined" onClick={() => handleNavigation('/reports-and-statistics')}>Reports And Statistics</Button>
+        <Button  style={buttonStyle} variant="outlined" onClick={() => handleNavigation('/group-request')}>Group Request</Button>
       </Box>
     </Box>
   );

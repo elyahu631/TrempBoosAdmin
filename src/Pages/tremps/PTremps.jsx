@@ -46,7 +46,7 @@ const PTremps = () => {
     { field: "displayId", headerName: "ID", flex: 0.2, minWidth: 50, hideable: false, align: "center", headerAlign: "center" },
     { field: "tremp_type", headerName: "Tremp Type", flex: 1, minWidth: 50, align: "center", headerAlign: "center" },
     { field: "tremp_group", headerName: "group", flex: 1, minWidth: 50, align: "center", headerAlign: "center" },
-    { field: "create_date", headerName: "Creation Date", flex: 1, minWidth: 50, align: "center", headerAlign: "center" },
+    { field: "driver_name", headerName: "Driver name", flex: 1, minWidth: 50, align: "center", headerAlign: "center" },
     { field: "tremp_time", headerName: "Tremp Time", flex: 1, minWidth: 50, align: "center", headerAlign: "center" },
     { field: "fromRootName", headerName: "From", flex: 1, minWidth: 50, align: "center", headerAlign: "center" },
     { field: "toRootName", headerName: "To", flex: 1, minWidth: 50, align: "center", headerAlign: "center" },

@@ -79,5 +79,7 @@ GenericBarChart.propTypes = {
   yAxisDataKey: PropTypes.oneOfType([PropTypes.string, PropTypes.func]).isRequired,
   customTooltip: PropTypes.func
 };
-
+GenericBarChart.defaultProps = {
+  data: [],
+};
 export default memo(GenericBarChart);

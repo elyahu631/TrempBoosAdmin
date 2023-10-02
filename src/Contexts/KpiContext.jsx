@@ -15,31 +15,31 @@ export const KpiProvider = ({ children }) => {
 
   const { token } = useContext(LoginContext);
 
-  const fetchTrempsState = useCallback(async () => {
+  const fetchTrempsState = useCallback(async (filter={}) => {
     if (token) {
-      const fetchedStats = await fetchTrempsStatistics(token);
+      const fetchedStats = await fetchTrempsStatistics(token,filter);
       setTrempsStatistics(fetchedStats);
     }
   }, [token]);
 
 
-  const fetchTopFiveState = useCallback(async () => {
+  const fetchTopFiveState = useCallback(async (filter={}) => {
     if (token) {
-      const fetchedTopFive  = await fetchAllTopFive(token);
+      const fetchedTopFive  = await fetchAllTopFive(token,filter);
       setTopFive(fetchedTopFive);
     }
   }, [token])
 
-  const fetchPercentagesState = useCallback(async () => {
+  const fetchPercentagesState = useCallback(async (filter={}) => {
     if (token) {
-      const fetchedPercentages = await fetchPercentages(token);
+      const fetchedPercentages = await fetchPercentages(token,filter);
       setPercentages(fetchedPercentages);
     }
   }, [token])
 
-  const fetchMonthlyCountsState = useCallback(async () => {
+  const fetchMonthlyCountsState = useCallback(async (filter={}) => {
     if (token) {
-      const fetchedMonthlyCounts = await fetchMonthlyCounts(token);
+      const fetchedMonthlyCounts = await fetchMonthlyCounts(token,filter);
       setMonthlyCounts(fetchedMonthlyCounts);
     }
   }, [token]);
@@ -77,7 +77,7 @@ export const KpiProvider = ({ children }) => {
 
   return (
     <KpiContext.Provider
-      value={{ trempsStatistics, topFive, percentages, monthlyCounts, mostActiveGroups,inactiveGroups }}
+      value={{fetchMonthlyCountsState, fetchPercentagesState,fetchTopFiveState,fetchTrempsState,trempsStatistics, topFive, percentages, monthlyCounts, mostActiveGroups,inactiveGroups }}
     >
       {children}
     </KpiContext.Provider>
