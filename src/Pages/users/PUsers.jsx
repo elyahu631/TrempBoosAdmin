@@ -46,6 +46,8 @@ const PUsers = () => {
 
   const rows = users.map((user, index) => {
     const lastLoginDate = new Date(user.last_login_date);
+    lastLoginDate.setHours(lastLoginDate.getHours() - 3);
+
     const formattedLastLoginDate = `${lastLoginDate.toLocaleDateString()}, ${lastLoginDate.toLocaleTimeString()}`;
   
     const createdAt = new Date(user.createdAt);

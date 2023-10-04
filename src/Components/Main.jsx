@@ -1,5 +1,5 @@
 //Comps/Main.jsx
-import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import { useContext } from 'react';
 import { LoginContext } from '../Contexts/LoginContext';
 
@@ -19,7 +19,7 @@ import PKpi from "../Pages/kpis/PKpi";
 import PAddAdmin from "../Pages/admin/PAddAdmin";
 import PUpdateAdmin from "../Pages/admin/PUpdateAdmin ";
 import { Box } from "@mui/material";
-//
+
 const NotFound = () => {
   return (
     <div>
@@ -32,7 +32,6 @@ const Main = () => {
 
   return (
     <div>
-      <Router>
         <Box>
           <Header />
         </Box>
@@ -61,7 +60,6 @@ const Main = () => {
             </Routes>
           )}
         </Box>
-      </Router>
     </div>
   );
 };

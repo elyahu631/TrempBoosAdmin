@@ -1,6 +1,6 @@
 import { TextField } from "@mui/material";
 
-export const TextInputField = ({ label, name, formik,type = "text"}) => {
+export const TextInputField = ({ label, name, formik, type = "text", autocomplete }) => {
   const { handleChange, handleBlur, values, touched, errors } = formik;
 
   return (
@@ -17,6 +17,7 @@ export const TextInputField = ({ label, name, formik,type = "text"}) => {
       placeholder={`Enter your ${label.toLowerCase()}`}
       error={touched[name] && Boolean(errors[name])}
       helperText={touched[name] && errors[name]}
+      autoComplete={name}
     />
   );
 };

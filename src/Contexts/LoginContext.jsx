@@ -1,4 +1,5 @@
 import { createContext, useCallback, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const LoginContext = createContext({
   token: null,
@@ -59,8 +60,8 @@ const LoginProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
   const [loading, setLoading] = useState(true);
-  console.log("API Base URL:", process.env.REACT_APP_API_URL);
-  console.log("Secret Key:", process.env.REACT_APP_SECRET_KEY);
+  const navigate = useNavigate();
+
   
   const decryptData = useCallback(async (encryptedObj, password) => {
     try {
@@ -100,10 +101,11 @@ const LoginProvider = ({ children }) => {
     } catch (error) {
       console.error(error);
       localStorage.removeItem("token");
+      navigate('/'); 
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [navigate]);
 
   useEffect(() => {
     const loadAndValidateToken = async () => {

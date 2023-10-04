@@ -30,7 +30,7 @@ const PHome = () => {
       </Box>
       <Box   display="flex" flexDirection="column" gap={2} >
         <Button  style={buttonStyle} variant="outlined" onClick={() => handleNavigation('/manage-system-admin')}>Managing System Admin</Button>
-        <Button  style={buttonStyle} variant="outlined" onClick={() => handleNavigation('/reports-and-statistics')}>Reports And Statistics</Button>
+        <Button  style={buttonStyle} variant="outlined" onClick={() => handleNavigation('/reports-and-statistics')}>Statistics Dashboard</Button>
         <Button  style={buttonStyle} variant="outlined" onClick={() => handleNavigation('/group-request')}>Group Request</Button>
       </Box>
     </Box>
