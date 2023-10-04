@@ -44,7 +44,6 @@ const PManageSystemAdmin = () => {
 
   const rows = adminUsers.map((user, index) => {
     const date = new Date(user.last_login_date);
-    console.log(process.env.HOUR_DIFFERENCE);
     date.setHours(date.getHours() - 3);
     const formattedDate = `${date.toLocaleDateString()}, ${date.toLocaleTimeString()}`;
   

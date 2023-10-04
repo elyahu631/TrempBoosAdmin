@@ -1,6 +1,6 @@
 import { TextField } from "@mui/material";
 
-export const TextInputField = ({ label, name, formik, type = "text", autocomplete }) => {
+export const TextInputField = ({ label, name, formik, type = "text" }) => {
   const { handleChange, handleBlur, values, touched, errors } = formik;
 
   return (
