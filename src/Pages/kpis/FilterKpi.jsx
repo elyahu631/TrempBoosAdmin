@@ -33,10 +33,11 @@ export const Filters = ({ onFilterChange }) => {
           }}
           textField={(params) => <TextField {...params} fullWidth />}
           style={styles.datePicker}
-          maxDate={endDate}  
+          format="dd/MM/yy"
+          maxDate={endDate}
         />
 
-        <div style={{ height: '20px' }}></div>  
+        <div style={{ height: '20px' }}></div>
 
         <DesktopDatePicker
           label="End Date"
@@ -44,8 +45,9 @@ export const Filters = ({ onFilterChange }) => {
           onChange={(newValue) => setEndDate(newValue)}
           textField={(params) => <TextField {...params} fullWidth />}
           style={styles.datePicker}
-          minDate={startDate}  
-          maxDate={new Date()}  
+          minDate={startDate}
+          format="dd/MM/yy"
+          maxDate={new Date()}
         />
       </LocalizationProvider>
 
@@ -61,7 +63,7 @@ export const Filters = ({ onFilterChange }) => {
           <MenuItem value="">
             <em>None</em>
           </MenuItem>
-          <MenuItem value="driver">Driver</MenuItem>  
+          <MenuItem value="driver">Driver</MenuItem>
           <MenuItem value="hitchhiker">Hitchhiker</MenuItem>
         </Select>
       </FormControl>
@@ -75,8 +77,8 @@ export const Filters = ({ onFilterChange }) => {
 
 const styles = {
   container: {
-    width: '320px', 
-    padding: '2rem',  
+    width: '320px',
+    padding: '2rem',
     border: 'none',
     position: 'sticky',
     top: '2rem',
@@ -110,16 +112,16 @@ const styles = {
   button: {
     marginTop: '1rem',
     width: '100%',
-    borderRadius: '50px',  
-    backgroundColor: '#370000',  
-    transition: 'background-color 0.3s, transform 0.3s, boxShadow 0.3s', 
+    borderRadius: '50px',
+    backgroundColor: '#370000',
+    transition: 'background-color 0.3s, transform 0.3s, boxShadow 0.3s',
     '&:hover': {
       backgroundColor: '#5390ff',
       transform: 'translateY(-3px)',  // Elevating the button on hover
       boxShadow: '0 4px 14px rgba(0, 0, 0, 0.1)',
     },
     '&:active': {
-      transform: 'translateY(-1px)', 
+      transform: 'translateY(-1px)',
       boxShadow: '0 3px 8px rgba(0, 0, 0, 0.1)',
     }
   },

@@ -9,7 +9,7 @@ const API_BASE_URL = process.env.REACT_APP_API_URL + "/adminUsers";
 const VALIDATE_TOKEN_URL = `${API_BASE_URL}/validateToken`;
 const LOGIN_URL = `${API_BASE_URL}/login`;
 const SECRET_PASSWORD = process.env.REACT_APP_SECRET_KEY;
-const SALT = 'your-static-salt-string-here';
+const SALT = process.env.SALT_STRING;
 const ITERATIONS = 100000;
 
 if (!SECRET_PASSWORD) {

@@ -81,12 +81,14 @@ const PLogin = () => {
                   label="Username"
                   name="username"
                   formik={formik}
+                  autoComplete ="username"
                 />
                 <TextInputField
                   label="Password"
                   name="password"
                   formik={formik}
                   type="password"
+                  autoComplete ="current-password"
                 />
                 <Box display="flex" justifyContent="center" mt="4px">
                   <Button type="submit" variant="contained" size="large" sx={{ fontWeight: "bold" }}>

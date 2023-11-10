@@ -182,7 +182,7 @@ const PKpi = () => {
           <GenericBarChart
             data={mostActiveGroups}
             windowWidth={windowWidth}
-            title="Top 5 Active Groups"
+            title="Top 5 Groups"
             fillColor="#123456"
             dataKey="total_activity"
             yAxisDataKey="group_name"
@@ -194,6 +194,7 @@ const PKpi = () => {
               </>
             )}
           />
+          
           <DataTable data={inactiveGroups} />
 
         </div>

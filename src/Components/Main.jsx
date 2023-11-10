@@ -28,38 +28,50 @@ const NotFound = () => {
 };
 
 const Main = () => {
-  const { isLoggedIn } = useContext(LoginContext);
+  const { isLoggedIn, user } = useContext(LoginContext);
 
   return (
     <div>
-        <Box>
-          <Header />
-        </Box>
-        <Box marginTop={13}>
-          {isLoggedIn ? (
-            <Routes>
-              <Route path="/" element={<Navigate to="/home" replace />} />
-              <Route path="/home" element={<PHome />} />
-              <Route path="/users" element={<PUsers />} />
-              <Route path="/add-user" element={<PAddUser />} />
-              <Route path="/update-user/:id" element={<PUpdateUser />} />
-              <Route path="/group-request" element={<PGroupReq/>} />
-              <Route path="/groups" element={<PGroups />} />
-              <Route path="/add-group" element={<PAddGroup />} />
-              <Route path="/update-group/:id" element={<PUpdateGroup />} />
-              <Route path="/tremps" element={<PTremps />} />
+      <Box>
+        <Header />
+      </Box>
+      <Box marginTop={13}>
+        {isLoggedIn ? (
+          <Routes>
+            <Route path="/" element={<Navigate to="/home" replace />} />
+            <Route path="/home" element={<PHome />} />
+            <Route path="/users" element={<PUsers />} />
+            <Route path="/add-user" element={<PAddUser />} />
+            <Route path="/update-user/:id" element={<PUpdateUser />} />
+            <Route path="/group-request" element={<PGroupReq />} />
+            <Route path="/groups" element={<PGroups />} />
+            <Route path="/add-group" element={<PAddGroup />} />
+            <Route path="/update-group/:id" element={<PUpdateGroup />} />
+            <Route path="/tremps" element={<PTremps />} />
+            {user && user.role === "helpdesk" ? (
+              <Route path="/manage-system-admin" element={<Navigate to="/" />} />
+            ) : (
               <Route path="/manage-system-admin" element={<PManageSystemAdmin />} />
+            )}
+            {user && user.role === "helpdesk" ? (
+              <Route path="/add-admin" element={<Navigate to="/" />} />
+            ) : (
               <Route path="/add-admin" element={<PAddAdmin />} />
+            )}
+            {user && user.role === "helpdesk" ? (
+              <Route path="/update-admin/:id" element={<Navigate to="/" />} />
+            ) : (
               <Route path="/update-admin/:id" element={<PUpdateAdmin />} />
-              <Route path="/reports-and-statistics" element={<PKpi />} />
-            </Routes>
-          ) : (
-            <Routes>
-              <Route path="/" element={<PLogin />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          )}
-        </Box>
+            )}
+            <Route path="/reports-and-statistics" element={<PKpi />} />
+          </Routes>
+        ) : (
+          <Routes>
+            <Route path="/" element={<PLogin />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        )}
+      </Box>
     </div>
   );
 };
